@@ -5,8 +5,6 @@ import {
   signInWithRedirect,
   getRedirectResult,
   signOut,
-  browserLocalPersistence,
-  setPersistence,
   type User,
 } from 'firebase/auth';
 import { auth, googleProvider } from '../lib/firebase';
@@ -18,26 +16,37 @@ export function useAuth() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Set persistence to local (survives browser restarts)
-    setPersistence(auth, browserLocalPersistence).catch(console.error);
+    let unsubscribe: (() => void) | undefined;
 
-    // Check for redirect result (mobile flow)
-    getRedirectResult(auth).catch(console.error);
+    async function init() {
+      // On mobile, check if we're returning from a redirect sign-in
+      if (isMobile) {
+        try {
+          await getRedirectResult(auth);
+        } catch (err) {
+          console.error('Redirect result error:', err);
+        }
+      }
 
-    const unsubscribe = onAuthStateChanged(auth, (u) => {
-      setUser(u);
-      setLoading(false);
-    });
-    return unsubscribe;
+      // Now listen for auth state
+      unsubscribe = onAuthStateChanged(auth, (u) => {
+        setUser(u);
+        setLoading(false);
+      });
+    }
+
+    init();
+
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, []);
 
   const signInWithGoogle = async () => {
     if (isMobile) {
-      // Redirect works better on mobile — no popup issues, no storage warnings
-      await signInWithRedirect(auth, googleProvider);
-    } else {
-      await signInWithPopup(auth, googleProvider);
+      return signInWithRedirect(auth, googleProvider);
     }
+    return signInWithPopup(auth, googleProvider);
   };
 
   const logout = () => signOut(auth);
