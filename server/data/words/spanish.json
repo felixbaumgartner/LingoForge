@@ -1,0 +1,4002 @@
+[
+  {
+    "rank": 1,
+    "word": "la",
+    "translation": "the (fem.)"
+  },
+  {
+    "rank": 2,
+    "word": "el",
+    "translation": "the (masc.)"
+  },
+  {
+    "rank": 3,
+    "word": "que",
+    "translation": "that, which"
+  },
+  {
+    "rank": 4,
+    "word": "de",
+    "translation": "of, from"
+  },
+  {
+    "rank": 5,
+    "word": "en",
+    "translation": "in, on"
+  },
+  {
+    "rank": 6,
+    "word": "y",
+    "translation": "and"
+  },
+  {
+    "rank": 7,
+    "word": "a",
+    "translation": "to, at"
+  },
+  {
+    "rank": 8,
+    "word": "ser",
+    "translation": "to be (essential)"
+  },
+  {
+    "rank": 9,
+    "word": "no",
+    "translation": "no, not"
+  },
+  {
+    "rank": 10,
+    "word": "se",
+    "translation": "reflexive marker"
+  },
+  {
+    "rank": 11,
+    "word": "un",
+    "translation": "a, an"
+  },
+  {
+    "rank": 12,
+    "word": "lo",
+    "translation": "it, the (neuter)"
+  },
+  {
+    "rank": 13,
+    "word": "decir",
+    "translation": "to say, to tell"
+  },
+  {
+    "rank": 14,
+    "word": "hacer",
+    "translation": "to do, to make"
+  },
+  {
+    "rank": 15,
+    "word": "su",
+    "translation": "his, her, their"
+  },
+  {
+    "rank": 16,
+    "word": "haber",
+    "translation": "to have (auxiliary)"
+  },
+  {
+    "rank": 17,
+    "word": "tener",
+    "translation": "to have (possess)"
+  },
+  {
+    "rank": 18,
+    "word": "me",
+    "translation": "me"
+  },
+  {
+    "rank": 19,
+    "word": "otro",
+    "translation": "other, another"
+  },
+  {
+    "rank": 20,
+    "word": "por",
+    "translation": "for, by, through"
+  },
+  {
+    "rank": 21,
+    "word": "con",
+    "translation": "with"
+  },
+  {
+    "rank": 22,
+    "word": "todo",
+    "translation": "all, every"
+  },
+  {
+    "rank": 23,
+    "word": "más",
+    "translation": "more"
+  },
+  {
+    "rank": 24,
+    "word": "para",
+    "translation": "for, in order to"
+  },
+  {
+    "rank": 25,
+    "word": "yo",
+    "translation": "I"
+  },
+  {
+    "rank": 26,
+    "word": "como",
+    "translation": "as, like"
+  },
+  {
+    "rank": 27,
+    "word": "si",
+    "translation": "if, whether"
+  },
+  {
+    "rank": 28,
+    "word": "poder",
+    "translation": "to be able to, can"
+  },
+  {
+    "rank": 29,
+    "word": "dar",
+    "translation": "to give"
+  },
+  {
+    "rank": 30,
+    "word": "le",
+    "translation": "him/her (indirect)"
+  },
+  {
+    "rank": 31,
+    "word": "estar",
+    "translation": "to be (state)"
+  },
+  {
+    "rank": 32,
+    "word": "pero",
+    "translation": "but, yet"
+  },
+  {
+    "rank": 33,
+    "word": "qué",
+    "translation": "what?, which?"
+  },
+  {
+    "rank": 34,
+    "word": "este",
+    "translation": "this"
+  },
+  {
+    "rank": 35,
+    "word": "entre",
+    "translation": "between, among"
+  },
+  {
+    "rank": 36,
+    "word": "pasar",
+    "translation": "to pass, to happen"
+  },
+  {
+    "rank": 37,
+    "word": "mi",
+    "translation": "my"
+  },
+  {
+    "rank": 38,
+    "word": "uno",
+    "translation": "one"
+  },
+  {
+    "rank": 39,
+    "word": "primero",
+    "translation": "first"
+  },
+  {
+    "rank": 40,
+    "word": "donde",
+    "translation": "where"
+  },
+  {
+    "rank": 41,
+    "word": "porque",
+    "translation": "because"
+  },
+  {
+    "rank": 42,
+    "word": "deber",
+    "translation": "should, to owe"
+  },
+  {
+    "rank": 43,
+    "word": "ese",
+    "translation": "that"
+  },
+  {
+    "rank": 44,
+    "word": "sí",
+    "translation": "yes"
+  },
+  {
+    "rank": 45,
+    "word": "nos",
+    "translation": "us"
+  },
+  {
+    "rank": 46,
+    "word": "ni",
+    "translation": "neither, nor"
+  },
+  {
+    "rank": 47,
+    "word": "sobre",
+    "translation": "about, on top of"
+  },
+  {
+    "rank": 48,
+    "word": "o",
+    "translation": "or"
+  },
+  {
+    "rank": 49,
+    "word": "cuando",
+    "translation": "when"
+  },
+  {
+    "rank": 50,
+    "word": "hombre",
+    "translation": "man"
+  },
+  {
+    "rank": 51,
+    "word": "grande",
+    "translation": "big, great"
+  },
+  {
+    "rank": 52,
+    "word": "ir",
+    "translation": "to go"
+  },
+  {
+    "rank": 53,
+    "word": "alguno",
+    "translation": "some, someone"
+  },
+  {
+    "rank": 54,
+    "word": "muy",
+    "translation": "very"
+  },
+  {
+    "rank": 55,
+    "word": "forma",
+    "translation": "form, shape, way"
+  },
+  {
+    "rank": 56,
+    "word": "cada",
+    "translation": "each, every"
+  },
+  {
+    "rank": 57,
+    "word": "algo",
+    "translation": "something"
+  },
+  {
+    "rank": 58,
+    "word": "tres",
+    "translation": "three"
+  },
+  {
+    "rank": 59,
+    "word": "ya",
+    "translation": "already"
+  },
+  {
+    "rank": 60,
+    "word": "dos",
+    "translation": "two"
+  },
+  {
+    "rank": 61,
+    "word": "momento",
+    "translation": "moment"
+  },
+  {
+    "rank": 62,
+    "word": "menos",
+    "translation": "less, fewer"
+  },
+  {
+    "rank": 63,
+    "word": "hasta",
+    "translation": "until, up to"
+  },
+  {
+    "rank": 64,
+    "word": "vez",
+    "translation": "time (occurrence)"
+  },
+  {
+    "rank": 65,
+    "word": "así",
+    "translation": "like that, thus"
+  },
+  {
+    "rank": 66,
+    "word": "esto",
+    "translation": "this (neuter)"
+  },
+  {
+    "rank": 67,
+    "word": "ver",
+    "translation": "to see"
+  },
+  {
+    "rank": 68,
+    "word": "cierto",
+    "translation": "certain, true"
+  },
+  {
+    "rank": 69,
+    "word": "mundo",
+    "translation": "world"
+  },
+  {
+    "rank": 70,
+    "word": "poner",
+    "translation": "to put, to place"
+  },
+  {
+    "rank": 71,
+    "word": "sin",
+    "translation": "without"
+  },
+  {
+    "rank": 72,
+    "word": "punto",
+    "translation": "point, dot"
+  },
+  {
+    "rank": 73,
+    "word": "mucho",
+    "translation": "much, many"
+  },
+  {
+    "rank": 74,
+    "word": "después",
+    "translation": "after"
+  },
+  {
+    "rank": 75,
+    "word": "cosa",
+    "translation": "thing"
+  },
+  {
+    "rank": 76,
+    "word": "él",
+    "translation": "he"
+  },
+  {
+    "rank": 77,
+    "word": "casi",
+    "translation": "almost"
+  },
+  {
+    "rank": 78,
+    "word": "llegar",
+    "translation": "to arrive"
+  },
+  {
+    "rank": 79,
+    "word": "tan",
+    "translation": "so, such"
+  },
+  {
+    "rank": 80,
+    "word": "también",
+    "translation": "also, too"
+  },
+  {
+    "rank": 81,
+    "word": "hablar",
+    "translation": "to speak, to talk"
+  },
+  {
+    "rank": 82,
+    "word": "mujer",
+    "translation": "woman, wife"
+  },
+  {
+    "rank": 83,
+    "word": "ella",
+    "translation": "she"
+  },
+  {
+    "rank": 84,
+    "word": "hora",
+    "translation": "hour, time"
+  },
+  {
+    "rank": 85,
+    "word": "ahora",
+    "translation": "now"
+  },
+  {
+    "rank": 86,
+    "word": "propio",
+    "translation": "own, proper"
+  },
+  {
+    "rank": 87,
+    "word": "saber",
+    "translation": "to know (a fact)"
+  },
+  {
+    "rank": 88,
+    "word": "tanto",
+    "translation": "so much"
+  },
+  {
+    "rank": 89,
+    "word": "pensar",
+    "translation": "to think"
+  },
+  {
+    "rank": 90,
+    "word": "desde",
+    "translation": "from, since"
+  },
+  {
+    "rank": 91,
+    "word": "mejor",
+    "translation": "better, best"
+  },
+  {
+    "rank": 92,
+    "word": "niño",
+    "translation": "child, boy"
+  },
+  {
+    "rank": 93,
+    "word": "mismo",
+    "translation": "same"
+  },
+  {
+    "rank": 94,
+    "word": "tipo",
+    "translation": "type, kind"
+  },
+  {
+    "rank": 95,
+    "word": "pequeño",
+    "translation": "small, little"
+  },
+  {
+    "rank": 96,
+    "word": "te",
+    "translation": "you (object)"
+  },
+  {
+    "rank": 97,
+    "word": "año",
+    "translation": "year"
+  },
+  {
+    "rank": 98,
+    "word": "allí",
+    "translation": "there"
+  },
+  {
+    "rank": 99,
+    "word": "parte",
+    "translation": "part, portion"
+  },
+  {
+    "rank": 100,
+    "word": "vida",
+    "translation": "life"
+  },
+  {
+    "rank": 101,
+    "word": "trabajo",
+    "translation": "work, job"
+  },
+  {
+    "rank": 102,
+    "word": "querer",
+    "translation": "to want, to love"
+  },
+  {
+    "rank": 103,
+    "word": "nombre",
+    "translation": "name"
+  },
+  {
+    "rank": 104,
+    "word": "casa",
+    "translation": "house, home"
+  },
+  {
+    "rank": 105,
+    "word": "país",
+    "translation": "country"
+  },
+  {
+    "rank": 106,
+    "word": "siempre",
+    "translation": "always"
+  },
+  {
+    "rank": 107,
+    "word": "volver",
+    "translation": "to return"
+  },
+  {
+    "rank": 108,
+    "word": "tiempo",
+    "translation": "time, weather"
+  },
+  {
+    "rank": 109,
+    "word": "mayor",
+    "translation": "older, larger"
+  },
+  {
+    "rank": 110,
+    "word": "eso",
+    "translation": "that (neuter)"
+  },
+  {
+    "rank": 111,
+    "word": "bajo",
+    "translation": "under"
+  },
+  {
+    "rank": 112,
+    "word": "nada",
+    "translation": "nothing"
+  },
+  {
+    "rank": 113,
+    "word": "persona",
+    "translation": "person"
+  },
+  {
+    "rank": 114,
+    "word": "bien",
+    "translation": "well"
+  },
+  {
+    "rank": 115,
+    "word": "nuestro",
+    "translation": "our"
+  },
+  {
+    "rank": 116,
+    "word": "antes",
+    "translation": "before"
+  },
+  {
+    "rank": 117,
+    "word": "historia",
+    "translation": "history, story"
+  },
+  {
+    "rank": 118,
+    "word": "poco",
+    "translation": "few, little"
+  },
+  {
+    "rank": 119,
+    "word": "durante",
+    "translation": "during"
+  },
+  {
+    "rank": 120,
+    "word": "quien",
+    "translation": "who, whom"
+  },
+  {
+    "rank": 121,
+    "word": "lugar",
+    "translation": "place"
+  },
+  {
+    "rank": 122,
+    "word": "realidad",
+    "translation": "reality"
+  },
+  {
+    "rank": 123,
+    "word": "presentar",
+    "translation": "to present"
+  },
+  {
+    "rank": 124,
+    "word": "conocer",
+    "translation": "to know (someone)"
+  },
+  {
+    "rank": 125,
+    "word": "vivir",
+    "translation": "to live"
+  },
+  {
+    "rank": 126,
+    "word": "hecho",
+    "translation": "fact"
+  },
+  {
+    "rank": 127,
+    "word": "entonces",
+    "translation": "then, so"
+  },
+  {
+    "rank": 128,
+    "word": "día",
+    "translation": "day"
+  },
+  {
+    "rank": 129,
+    "word": "salir",
+    "translation": "to leave, go out"
+  },
+  {
+    "rank": 130,
+    "word": "llamar",
+    "translation": "to call"
+  },
+  {
+    "rank": 131,
+    "word": "cuatro",
+    "translation": "four"
+  },
+  {
+    "rank": 132,
+    "word": "seguir",
+    "translation": "to follow"
+  },
+  {
+    "rank": 133,
+    "word": "recordar",
+    "translation": "to remember"
+  },
+  {
+    "rank": 134,
+    "word": "cambio",
+    "translation": "change"
+  },
+  {
+    "rank": 135,
+    "word": "blanco",
+    "translation": "white"
+  },
+  {
+    "rank": 136,
+    "word": "sacar",
+    "translation": "to take out"
+  },
+  {
+    "rank": 137,
+    "word": "conseguir",
+    "translation": "to get, obtain"
+  },
+  {
+    "rank": 138,
+    "word": "aquel",
+    "translation": "that (over there)"
+  },
+  {
+    "rank": 139,
+    "word": "empezar",
+    "translation": "to begin"
+  },
+  {
+    "rank": 140,
+    "word": "modo",
+    "translation": "way, manner"
+  },
+  {
+    "rank": 141,
+    "word": "llevar",
+    "translation": "to carry, take"
+  },
+  {
+    "rank": 142,
+    "word": "amigo",
+    "translation": "friend"
+  },
+  {
+    "rank": 143,
+    "word": "tema",
+    "translation": "topic, subject"
+  },
+  {
+    "rank": 144,
+    "word": "creer",
+    "translation": "to believe"
+  },
+  {
+    "rank": 145,
+    "word": "dejar",
+    "translation": "to let, to leave"
+  },
+  {
+    "rank": 146,
+    "word": "existir",
+    "translation": "to exist"
+  },
+  {
+    "rank": 147,
+    "word": "verdad",
+    "translation": "truth"
+  },
+  {
+    "rank": 148,
+    "word": "aquí",
+    "translation": "here"
+  },
+  {
+    "rank": 149,
+    "word": "ciudad",
+    "translation": "city"
+  },
+  {
+    "rank": 150,
+    "word": "general",
+    "translation": "general"
+  },
+  {
+    "rank": 151,
+    "word": "sólo",
+    "translation": "only, just"
+  },
+  {
+    "rank": 152,
+    "word": "aunque",
+    "translation": "although"
+  },
+  {
+    "rank": 153,
+    "word": "calle",
+    "translation": "street"
+  },
+  {
+    "rank": 154,
+    "word": "parecer",
+    "translation": "to seem"
+  },
+  {
+    "rank": 155,
+    "word": "manera",
+    "translation": "way, manner"
+  },
+  {
+    "rank": 156,
+    "word": "recibir",
+    "translation": "to receive"
+  },
+  {
+    "rank": 157,
+    "word": "quedar",
+    "translation": "to stay, remain"
+  },
+  {
+    "rank": 158,
+    "word": "preguntar",
+    "translation": "to ask"
+  },
+  {
+    "rank": 159,
+    "word": "trabajar",
+    "translation": "to work"
+  },
+  {
+    "rank": 160,
+    "word": "esperar",
+    "translation": "to wait, to hope"
+  },
+  {
+    "rank": 161,
+    "word": "aceptar",
+    "translation": "to accept"
+  },
+  {
+    "rank": 162,
+    "word": "formar",
+    "translation": "to form"
+  },
+  {
+    "rank": 163,
+    "word": "hacia",
+    "translation": "toward"
+  },
+  {
+    "rank": 164,
+    "word": "sino",
+    "translation": "but, rather"
+  },
+  {
+    "rank": 165,
+    "word": "aún",
+    "translation": "yet, still"
+  },
+  {
+    "rank": 166,
+    "word": "nunca",
+    "translation": "never"
+  },
+  {
+    "rank": 167,
+    "word": "bueno",
+    "translation": "good"
+  },
+  {
+    "rank": 168,
+    "word": "caso",
+    "translation": "case"
+  },
+  {
+    "rank": 169,
+    "word": "mano",
+    "translation": "hand"
+  },
+  {
+    "rank": 170,
+    "word": "nuevo",
+    "translation": "new"
+  },
+  {
+    "rank": 171,
+    "word": "pueblo",
+    "translation": "village, people"
+  },
+  {
+    "rank": 172,
+    "word": "cuanto",
+    "translation": "as much as"
+  },
+  {
+    "rank": 173,
+    "word": "solo",
+    "translation": "alone"
+  },
+  {
+    "rank": 174,
+    "word": "sentir",
+    "translation": "to feel"
+  },
+  {
+    "rank": 175,
+    "word": "medio",
+    "translation": "half, middle"
+  },
+  {
+    "rank": 176,
+    "word": "alcanzar",
+    "translation": "to reach"
+  },
+  {
+    "rank": 177,
+    "word": "cuyo",
+    "translation": "whose"
+  },
+  {
+    "rank": 178,
+    "word": "jugar",
+    "translation": "to play"
+  },
+  {
+    "rank": 179,
+    "word": "fuerza",
+    "translation": "force, strength"
+  },
+  {
+    "rank": 180,
+    "word": "tarde",
+    "translation": "afternoon"
+  },
+  {
+    "rank": 181,
+    "word": "tal",
+    "translation": "such (a)"
+  },
+  {
+    "rank": 182,
+    "word": "posible",
+    "translation": "possible"
+  },
+  {
+    "rank": 183,
+    "word": "ejemplo",
+    "translation": "example"
+  },
+  {
+    "rank": 184,
+    "word": "tratar",
+    "translation": "to try, to treat"
+  },
+  {
+    "rank": 185,
+    "word": "crear",
+    "translation": "to create"
+  },
+  {
+    "rank": 186,
+    "word": "encontrar",
+    "translation": "to find"
+  },
+  {
+    "rank": 187,
+    "word": "ante",
+    "translation": "before, in presence of"
+  },
+  {
+    "rank": 188,
+    "word": "ser",
+    "translation": "being (noun)"
+  },
+  {
+    "rank": 189,
+    "word": "aire",
+    "translation": "air"
+  },
+  {
+    "rank": 190,
+    "word": "venir",
+    "translation": "to come"
+  },
+  {
+    "rank": 191,
+    "word": "escribir",
+    "translation": "to write"
+  },
+  {
+    "rank": 192,
+    "word": "viejo",
+    "translation": "old"
+  },
+  {
+    "rank": 193,
+    "word": "palabra",
+    "translation": "word"
+  },
+  {
+    "rank": 194,
+    "word": "obra",
+    "translation": "work, deed"
+  },
+  {
+    "rank": 195,
+    "word": "ninguno",
+    "translation": "none, nobody"
+  },
+  {
+    "rank": 196,
+    "word": "mí",
+    "translation": "me (prepositional)"
+  },
+  {
+    "rank": 197,
+    "word": "pues",
+    "translation": "well then"
+  },
+  {
+    "rank": 198,
+    "word": "situación",
+    "translation": "situation"
+  },
+  {
+    "rank": 199,
+    "word": "campo",
+    "translation": "field, countryside"
+  },
+  {
+    "rank": 200,
+    "word": "luego",
+    "translation": "later"
+  },
+  {
+    "rank": 201,
+    "word": "dentro",
+    "translation": "inside"
+  },
+  {
+    "rank": 202,
+    "word": "cuenta",
+    "translation": "account, bill"
+  },
+  {
+    "rank": 203,
+    "word": "cuerpo",
+    "translation": "body"
+  },
+  {
+    "rank": 204,
+    "word": "segundo",
+    "translation": "second"
+  },
+  {
+    "rank": 205,
+    "word": "cual",
+    "translation": "which, who"
+  },
+  {
+    "rank": 206,
+    "word": "cambiar",
+    "translation": "to change"
+  },
+  {
+    "rank": 207,
+    "word": "ocurrir",
+    "translation": "to happen"
+  },
+  {
+    "rank": 208,
+    "word": "luz",
+    "translation": "light"
+  },
+  {
+    "rank": 209,
+    "word": "anterior",
+    "translation": "previous"
+  },
+  {
+    "rank": 210,
+    "word": "menor",
+    "translation": "younger"
+  },
+  {
+    "rank": 211,
+    "word": "aparecer",
+    "translation": "to appear"
+  },
+  {
+    "rank": 212,
+    "word": "éste",
+    "translation": "this one"
+  },
+  {
+    "rank": 213,
+    "word": "gente",
+    "translation": "people"
+  },
+  {
+    "rank": 214,
+    "word": "tomar",
+    "translation": "to take, to drink"
+  },
+  {
+    "rank": 215,
+    "word": "escuchar",
+    "translation": "to listen"
+  },
+  {
+    "rank": 216,
+    "word": "gracia",
+    "translation": "grace; thanks"
+  },
+  {
+    "rank": 217,
+    "word": "además",
+    "translation": "besides, also"
+  },
+  {
+    "rank": 218,
+    "word": "gustar",
+    "translation": "to like"
+  },
+  {
+    "rank": 219,
+    "word": "varios",
+    "translation": "several"
+  },
+  {
+    "rank": 220,
+    "word": "cabeza",
+    "translation": "head"
+  },
+  {
+    "rank": 221,
+    "word": "efecto",
+    "translation": "effect"
+  },
+  {
+    "rank": 222,
+    "word": "mantener",
+    "translation": "to keep, maintain"
+  },
+  {
+    "rank": 223,
+    "word": "santo",
+    "translation": "saint"
+  },
+  {
+    "rank": 224,
+    "word": "quizás",
+    "translation": "perhaps"
+  },
+  {
+    "rank": 225,
+    "word": "servicio",
+    "translation": "service"
+  },
+  {
+    "rank": 226,
+    "word": "cinco",
+    "translation": "five"
+  },
+  {
+    "rank": 227,
+    "word": "tierra",
+    "translation": "earth, land"
+  },
+  {
+    "rank": 228,
+    "word": "cómo",
+    "translation": "how?"
+  },
+  {
+    "rank": 229,
+    "word": "comprender",
+    "translation": "to understand"
+  },
+  {
+    "rank": 230,
+    "word": "comer",
+    "translation": "to eat"
+  },
+  {
+    "rank": 231,
+    "word": "contar",
+    "translation": "to tell, to count"
+  },
+  {
+    "rank": 232,
+    "word": "mil",
+    "translation": "thousand"
+  },
+  {
+    "rank": 233,
+    "word": "programa",
+    "translation": "program"
+  },
+  {
+    "rank": 234,
+    "word": "distinto",
+    "translation": "different"
+  },
+  {
+    "rank": 235,
+    "word": "ahí",
+    "translation": "there"
+  },
+  {
+    "rank": 236,
+    "word": "último",
+    "translation": "last, final"
+  },
+  {
+    "rank": 237,
+    "word": "don",
+    "translation": "Mr., gift"
+  },
+  {
+    "rank": 238,
+    "word": "pedir",
+    "translation": "to ask for"
+  },
+  {
+    "rank": 239,
+    "word": "agua",
+    "translation": "water"
+  },
+  {
+    "rank": 240,
+    "word": "abrir",
+    "translation": "to open"
+  },
+  {
+    "rank": 241,
+    "word": "valor",
+    "translation": "value, worth"
+  },
+  {
+    "rank": 242,
+    "word": "embargo",
+    "translation": "nevertheless (sin~)"
+  },
+  {
+    "rank": 243,
+    "word": "fácil",
+    "translation": "easy"
+  },
+  {
+    "rank": 244,
+    "word": "nadie",
+    "translation": "nobody"
+  },
+  {
+    "rank": 245,
+    "word": "contrario",
+    "translation": "contrary, opposite"
+  },
+  {
+    "rank": 246,
+    "word": "imaginar",
+    "translation": "to imagine"
+  },
+  {
+    "rank": 247,
+    "word": "junto",
+    "translation": "together"
+  },
+  {
+    "rank": 248,
+    "word": "partido",
+    "translation": "party, match"
+  },
+  {
+    "rank": 249,
+    "word": "ciento",
+    "translation": "hundred"
+  },
+  {
+    "rank": 250,
+    "word": "leer",
+    "translation": "to read"
+  },
+  {
+    "rank": 251,
+    "word": "pregunta",
+    "translation": "question"
+  },
+  {
+    "rank": 252,
+    "word": "español",
+    "translation": "Spanish"
+  },
+  {
+    "rank": 253,
+    "word": "hoy",
+    "translation": "today"
+  },
+  {
+    "rank": 254,
+    "word": "mesa",
+    "translation": "table"
+  },
+  {
+    "rank": 255,
+    "word": "cualquier",
+    "translation": "any"
+  },
+  {
+    "rank": 256,
+    "word": "seguridad",
+    "translation": "security, safety"
+  },
+  {
+    "rank": 257,
+    "word": "mirar",
+    "translation": "to look, watch"
+  },
+  {
+    "rank": 258,
+    "word": "estudiar",
+    "translation": "to study"
+  },
+  {
+    "rank": 259,
+    "word": "lado",
+    "translation": "side"
+  },
+  {
+    "rank": 260,
+    "word": "mientras",
+    "translation": "while"
+  },
+  {
+    "rank": 261,
+    "word": "base",
+    "translation": "base, basis"
+  },
+  {
+    "rank": 262,
+    "word": "época",
+    "translation": "era, period"
+  },
+  {
+    "rank": 263,
+    "word": "claro",
+    "translation": "clear"
+  },
+  {
+    "rank": 264,
+    "word": "clase",
+    "translation": "class, kind"
+  },
+  {
+    "rank": 265,
+    "word": "quién",
+    "translation": "who?"
+  },
+  {
+    "rank": 266,
+    "word": "alto",
+    "translation": "tall, high"
+  },
+  {
+    "rank": 267,
+    "word": "problema",
+    "translation": "problem"
+  },
+  {
+    "rank": 268,
+    "word": "antiguo",
+    "translation": "old, ancient"
+  },
+  {
+    "rank": 269,
+    "word": "posibilidad",
+    "translation": "possibility"
+  },
+  {
+    "rank": 270,
+    "word": "vista",
+    "translation": "view, sight"
+  },
+  {
+    "rank": 271,
+    "word": "obtener",
+    "translation": "to obtain"
+  },
+  {
+    "rank": 272,
+    "word": "centro",
+    "translation": "center"
+  },
+  {
+    "rank": 273,
+    "word": "carta",
+    "translation": "letter, card"
+  },
+  {
+    "rank": 274,
+    "word": "pobre",
+    "translation": "poor"
+  },
+  {
+    "rank": 275,
+    "word": "contra",
+    "translation": "against"
+  },
+  {
+    "rank": 276,
+    "word": "hijo",
+    "translation": "son, children"
+  },
+  {
+    "rank": 277,
+    "word": "mostrar",
+    "translation": "to show"
+  },
+  {
+    "rank": 278,
+    "word": "interés",
+    "translation": "interest"
+  },
+  {
+    "rank": 279,
+    "word": "término",
+    "translation": "term, end"
+  },
+  {
+    "rank": 280,
+    "word": "buscar",
+    "translation": "to look for"
+  },
+  {
+    "rank": 281,
+    "word": "especial",
+    "translation": "special"
+  },
+  {
+    "rank": 282,
+    "word": "político",
+    "translation": "political"
+  },
+  {
+    "rank": 283,
+    "word": "desear",
+    "translation": "to want, wish"
+  },
+  {
+    "rank": 284,
+    "word": "necesario",
+    "translation": "necessary"
+  },
+  {
+    "rank": 285,
+    "word": "terminar",
+    "translation": "to finish"
+  },
+  {
+    "rank": 286,
+    "word": "perder",
+    "translation": "to lose"
+  },
+  {
+    "rank": 287,
+    "word": "deseo",
+    "translation": "desire, wish"
+  },
+  {
+    "rank": 288,
+    "word": "padre",
+    "translation": "father"
+  },
+  {
+    "rank": 289,
+    "word": "tampoco",
+    "translation": "neither, either"
+  },
+  {
+    "rank": 290,
+    "word": "señor",
+    "translation": "sir, Mr."
+  },
+  {
+    "rank": 291,
+    "word": "resultar",
+    "translation": "to turn out"
+  },
+  {
+    "rank": 292,
+    "word": "función",
+    "translation": "function"
+  },
+  {
+    "rank": 293,
+    "word": "noche",
+    "translation": "night"
+  },
+  {
+    "rank": 294,
+    "word": "largo",
+    "translation": "long"
+  },
+  {
+    "rank": 295,
+    "word": "familia",
+    "translation": "family"
+  },
+  {
+    "rank": 296,
+    "word": "desarrollar",
+    "translation": "to develop"
+  },
+  {
+    "rank": 297,
+    "word": "seis",
+    "translation": "six"
+  },
+  {
+    "rank": 298,
+    "word": "bajo",
+    "translation": "low, short"
+  },
+  {
+    "rank": 299,
+    "word": "producir",
+    "translation": "to produce"
+  },
+  {
+    "rank": 300,
+    "word": "segundo",
+    "translation": "second (ordinal)"
+  },
+  {
+    "rank": 301,
+    "word": "inglés",
+    "translation": "English"
+  },
+  {
+    "rank": 302,
+    "word": "negro",
+    "translation": "black"
+  },
+  {
+    "rank": 303,
+    "word": "miedo",
+    "translation": "fear"
+  },
+  {
+    "rank": 304,
+    "word": "entrar",
+    "translation": "to enter"
+  },
+  {
+    "rank": 305,
+    "word": "dedicar",
+    "translation": "to dedicate"
+  },
+  {
+    "rank": 306,
+    "word": "paso",
+    "translation": "step, pace"
+  },
+  {
+    "rank": 307,
+    "word": "usted",
+    "translation": "you (formal)"
+  },
+  {
+    "rank": 308,
+    "word": "río",
+    "translation": "river"
+  },
+  {
+    "rank": 309,
+    "word": "dirección",
+    "translation": "direction, address"
+  },
+  {
+    "rank": 310,
+    "word": "cuestión",
+    "translation": "matter, question"
+  },
+  {
+    "rank": 311,
+    "word": "derecho",
+    "translation": "right, law"
+  },
+  {
+    "rank": 312,
+    "word": "malo",
+    "translation": "bad"
+  },
+  {
+    "rank": 313,
+    "word": "principio",
+    "translation": "beginning, principle"
+  },
+  {
+    "rank": 314,
+    "word": "guerra",
+    "translation": "war"
+  },
+  {
+    "rank": 315,
+    "word": "único",
+    "translation": "only, unique"
+  },
+  {
+    "rank": 316,
+    "word": "avanzar",
+    "translation": "to advance"
+  },
+  {
+    "rank": 317,
+    "word": "entender",
+    "translation": "to understand"
+  },
+  {
+    "rank": 318,
+    "word": "lanzar",
+    "translation": "to throw, launch"
+  },
+  {
+    "rank": 319,
+    "word": "diferencia",
+    "translation": "difference"
+  },
+  {
+    "rank": 320,
+    "word": "bueno",
+    "translation": "well (interjection)"
+  },
+  {
+    "rank": 321,
+    "word": "propiedad",
+    "translation": "property"
+  },
+  {
+    "rank": 322,
+    "word": "repetir",
+    "translation": "to repeat"
+  },
+  {
+    "rank": 323,
+    "word": "viaje",
+    "translation": "trip, travel"
+  },
+  {
+    "rank": 324,
+    "word": "nosotros",
+    "translation": "we"
+  },
+  {
+    "rank": 325,
+    "word": "diez",
+    "translation": "ten"
+  },
+  {
+    "rank": 326,
+    "word": "indicar",
+    "translation": "to indicate"
+  },
+  {
+    "rank": 327,
+    "word": "capaz",
+    "translation": "capable"
+  },
+  {
+    "rank": 328,
+    "word": "todavía",
+    "translation": "still, yet"
+  },
+  {
+    "rank": 329,
+    "word": "servir",
+    "translation": "to serve"
+  },
+  {
+    "rank": 330,
+    "word": "joven",
+    "translation": "young person"
+  },
+  {
+    "rank": 331,
+    "word": "comenzar",
+    "translation": "to begin"
+  },
+  {
+    "rank": 332,
+    "word": "idea",
+    "translation": "idea"
+  },
+  {
+    "rank": 333,
+    "word": "peso",
+    "translation": "weight, peso"
+  },
+  {
+    "rank": 334,
+    "word": "ocho",
+    "translation": "eight"
+  },
+  {
+    "rank": 335,
+    "word": "estudio",
+    "translation": "study"
+  },
+  {
+    "rank": 336,
+    "word": "grupo",
+    "translation": "group"
+  },
+  {
+    "rank": 337,
+    "word": "decidir",
+    "translation": "to decide"
+  },
+  {
+    "rank": 338,
+    "word": "considerar",
+    "translation": "to consider"
+  },
+  {
+    "rank": 339,
+    "word": "allá",
+    "translation": "there, over there"
+  },
+  {
+    "rank": 340,
+    "word": "mal",
+    "translation": "badly"
+  },
+  {
+    "rank": 341,
+    "word": "anunciar",
+    "translation": "to announce"
+  },
+  {
+    "rank": 342,
+    "word": "sociedad",
+    "translation": "society"
+  },
+  {
+    "rank": 343,
+    "word": "política",
+    "translation": "politics, policy"
+  },
+  {
+    "rank": 344,
+    "word": "detener",
+    "translation": "to stop, detain"
+  },
+  {
+    "rank": 345,
+    "word": "camino",
+    "translation": "road, path"
+  },
+  {
+    "rank": 346,
+    "word": "duda",
+    "translation": "doubt"
+  },
+  {
+    "rank": 347,
+    "word": "dinero",
+    "translation": "money"
+  },
+  {
+    "rank": 348,
+    "word": "millón",
+    "translation": "million"
+  },
+  {
+    "rank": 349,
+    "word": "abandonar",
+    "translation": "to abandon"
+  },
+  {
+    "rank": 350,
+    "word": "pieza",
+    "translation": "piece, part"
+  },
+  {
+    "rank": 351,
+    "word": "claro",
+    "translation": "clearly, of course"
+  },
+  {
+    "rank": 352,
+    "word": "movimiento",
+    "translation": "movement"
+  },
+  {
+    "rank": 353,
+    "word": "sitio",
+    "translation": "place, space"
+  },
+  {
+    "rank": 354,
+    "word": "arriba",
+    "translation": "up, above"
+  },
+  {
+    "rank": 355,
+    "word": "crecer",
+    "translation": "to grow"
+  },
+  {
+    "rank": 356,
+    "word": "siglo",
+    "translation": "century"
+  },
+  {
+    "rank": 357,
+    "word": "necesidad",
+    "translation": "need"
+  },
+  {
+    "rank": 358,
+    "word": "verdadero",
+    "translation": "true, real"
+  },
+  {
+    "rank": 359,
+    "word": "doctor",
+    "translation": "doctor"
+  },
+  {
+    "rank": 360,
+    "word": "natural",
+    "translation": "natural"
+  },
+  {
+    "rank": 361,
+    "word": "contestar",
+    "translation": "to answer"
+  },
+  {
+    "rank": 362,
+    "word": "mercado",
+    "translation": "market"
+  },
+  {
+    "rank": 363,
+    "word": "reconocer",
+    "translation": "to recognize"
+  },
+  {
+    "rank": 364,
+    "word": "importante",
+    "translation": "important"
+  },
+  {
+    "rank": 365,
+    "word": "recurso",
+    "translation": "resource"
+  },
+  {
+    "rank": 366,
+    "word": "intentar",
+    "translation": "to try"
+  },
+  {
+    "rank": 367,
+    "word": "realizar",
+    "translation": "to carry out"
+  },
+  {
+    "rank": 368,
+    "word": "mes",
+    "translation": "month"
+  },
+  {
+    "rank": 369,
+    "word": "golpe",
+    "translation": "hit, strike"
+  },
+  {
+    "rank": 370,
+    "word": "grado",
+    "translation": "degree, grade"
+  },
+  {
+    "rank": 371,
+    "word": "morir",
+    "translation": "to die"
+  },
+  {
+    "rank": 372,
+    "word": "ojo",
+    "translation": "eye"
+  },
+  {
+    "rank": 373,
+    "word": "permitir",
+    "translation": "to allow"
+  },
+  {
+    "rank": 374,
+    "word": "humano",
+    "translation": "human"
+  },
+  {
+    "rank": 375,
+    "word": "físico",
+    "translation": "physical"
+  },
+  {
+    "rank": 376,
+    "word": "convertir",
+    "translation": "to convert, become"
+  },
+  {
+    "rank": 377,
+    "word": "voz",
+    "translation": "voice"
+  },
+  {
+    "rank": 378,
+    "word": "incluso",
+    "translation": "even, including"
+  },
+  {
+    "rank": 379,
+    "word": "responsabilidad",
+    "translation": "responsibility"
+  },
+  {
+    "rank": 380,
+    "word": "bastante",
+    "translation": "quite, fairly"
+  },
+  {
+    "rank": 381,
+    "word": "profundo",
+    "translation": "deep, profound"
+  },
+  {
+    "rank": 382,
+    "word": "minuto",
+    "translation": "minute"
+  },
+  {
+    "rank": 383,
+    "word": "suelo",
+    "translation": "floor, ground"
+  },
+  {
+    "rank": 384,
+    "word": "traer",
+    "translation": "to bring"
+  },
+  {
+    "rank": 385,
+    "word": "asegurar",
+    "translation": "to assure"
+  },
+  {
+    "rank": 386,
+    "word": "brazo",
+    "translation": "arm"
+  },
+  {
+    "rank": 387,
+    "word": "uso",
+    "translation": "use"
+  },
+  {
+    "rank": 388,
+    "word": "parecido",
+    "translation": "similar"
+  },
+  {
+    "rank": 389,
+    "word": "imagen",
+    "translation": "image, picture"
+  },
+  {
+    "rank": 390,
+    "word": "origen",
+    "translation": "origin"
+  },
+  {
+    "rank": 391,
+    "word": "caer",
+    "translation": "to fall"
+  },
+  {
+    "rank": 392,
+    "word": "relación",
+    "translation": "relationship"
+  },
+  {
+    "rank": 393,
+    "word": "apoyar",
+    "translation": "to support"
+  },
+  {
+    "rank": 394,
+    "word": "sangre",
+    "translation": "blood"
+  },
+  {
+    "rank": 395,
+    "word": "demás",
+    "translation": "others, the rest"
+  },
+  {
+    "rank": 396,
+    "word": "igual",
+    "translation": "equal, same"
+  },
+  {
+    "rank": 397,
+    "word": "edad",
+    "translation": "age"
+  },
+  {
+    "rank": 398,
+    "word": "cantidad",
+    "translation": "quantity, amount"
+  },
+  {
+    "rank": 399,
+    "word": "actuar",
+    "translation": "to act"
+  },
+  {
+    "rank": 400,
+    "word": "comprobar",
+    "translation": "to verify"
+  },
+  {
+    "rank": 401,
+    "word": "comprar",
+    "translation": "to buy"
+  },
+  {
+    "rank": 402,
+    "word": "según",
+    "translation": "according to"
+  },
+  {
+    "rank": 403,
+    "word": "observar",
+    "translation": "to observe"
+  },
+  {
+    "rank": 404,
+    "word": "frente",
+    "translation": "front"
+  },
+  {
+    "rank": 405,
+    "word": "lograr",
+    "translation": "to achieve"
+  },
+  {
+    "rank": 406,
+    "word": "puerta",
+    "translation": "door"
+  },
+  {
+    "rank": 407,
+    "word": "completo",
+    "translation": "complete"
+  },
+  {
+    "rank": 408,
+    "word": "moderno",
+    "translation": "modern"
+  },
+  {
+    "rank": 409,
+    "word": "atravesar",
+    "translation": "to cross"
+  },
+  {
+    "rank": 410,
+    "word": "maestro",
+    "translation": "teacher, master"
+  },
+  {
+    "rank": 411,
+    "word": "oír",
+    "translation": "to hear"
+  },
+  {
+    "rank": 412,
+    "word": "adelante",
+    "translation": "forward"
+  },
+  {
+    "rank": 413,
+    "word": "diferente",
+    "translation": "different"
+  },
+  {
+    "rank": 414,
+    "word": "delante",
+    "translation": "in front of"
+  },
+  {
+    "rank": 415,
+    "word": "sentido",
+    "translation": "sense, feeling"
+  },
+  {
+    "rank": 416,
+    "word": "imposible",
+    "translation": "impossible"
+  },
+  {
+    "rank": 417,
+    "word": "solamente",
+    "translation": "only"
+  },
+  {
+    "rank": 418,
+    "word": "libro",
+    "translation": "book"
+  },
+  {
+    "rank": 419,
+    "word": "directamente",
+    "translation": "directly"
+  },
+  {
+    "rank": 420,
+    "word": "lenguaje",
+    "translation": "language, speech"
+  },
+  {
+    "rank": 421,
+    "word": "ello",
+    "translation": "it (neuter)"
+  },
+  {
+    "rank": 422,
+    "word": "difícil",
+    "translation": "difficult"
+  },
+  {
+    "rank": 423,
+    "word": "ofrecer",
+    "translation": "to offer"
+  },
+  {
+    "rank": 424,
+    "word": "sistema",
+    "translation": "system"
+  },
+  {
+    "rank": 425,
+    "word": "enorme",
+    "translation": "enormous"
+  },
+  {
+    "rank": 426,
+    "word": "realmente",
+    "translation": "really"
+  },
+  {
+    "rank": 427,
+    "word": "social",
+    "translation": "social"
+  },
+  {
+    "rank": 428,
+    "word": "abierto",
+    "translation": "open"
+  },
+  {
+    "rank": 429,
+    "word": "subir",
+    "translation": "to go up"
+  },
+  {
+    "rank": 430,
+    "word": "evitar",
+    "translation": "to avoid"
+  },
+  {
+    "rank": 431,
+    "word": "superar",
+    "translation": "to overcome"
+  },
+  {
+    "rank": 432,
+    "word": "papel",
+    "translation": "paper, role"
+  },
+  {
+    "rank": 433,
+    "word": "surgir",
+    "translation": "to appear"
+  },
+  {
+    "rank": 434,
+    "word": "rojo",
+    "translation": "red"
+  },
+  {
+    "rank": 435,
+    "word": "pasado",
+    "translation": "past, last"
+  },
+  {
+    "rank": 436,
+    "word": "favor",
+    "translation": "favor"
+  },
+  {
+    "rank": 437,
+    "word": "siguiente",
+    "translation": "next, following"
+  },
+  {
+    "rank": 438,
+    "word": "semana",
+    "translation": "week"
+  },
+  {
+    "rank": 439,
+    "word": "miembro",
+    "translation": "member"
+  },
+  {
+    "rank": 440,
+    "word": "suponer",
+    "translation": "to suppose"
+  },
+  {
+    "rank": 441,
+    "word": "puro",
+    "translation": "pure"
+  },
+  {
+    "rank": 442,
+    "word": "carga",
+    "translation": "load, charge"
+  },
+  {
+    "rank": 443,
+    "word": "calor",
+    "translation": "heat, warmth"
+  },
+  {
+    "rank": 444,
+    "word": "enemigo",
+    "translation": "enemy"
+  },
+  {
+    "rank": 445,
+    "word": "tender",
+    "translation": "to tend to"
+  },
+  {
+    "rank": 446,
+    "word": "serio",
+    "translation": "serious"
+  },
+  {
+    "rank": 447,
+    "word": "madre",
+    "translation": "mother"
+  },
+  {
+    "rank": 448,
+    "word": "mover",
+    "translation": "to move"
+  },
+  {
+    "rank": 449,
+    "word": "demasiado",
+    "translation": "too much"
+  },
+  {
+    "rank": 450,
+    "word": "ganar",
+    "translation": "to win, to earn"
+  },
+  {
+    "rank": 451,
+    "word": "lleno",
+    "translation": "full"
+  },
+  {
+    "rank": 452,
+    "word": "altura",
+    "translation": "height"
+  },
+  {
+    "rank": 453,
+    "word": "civil",
+    "translation": "civil"
+  },
+  {
+    "rank": 454,
+    "word": "niña",
+    "translation": "girl"
+  },
+  {
+    "rank": 455,
+    "word": "cara",
+    "translation": "face"
+  },
+  {
+    "rank": 456,
+    "word": "metro",
+    "translation": "meter, subway"
+  },
+  {
+    "rank": 457,
+    "word": "cuidado",
+    "translation": "care"
+  },
+  {
+    "rank": 458,
+    "word": "levantar",
+    "translation": "to raise, lift"
+  },
+  {
+    "rank": 459,
+    "word": "dios",
+    "translation": "god"
+  },
+  {
+    "rank": 460,
+    "word": "hermano",
+    "translation": "brother, sibling"
+  },
+  {
+    "rank": 461,
+    "word": "participar",
+    "translation": "to participate"
+  },
+  {
+    "rank": 462,
+    "word": "dónde",
+    "translation": "where?"
+  },
+  {
+    "rank": 463,
+    "word": "explicar",
+    "translation": "to explain"
+  },
+  {
+    "rank": 464,
+    "word": "libertad",
+    "translation": "freedom"
+  },
+  {
+    "rank": 465,
+    "word": "naturaleza",
+    "translation": "nature"
+  },
+  {
+    "rank": 466,
+    "word": "sol",
+    "translation": "sun"
+  },
+  {
+    "rank": 467,
+    "word": "popular",
+    "translation": "popular"
+  },
+  {
+    "rank": 468,
+    "word": "utilizar",
+    "translation": "to use, utilize"
+  },
+  {
+    "rank": 469,
+    "word": "voluntad",
+    "translation": "will, willpower"
+  },
+  {
+    "rank": 470,
+    "word": "verde",
+    "translation": "green"
+  },
+  {
+    "rank": 471,
+    "word": "extraño",
+    "translation": "strange"
+  },
+  {
+    "rank": 472,
+    "word": "accidente",
+    "translation": "accident"
+  },
+  {
+    "rank": 473,
+    "word": "económico",
+    "translation": "economic"
+  },
+  {
+    "rank": 474,
+    "word": "desaparecer",
+    "translation": "to disappear"
+  },
+  {
+    "rank": 475,
+    "word": "rico",
+    "translation": "rich, tasty"
+  },
+  {
+    "rank": 476,
+    "word": "olvidar",
+    "translation": "to forget"
+  },
+  {
+    "rank": 477,
+    "word": "zona",
+    "translation": "zone, area"
+  },
+  {
+    "rank": 478,
+    "word": "fuera",
+    "translation": "outside"
+  },
+  {
+    "rank": 479,
+    "word": "número",
+    "translation": "number"
+  },
+  {
+    "rank": 480,
+    "word": "estado",
+    "translation": "state, condition"
+  },
+  {
+    "rank": 481,
+    "word": "través",
+    "translation": "through (a ~ de)"
+  },
+  {
+    "rank": 482,
+    "word": "especie",
+    "translation": "species, kind"
+  },
+  {
+    "rank": 483,
+    "word": "empresa",
+    "translation": "company, firm"
+  },
+  {
+    "rank": 484,
+    "word": "cincuenta",
+    "translation": "fifty"
+  },
+  {
+    "rank": 485,
+    "word": "nacer",
+    "translation": "to be born"
+  },
+  {
+    "rank": 486,
+    "word": "lengua",
+    "translation": "tongue, language"
+  },
+  {
+    "rank": 487,
+    "word": "usar",
+    "translation": "to use"
+  },
+  {
+    "rank": 488,
+    "word": "pagar",
+    "translation": "to pay"
+  },
+  {
+    "rank": 489,
+    "word": "tamaño",
+    "translation": "size"
+  },
+  {
+    "rank": 490,
+    "word": "revista",
+    "translation": "magazine"
+  },
+  {
+    "rank": 491,
+    "word": "cerrado",
+    "translation": "closed"
+  },
+  {
+    "rank": 492,
+    "word": "frontera",
+    "translation": "frontier, border"
+  },
+  {
+    "rank": 493,
+    "word": "faltar",
+    "translation": "to be lacking"
+  },
+  {
+    "rank": 494,
+    "word": "animal",
+    "translation": "animal"
+  },
+  {
+    "rank": 495,
+    "word": "acción",
+    "translation": "action, deed"
+  },
+  {
+    "rank": 496,
+    "word": "correr",
+    "translation": "to run"
+  },
+  {
+    "rank": 497,
+    "word": "corazón",
+    "translation": "heart"
+  },
+  {
+    "rank": 498,
+    "word": "aprender",
+    "translation": "to learn"
+  },
+  {
+    "rank": 499,
+    "word": "enseñar",
+    "translation": "to teach"
+  },
+  {
+    "rank": 500,
+    "word": "quitar",
+    "translation": "to remove"
+  },
+  {
+    "rank": 501,
+    "word": "mensaje",
+    "translation": "message"
+  },
+  {
+    "rank": 502,
+    "word": "analizar",
+    "translation": "to analyze"
+  },
+  {
+    "rank": 503,
+    "word": "bien",
+    "translation": "goods, property"
+  },
+  {
+    "rank": 504,
+    "word": "público",
+    "translation": "public"
+  },
+  {
+    "rank": 505,
+    "word": "elegir",
+    "translation": "to choose, elect"
+  },
+  {
+    "rank": 506,
+    "word": "región",
+    "translation": "region"
+  },
+  {
+    "rank": 507,
+    "word": "policía",
+    "translation": "police"
+  },
+  {
+    "rank": 508,
+    "word": "comienzo",
+    "translation": "beginning"
+  },
+  {
+    "rank": 509,
+    "word": "suceder",
+    "translation": "to happen"
+  },
+  {
+    "rank": 510,
+    "word": "fondo",
+    "translation": "bottom, background"
+  },
+  {
+    "rank": 511,
+    "word": "amor",
+    "translation": "love"
+  },
+  {
+    "rank": 512,
+    "word": "resolver",
+    "translation": "to resolve"
+  },
+  {
+    "rank": 513,
+    "word": "vecino",
+    "translation": "neighbor"
+  },
+  {
+    "rank": 514,
+    "word": "actividad",
+    "translation": "activity"
+  },
+  {
+    "rank": 515,
+    "word": "corto",
+    "translation": "short, brief"
+  },
+  {
+    "rank": 516,
+    "word": "oportunidad",
+    "translation": "opportunity"
+  },
+  {
+    "rank": 517,
+    "word": "derecha",
+    "translation": "right (side)"
+  },
+  {
+    "rank": 518,
+    "word": "dirigir",
+    "translation": "to direct, manage"
+  },
+  {
+    "rank": 519,
+    "word": "unir",
+    "translation": "to unite, join"
+  },
+  {
+    "rank": 520,
+    "word": "muerte",
+    "translation": "death"
+  },
+  {
+    "rank": 521,
+    "word": "plantear",
+    "translation": "to propose"
+  },
+  {
+    "rank": 522,
+    "word": "gobierno",
+    "translation": "government"
+  },
+  {
+    "rank": 523,
+    "word": "compartir",
+    "translation": "to share"
+  },
+  {
+    "rank": 524,
+    "word": "sentar",
+    "translation": "to sit down"
+  },
+  {
+    "rank": 525,
+    "word": "pensamiento",
+    "translation": "thought"
+  },
+  {
+    "rank": 526,
+    "word": "ley",
+    "translation": "law, rule"
+  },
+  {
+    "rank": 527,
+    "word": "plano",
+    "translation": "plane, map"
+  },
+  {
+    "rank": 528,
+    "word": "tocar",
+    "translation": "to touch, to play"
+  },
+  {
+    "rank": 529,
+    "word": "importancia",
+    "translation": "importance"
+  },
+  {
+    "rank": 530,
+    "word": "terrible",
+    "translation": "terrible"
+  },
+  {
+    "rank": 531,
+    "word": "línea",
+    "translation": "line"
+  },
+  {
+    "rank": 532,
+    "word": "temprano",
+    "translation": "early"
+  },
+  {
+    "rank": 533,
+    "word": "andar",
+    "translation": "to walk"
+  },
+  {
+    "rank": 534,
+    "word": "resultado",
+    "translation": "result"
+  },
+  {
+    "rank": 535,
+    "word": "espacio",
+    "translation": "space, room"
+  },
+  {
+    "rank": 536,
+    "word": "constituir",
+    "translation": "to constitute"
+  },
+  {
+    "rank": 537,
+    "word": "carrera",
+    "translation": "career, race"
+  },
+  {
+    "rank": 538,
+    "word": "mañana",
+    "translation": "morning, tomorrow"
+  },
+  {
+    "rank": 539,
+    "word": "frase",
+    "translation": "phrase"
+  },
+  {
+    "rank": 540,
+    "word": "reunión",
+    "translation": "meeting"
+  },
+  {
+    "rank": 541,
+    "word": "cultura",
+    "translation": "culture"
+  },
+  {
+    "rank": 542,
+    "word": "enfermedad",
+    "translation": "illness"
+  },
+  {
+    "rank": 543,
+    "word": "resto",
+    "translation": "rest, remainder"
+  },
+  {
+    "rank": 544,
+    "word": "literatura",
+    "translation": "literature"
+  },
+  {
+    "rank": 545,
+    "word": "fe",
+    "translation": "faith"
+  },
+  {
+    "rank": 546,
+    "word": "sueño",
+    "translation": "dream, sleep"
+  },
+  {
+    "rank": 547,
+    "word": "importar",
+    "translation": "to matter"
+  },
+  {
+    "rank": 548,
+    "word": "dispuesto",
+    "translation": "willing, ready"
+  },
+  {
+    "rank": 549,
+    "word": "compañero",
+    "translation": "companion"
+  },
+  {
+    "rank": 550,
+    "word": "depender",
+    "translation": "to depend"
+  },
+  {
+    "rank": 551,
+    "word": "poder",
+    "translation": "power (noun)"
+  },
+  {
+    "rank": 552,
+    "word": "verano",
+    "translation": "summer"
+  },
+  {
+    "rank": 553,
+    "word": "acontecimiento",
+    "translation": "event"
+  },
+  {
+    "rank": 554,
+    "word": "cumplir",
+    "translation": "to fulfill"
+  },
+  {
+    "rank": 555,
+    "word": "jamás",
+    "translation": "never"
+  },
+  {
+    "rank": 556,
+    "word": "tercero",
+    "translation": "third"
+  },
+  {
+    "rank": 557,
+    "word": "continuar",
+    "translation": "to continue"
+  },
+  {
+    "rank": 558,
+    "word": "arma",
+    "translation": "weapon"
+  },
+  {
+    "rank": 559,
+    "word": "pie",
+    "translation": "foot"
+  },
+  {
+    "rank": 560,
+    "word": "esfuerzo",
+    "translation": "effort"
+  },
+  {
+    "rank": 561,
+    "word": "condición",
+    "translation": "condition"
+  },
+  {
+    "rank": 562,
+    "word": "contribuir",
+    "translation": "to contribute"
+  },
+  {
+    "rank": 563,
+    "word": "cortar",
+    "translation": "to cut"
+  },
+  {
+    "rank": 564,
+    "word": "atender",
+    "translation": "to attend to"
+  },
+  {
+    "rank": 565,
+    "word": "ayudar",
+    "translation": "to help"
+  },
+  {
+    "rank": 566,
+    "word": "color",
+    "translation": "color"
+  },
+  {
+    "rank": 567,
+    "word": "pasado",
+    "translation": "past (noun)"
+  },
+  {
+    "rank": 568,
+    "word": "lista",
+    "translation": "list"
+  },
+  {
+    "rank": 569,
+    "word": "famoso",
+    "translation": "famous"
+  },
+  {
+    "rank": 570,
+    "word": "falta",
+    "translation": "lack, shortage"
+  },
+  {
+    "rank": 571,
+    "word": "ocasión",
+    "translation": "occasion"
+  },
+  {
+    "rank": 572,
+    "word": "visitar",
+    "translation": "to visit"
+  },
+  {
+    "rank": 573,
+    "word": "premio",
+    "translation": "prize, reward"
+  },
+  {
+    "rank": 574,
+    "word": "visita",
+    "translation": "visit"
+  },
+  {
+    "rank": 575,
+    "word": "tu",
+    "translation": "your (informal)"
+  },
+  {
+    "rank": 576,
+    "word": "dedo",
+    "translation": "finger, toe"
+  },
+  {
+    "rank": 577,
+    "word": "quince",
+    "translation": "fifteen"
+  },
+  {
+    "rank": 578,
+    "word": "demostrar",
+    "translation": "to demonstrate"
+  },
+  {
+    "rank": 579,
+    "word": "despertar",
+    "translation": "to wake up"
+  },
+  {
+    "rank": 580,
+    "word": "existencia",
+    "translation": "existence"
+  },
+  {
+    "rank": 581,
+    "word": "mente",
+    "translation": "mind"
+  },
+  {
+    "rank": 582,
+    "word": "mayoría",
+    "translation": "majority"
+  },
+  {
+    "rank": 583,
+    "word": "conocimiento",
+    "translation": "knowledge"
+  },
+  {
+    "rank": 584,
+    "word": "examen",
+    "translation": "exam"
+  },
+  {
+    "rank": 585,
+    "word": "teléfono",
+    "translation": "telephone"
+  },
+  {
+    "rank": 586,
+    "word": "juego",
+    "translation": "game, play"
+  },
+  {
+    "rank": 587,
+    "word": "mío",
+    "translation": "mine"
+  },
+  {
+    "rank": 588,
+    "word": "acto",
+    "translation": "act, action"
+  },
+  {
+    "rank": 589,
+    "word": "rama",
+    "translation": "branch"
+  },
+  {
+    "rank": 590,
+    "word": "libre",
+    "translation": "free"
+  },
+  {
+    "rank": 591,
+    "word": "recoger",
+    "translation": "to pick up"
+  },
+  {
+    "rank": 592,
+    "word": "inmediato",
+    "translation": "immediate"
+  },
+  {
+    "rank": 593,
+    "word": "nivel",
+    "translation": "level"
+  },
+  {
+    "rank": 594,
+    "word": "ciencia",
+    "translation": "science"
+  },
+  {
+    "rank": 595,
+    "word": "ayuda",
+    "translation": "help, aid"
+  },
+  {
+    "rank": 596,
+    "word": "ambiente",
+    "translation": "environment"
+  },
+  {
+    "rank": 597,
+    "word": "imponer",
+    "translation": "to impose"
+  },
+  {
+    "rank": 598,
+    "word": "alemán",
+    "translation": "German"
+  },
+  {
+    "rank": 599,
+    "word": "casar",
+    "translation": "to marry"
+  },
+  {
+    "rank": 600,
+    "word": "masa",
+    "translation": "mass, dough"
+  },
+  {
+    "rank": 601,
+    "word": "clásico",
+    "translation": "classic"
+  },
+  {
+    "rank": 602,
+    "word": "futuro",
+    "translation": "future"
+  },
+  {
+    "rank": 603,
+    "word": "loco",
+    "translation": "crazy"
+  },
+  {
+    "rank": 604,
+    "word": "atención",
+    "translation": "attention"
+  },
+  {
+    "rank": 605,
+    "word": "pegar",
+    "translation": "to hit, to stick"
+  },
+  {
+    "rank": 606,
+    "word": "comida",
+    "translation": "food, meal"
+  },
+  {
+    "rank": 607,
+    "word": "capacidad",
+    "translation": "capacity"
+  },
+  {
+    "rank": 608,
+    "word": "ambos",
+    "translation": "both"
+  },
+  {
+    "rank": 609,
+    "word": "concreto",
+    "translation": "concrete, real"
+  },
+  {
+    "rank": 610,
+    "word": "ocupar",
+    "translation": "to occupy"
+  },
+  {
+    "rank": 611,
+    "word": "entrada",
+    "translation": "entrance, ticket"
+  },
+  {
+    "rank": 612,
+    "word": "tú",
+    "translation": "you (informal)"
+  },
+  {
+    "rank": 613,
+    "word": "objetivo",
+    "translation": "objective"
+  },
+  {
+    "rank": 614,
+    "word": "disposición",
+    "translation": "disposition"
+  },
+  {
+    "rank": 615,
+    "word": "entregar",
+    "translation": "to deliver"
+  },
+  {
+    "rank": 616,
+    "word": "teatro",
+    "translation": "theater"
+  },
+  {
+    "rank": 617,
+    "word": "cuál",
+    "translation": "which?"
+  },
+  {
+    "rank": 618,
+    "word": "volumen",
+    "translation": "volume"
+  },
+  {
+    "rank": 619,
+    "word": "francés",
+    "translation": "French"
+  },
+  {
+    "rank": 620,
+    "word": "cerca",
+    "translation": "near, close"
+  },
+  {
+    "rank": 621,
+    "word": "nueve",
+    "translation": "nine"
+  },
+  {
+    "rank": 622,
+    "word": "experiencia",
+    "translation": "experience"
+  },
+  {
+    "rank": 623,
+    "word": "descubrir",
+    "translation": "to discover"
+  },
+  {
+    "rank": 624,
+    "word": "pintura",
+    "translation": "painting"
+  },
+  {
+    "rank": 625,
+    "word": "precisamente",
+    "translation": "precisely"
+  },
+  {
+    "rank": 626,
+    "word": "determinar",
+    "translation": "to determine"
+  },
+  {
+    "rank": 627,
+    "word": "materia",
+    "translation": "matter, subject"
+  },
+  {
+    "rank": 628,
+    "word": "televisión",
+    "translation": "television"
+  },
+  {
+    "rank": 629,
+    "word": "autoridad",
+    "translation": "authority"
+  },
+  {
+    "rank": 630,
+    "word": "hogar",
+    "translation": "home, hearth"
+  },
+  {
+    "rank": 631,
+    "word": "norteamericano",
+    "translation": "North American"
+  },
+  {
+    "rank": 632,
+    "word": "material",
+    "translation": "material"
+  },
+  {
+    "rank": 633,
+    "word": "cuándo",
+    "translation": "when?"
+  },
+  {
+    "rank": 634,
+    "word": "pintar",
+    "translation": "to paint"
+  },
+  {
+    "rank": 635,
+    "word": "energía",
+    "translation": "energy"
+  },
+  {
+    "rank": 636,
+    "word": "recuerdo",
+    "translation": "memory, keepsake"
+  },
+  {
+    "rank": 637,
+    "word": "conservar",
+    "translation": "to conserve"
+  },
+  {
+    "rank": 638,
+    "word": "meter",
+    "translation": "to put into"
+  },
+  {
+    "rank": 639,
+    "word": "santa",
+    "translation": "saint (fem.)"
+  },
+  {
+    "rank": 640,
+    "word": "común",
+    "translation": "common"
+  },
+  {
+    "rank": 641,
+    "word": "viajar",
+    "translation": "to travel"
+  },
+  {
+    "rank": 642,
+    "word": "discutir",
+    "translation": "to argue, discuss"
+  },
+  {
+    "rank": 643,
+    "word": "pasión",
+    "translation": "passion"
+  },
+  {
+    "rank": 644,
+    "word": "vino",
+    "translation": "wine"
+  },
+  {
+    "rank": 645,
+    "word": "alma",
+    "translation": "soul"
+  },
+  {
+    "rank": 646,
+    "word": "teoría",
+    "translation": "theory"
+  },
+  {
+    "rank": 647,
+    "word": "temer",
+    "translation": "to fear"
+  },
+  {
+    "rank": 648,
+    "word": "artista",
+    "translation": "artist"
+  },
+  {
+    "rank": 649,
+    "word": "junto",
+    "translation": "together"
+  },
+  {
+    "rank": 650,
+    "word": "fecha",
+    "translation": "date"
+  },
+  {
+    "rank": 651,
+    "word": "sufrir",
+    "translation": "to suffer"
+  },
+  {
+    "rank": 652,
+    "word": "cielo",
+    "translation": "sky, heaven"
+  },
+  {
+    "rank": 653,
+    "word": "temor",
+    "translation": "fear"
+  },
+  {
+    "rank": 654,
+    "word": "jefe",
+    "translation": "boss, manager"
+  },
+  {
+    "rank": 655,
+    "word": "capítulo",
+    "translation": "chapter"
+  },
+  {
+    "rank": 656,
+    "word": "profesional",
+    "translation": "professional"
+  },
+  {
+    "rank": 657,
+    "word": "techo",
+    "translation": "roof"
+  },
+  {
+    "rank": 658,
+    "word": "presencia",
+    "translation": "presence"
+  },
+  {
+    "rank": 659,
+    "word": "separar",
+    "translation": "to separate"
+  },
+  {
+    "rank": 660,
+    "word": "decisión",
+    "translation": "decision"
+  },
+  {
+    "rank": 661,
+    "word": "absolutamente",
+    "translation": "absolutely"
+  },
+  {
+    "rank": 662,
+    "word": "echar",
+    "translation": "to throw, cast"
+  },
+  {
+    "rank": 663,
+    "word": "nacional",
+    "translation": "national"
+  },
+  {
+    "rank": 664,
+    "word": "objeto",
+    "translation": "object"
+  },
+  {
+    "rank": 665,
+    "word": "autor",
+    "translation": "author"
+  },
+  {
+    "rank": 666,
+    "word": "aspecto",
+    "translation": "aspect, appearance"
+  },
+  {
+    "rank": 667,
+    "word": "seguramente",
+    "translation": "surely"
+  },
+  {
+    "rank": 668,
+    "word": "resistir",
+    "translation": "to resist"
+  },
+  {
+    "rank": 669,
+    "word": "responder",
+    "translation": "to respond"
+  },
+  {
+    "rank": 670,
+    "word": "encima",
+    "translation": "above, on top"
+  },
+  {
+    "rank": 671,
+    "word": "acercar",
+    "translation": "to come near"
+  },
+  {
+    "rank": 672,
+    "word": "preparar",
+    "translation": "to prepare"
+  },
+  {
+    "rank": 673,
+    "word": "citar",
+    "translation": "to cite, quote"
+  },
+  {
+    "rank": 674,
+    "word": "extender",
+    "translation": "to extend"
+  },
+  {
+    "rank": 675,
+    "word": "descansar",
+    "translation": "to rest"
+  },
+  {
+    "rank": 676,
+    "word": "asunto",
+    "translation": "matter, issue"
+  },
+  {
+    "rank": 677,
+    "word": "fundamental",
+    "translation": "fundamental"
+  },
+  {
+    "rank": 678,
+    "word": "facilidad",
+    "translation": "ease"
+  },
+  {
+    "rank": 679,
+    "word": "preocupar",
+    "translation": "to worry"
+  },
+  {
+    "rank": 680,
+    "word": "atrás",
+    "translation": "back, behind"
+  },
+  {
+    "rank": 681,
+    "word": "empleado",
+    "translation": "employee"
+  },
+  {
+    "rank": 682,
+    "word": "pronto",
+    "translation": "soon, quick"
+  },
+  {
+    "rank": 683,
+    "word": "concepto",
+    "translation": "concept"
+  },
+  {
+    "rank": 684,
+    "word": "grave",
+    "translation": "serious"
+  },
+  {
+    "rank": 685,
+    "word": "retirar",
+    "translation": "to retire, remove"
+  },
+  {
+    "rank": 686,
+    "word": "establecer",
+    "translation": "to establish"
+  },
+  {
+    "rank": 687,
+    "word": "adquirir",
+    "translation": "to acquire"
+  },
+  {
+    "rank": 688,
+    "word": "costar",
+    "translation": "to cost"
+  },
+  {
+    "rank": 689,
+    "word": "mencionar",
+    "translation": "to mention"
+  },
+  {
+    "rank": 690,
+    "word": "práctica",
+    "translation": "practice"
+  },
+  {
+    "rank": 691,
+    "word": "publicar",
+    "translation": "to publish"
+  },
+  {
+    "rank": 692,
+    "word": "idioma",
+    "translation": "language"
+  },
+  {
+    "rank": 693,
+    "word": "aprovechar",
+    "translation": "to take advantage"
+  },
+  {
+    "rank": 694,
+    "word": "futuro",
+    "translation": "future (adj.)"
+  },
+  {
+    "rank": 695,
+    "word": "conclusión",
+    "translation": "conclusion"
+  },
+  {
+    "rank": 696,
+    "word": "vehículo",
+    "translation": "vehicle"
+  },
+  {
+    "rank": 697,
+    "word": "militar",
+    "translation": "military"
+  },
+  {
+    "rank": 698,
+    "word": "compañía",
+    "translation": "company"
+  },
+  {
+    "rank": 699,
+    "word": "curso",
+    "translation": "course"
+  },
+  {
+    "rank": 700,
+    "word": "cine",
+    "translation": "cinema"
+  },
+  {
+    "rank": 701,
+    "word": "marcar",
+    "translation": "to mark, dial"
+  },
+  {
+    "rank": 702,
+    "word": "comentario",
+    "translation": "comment"
+  },
+  {
+    "rank": 703,
+    "word": "vivo",
+    "translation": "alive, bright"
+  },
+  {
+    "rank": 704,
+    "word": "lucha",
+    "translation": "fight, struggle"
+  },
+  {
+    "rank": 705,
+    "word": "daño",
+    "translation": "damage, harm"
+  },
+  {
+    "rank": 706,
+    "word": "intento",
+    "translation": "attempt"
+  },
+  {
+    "rank": 707,
+    "word": "enfermo",
+    "translation": "sick, ill"
+  },
+  {
+    "rank": 708,
+    "word": "piso",
+    "translation": "floor, story"
+  },
+  {
+    "rank": 709,
+    "word": "gesto",
+    "translation": "gesture"
+  },
+  {
+    "rank": 710,
+    "word": "derecho",
+    "translation": "right, straight"
+  },
+  {
+    "rank": 711,
+    "word": "actual",
+    "translation": "current"
+  },
+  {
+    "rank": 712,
+    "word": "diciembre",
+    "translation": "December"
+  },
+  {
+    "rank": 713,
+    "word": "economía",
+    "translation": "economy"
+  },
+  {
+    "rank": 714,
+    "word": "introducir",
+    "translation": "to introduce"
+  },
+  {
+    "rank": 715,
+    "word": "totalmente",
+    "translation": "totally"
+  },
+  {
+    "rank": 716,
+    "word": "cuánto",
+    "translation": "how much?"
+  },
+  {
+    "rank": 717,
+    "word": "posición",
+    "translation": "position"
+  },
+  {
+    "rank": 718,
+    "word": "lejos",
+    "translation": "far away"
+  },
+  {
+    "rank": 719,
+    "word": "leche",
+    "translation": "milk"
+  },
+  {
+    "rank": 720,
+    "word": "conciencia",
+    "translation": "conscience"
+  },
+  {
+    "rank": 721,
+    "word": "aplicar",
+    "translation": "to apply"
+  },
+  {
+    "rank": 722,
+    "word": "bajar",
+    "translation": "to come down"
+  },
+  {
+    "rank": 723,
+    "word": "consejo",
+    "translation": "advice, council"
+  },
+  {
+    "rank": 724,
+    "word": "próximo",
+    "translation": "next"
+  },
+  {
+    "rank": 725,
+    "word": "piedra",
+    "translation": "stone, rock"
+  },
+  {
+    "rank": 726,
+    "word": "médico",
+    "translation": "doctor"
+  },
+  {
+    "rank": 727,
+    "word": "director",
+    "translation": "director"
+  },
+  {
+    "rank": 728,
+    "word": "recuperar",
+    "translation": "to recover"
+  },
+  {
+    "rank": 729,
+    "word": "principal",
+    "translation": "main"
+  },
+  {
+    "rank": 730,
+    "word": "cuento",
+    "translation": "story, tale"
+  },
+  {
+    "rank": 731,
+    "word": "mirada",
+    "translation": "look, gaze"
+  },
+  {
+    "rank": 732,
+    "word": "siete",
+    "translation": "seven"
+  },
+  {
+    "rank": 733,
+    "word": "duro",
+    "translation": "hard"
+  },
+  {
+    "rank": 734,
+    "word": "información",
+    "translation": "information"
+  },
+  {
+    "rank": 735,
+    "word": "espíritu",
+    "translation": "spirit"
+  },
+  {
+    "rank": 736,
+    "word": "artículo",
+    "translation": "article, item"
+  },
+  {
+    "rank": 737,
+    "word": "trasladar",
+    "translation": "to move, transfer"
+  },
+  {
+    "rank": 738,
+    "word": "hábito",
+    "translation": "habit"
+  },
+  {
+    "rank": 739,
+    "word": "positivo",
+    "translation": "positive"
+  },
+  {
+    "rank": 740,
+    "word": "expresión",
+    "translation": "expression"
+  },
+  {
+    "rank": 741,
+    "word": "exponer",
+    "translation": "to expose"
+  },
+  {
+    "rank": 742,
+    "word": "letra",
+    "translation": "letter, lyrics"
+  },
+  {
+    "rank": 743,
+    "word": "partida",
+    "translation": "departure, game"
+  },
+  {
+    "rank": 744,
+    "word": "sencillo",
+    "translation": "simple, easy"
+  },
+  {
+    "rank": 745,
+    "word": "apenas",
+    "translation": "barely, hardly"
+  },
+  {
+    "rank": 746,
+    "word": "estilo",
+    "translation": "style"
+  },
+  {
+    "rank": 747,
+    "word": "perfecto",
+    "translation": "perfect"
+  },
+  {
+    "rank": 748,
+    "word": "vuelta",
+    "translation": "turn, return"
+  },
+  {
+    "rank": 749,
+    "word": "excepción",
+    "translation": "exception"
+  },
+  {
+    "rank": 750,
+    "word": "control",
+    "translation": "control"
+  },
+  {
+    "rank": 751,
+    "word": "esperanza",
+    "translation": "hope"
+  },
+  {
+    "rank": 752,
+    "word": "superior",
+    "translation": "superior, upper"
+  },
+  {
+    "rank": 753,
+    "word": "habitación",
+    "translation": "room, bedroom"
+  },
+  {
+    "rank": 754,
+    "word": "manejar",
+    "translation": "to drive, handle"
+  },
+  {
+    "rank": 755,
+    "word": "representar",
+    "translation": "to represent"
+  },
+  {
+    "rank": 756,
+    "word": "causa",
+    "translation": "cause"
+  },
+  {
+    "rank": 757,
+    "word": "semejante",
+    "translation": "similar, such"
+  },
+  {
+    "rank": 758,
+    "word": "alrededor",
+    "translation": "around, about"
+  },
+  {
+    "rank": 759,
+    "word": "profesor",
+    "translation": "teacher, professor"
+  },
+  {
+    "rank": 760,
+    "word": "siquiera",
+    "translation": "even (if)"
+  },
+  {
+    "rank": 761,
+    "word": "acompañar",
+    "translation": "to accompany"
+  },
+  {
+    "rank": 762,
+    "word": "labor",
+    "translation": "work, task"
+  },
+  {
+    "rank": 763,
+    "word": "trabajador",
+    "translation": "worker"
+  },
+  {
+    "rank": 764,
+    "word": "carácter",
+    "translation": "character"
+  },
+  {
+    "rank": 765,
+    "word": "cantar",
+    "translation": "to sing"
+  },
+  {
+    "rank": 766,
+    "word": "operar",
+    "translation": "to operate"
+  },
+  {
+    "rank": 767,
+    "word": "obstante",
+    "translation": "nevertheless (no~)"
+  },
+  {
+    "rank": 768,
+    "word": "joven",
+    "translation": "young"
+  },
+  {
+    "rank": 769,
+    "word": "sexo",
+    "translation": "sex"
+  },
+  {
+    "rank": 770,
+    "word": "documento",
+    "translation": "document"
+  },
+  {
+    "rank": 771,
+    "word": "motivo",
+    "translation": "motive, cause"
+  },
+  {
+    "rank": 772,
+    "word": "construir",
+    "translation": "to build"
+  },
+  {
+    "rank": 773,
+    "word": "opinión",
+    "translation": "opinion"
+  },
+  {
+    "rank": 774,
+    "word": "dominar",
+    "translation": "to dominate"
+  },
+  {
+    "rank": 775,
+    "word": "oscuro",
+    "translation": "dark, obscure"
+  },
+  {
+    "rank": 776,
+    "word": "acordar",
+    "translation": "to remember"
+  },
+  {
+    "rank": 777,
+    "word": "generalmente",
+    "translation": "generally"
+  },
+  {
+    "rank": 778,
+    "word": "cerrar",
+    "translation": "to close"
+  },
+  {
+    "rank": 779,
+    "word": "cadena",
+    "translation": "chain"
+  },
+  {
+    "rank": 780,
+    "word": "tras",
+    "translation": "after, behind"
+  },
+  {
+    "rank": 781,
+    "word": "repartir",
+    "translation": "to distribute"
+  },
+  {
+    "rank": 782,
+    "word": "fenómeno",
+    "translation": "phenomenon"
+  },
+  {
+    "rank": 783,
+    "word": "proceso",
+    "translation": "process"
+  },
+  {
+    "rank": 784,
+    "word": "desarrollo",
+    "translation": "development"
+  },
+  {
+    "rank": 785,
+    "word": "contacto",
+    "translation": "contact"
+  },
+  {
+    "rank": 786,
+    "word": "dudar",
+    "translation": "to doubt"
+  },
+  {
+    "rank": 787,
+    "word": "prestar",
+    "translation": "to lend"
+  },
+  {
+    "rank": 788,
+    "word": "guardar",
+    "translation": "to keep, save"
+  },
+  {
+    "rank": 789,
+    "word": "llorar",
+    "translation": "to cry"
+  },
+  {
+    "rank": 790,
+    "word": "margen",
+    "translation": "margin, edge"
+  },
+  {
+    "rank": 791,
+    "word": "hallar",
+    "translation": "to find"
+  },
+  {
+    "rank": 792,
+    "word": "inmediatamente",
+    "translation": "immediately"
+  },
+  {
+    "rank": 793,
+    "word": "dolor",
+    "translation": "pain, sorrow"
+  },
+  {
+    "rank": 794,
+    "word": "bomba",
+    "translation": "bomb, pump"
+  },
+  {
+    "rank": 795,
+    "word": "impresión",
+    "translation": "impression"
+  },
+  {
+    "rank": 796,
+    "word": "respuesta",
+    "translation": "answer, reply"
+  },
+  {
+    "rank": 797,
+    "word": "culpa",
+    "translation": "blame, fault"
+  },
+  {
+    "rank": 798,
+    "word": "interesante",
+    "translation": "interesting"
+  },
+  {
+    "rank": 799,
+    "word": "añadir",
+    "translation": "to add"
+  },
+  {
+    "rank": 800,
+    "word": "argentino",
+    "translation": "Argentine"
+  }
+]

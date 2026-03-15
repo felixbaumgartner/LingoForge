@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Focus on the Top 800 Words",
+    "description": "Start with the 800 most commonly used words. People use about 800 words daily regardless of language. Master these first before anything else.",
+    "applicableTo": "all"
+  },
+  {
+    "name": "Multi-Sensory Learning (See, Hear, Speak, Do)",
+    "description": "Engage all senses: see the written word, hear it spoken, speak it aloud, and physically act it out. Retention scale: Read 10%, Hear 20%, See 30%, Write 40%, Say 50%, Do 60%, Create Context 70%, Emotional Involvement 80%, Repetition 90%.",
+    "applicableTo": "all"
+  },
+  {
+    "name": "Context and Story Integration",
+    "description": "Never learn words in isolation. Connect each word to a picture, story, situation, or personal context. Integrate vocabulary into stories — instead of remembering 100 separate words, remember one story containing them all.",
+    "applicableTo": "reading"
+  },
+  {
+    "name": "One-to-One Translation (Skip Grammar)",
+    "description": "Translate sentences word-for-word rather than learning grammar rules. This sounds funny in English but gives an intuitive feel for sentence structure. Skip grammar classes — children learn languages properly without grammar.",
+    "applicableTo": "writing"
+  },
+  {
+    "name": "Flip Card Method",
+    "description": "Write words on flip cards: foreign language on one side, English on the other. First translate foreign→English (understanding), then English→foreign (speaking ability). Repeat until 80%+ accuracy, setting aside difficult words for later.",
+    "applicableTo": "all"
+  },
+  {
+    "name": "The Café Routine (Role-Play Practice)",
+    "description": "Imagine real-life scenarios and practice using vocabulary in context: ordering at a café, asking directions, making small talk. First attempt without help, then with cards, then without again. The gap between knowing and using words is bridged through practice.",
+    "applicableTo": "speaking"
+  },
+  {
+    "name": "Picture-Word Association",
+    "description": "Connect words to pictures from magazines or images. The visual connection creates strong memory anchors. After connecting words to pictures, remove the words and try to recall them from pictures alone. Students recall 60-100% of words in 30 minutes this way.",
+    "applicableTo": "reading"
+  },
+  {
+    "name": "Voice Recording and Passive Listening",
+    "description": "Record yourself saying: foreign word → pause → English translation → pause → foreign word again. Listen with eyes closed in a relaxed state (passive absorption), then listen again with eyes open while looking at the written words.",
+    "applicableTo": "speaking"
+  },
+  {
+    "name": "Scale of Knowing (8 Levels)",
+    "description": "Words exist on a familiarity scale from 1 (completely unaware) to 8 (daily use, comes easily). Focus on words you already know a little and lift them higher, rather than obsessing over completely unknown words. Prioritize words that come easy — the energy to learn one hard word could learn 10 easier ones.",
+    "applicableTo": "all"
+  },
+  {
+    "name": "Emotional and Interest-Based Learning",
+    "description": "Connect learning to things you're genuinely interested in. If your hobby is cooking, learn food vocabulary first. Fascination and personal relevance dramatically increase retention. Create reasons why learning the language benefits you personally.",
+    "applicableTo": "all"
+  },
+  {
+    "name": "Interactive Movie Technique",
+    "description": "Watch movies with foreign audio and foreign subtitles. Use freeze-and-repeat to study specific phrases. Movies provide real spoken language in context with pictures, stories, and emotional engagement — superior to classroom learning. Choose movies you enjoy.",
+    "applicableTo": "reading"
+  },
+  {
+    "name": "Spaced Repetition with Sleep Processing",
+    "description": "Learn a batch of words, then let go and sleep on it. The mind processes during sleep. Return to the same words the next day for a fresh, improved recall. Don't over-drill in one session — spread repetition across days.",
+    "applicableTo": "all"
+  },
+  {
+    "name": "Sentence Creation from Vocabulary",
+    "description": "For each word learned, create your own sentence using it. Mix with English if needed at first. One word can generate many different sentences. Creating your own examples is far more effective than memorizing given ones.",
+    "applicableTo": "writing"
+  },
+  {
+    "name": "Relaxed State Learning",
+    "description": "Learn in a relaxed, comfortable state. Clear unfinished business before sessions. Balance reading with physical activity, water, fresh air. Results triple when in the right physical, emotional, and mental state. Tolerance for uncertainty and mistakes is essential.",
+    "applicableTo": "all"
+  }
+]

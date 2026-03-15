@@ -1,0 +1,3997 @@
+[
+  {
+    "rank": 1,
+    "word": "ik",
+    "translation": "I"
+  },
+  {
+    "rank": 2,
+    "word": "je",
+    "translation": "you"
+  },
+  {
+    "rank": 3,
+    "word": "het",
+    "translation": "the / it"
+  },
+  {
+    "rank": 4,
+    "word": "de",
+    "translation": "the"
+  },
+  {
+    "rank": 5,
+    "word": "is",
+    "translation": "is"
+  },
+  {
+    "rank": 6,
+    "word": "dat",
+    "translation": "that"
+  },
+  {
+    "rank": 7,
+    "word": "een",
+    "translation": "a / one"
+  },
+  {
+    "rank": 8,
+    "word": "niet",
+    "translation": "not"
+  },
+  {
+    "rank": 9,
+    "word": "en",
+    "translation": "and"
+  },
+  {
+    "rank": 10,
+    "word": "wat",
+    "translation": "what"
+  },
+  {
+    "rank": 11,
+    "word": "van",
+    "translation": "of / from"
+  },
+  {
+    "rank": 12,
+    "word": "we",
+    "translation": "we"
+  },
+  {
+    "rank": 13,
+    "word": "in",
+    "translation": "in"
+  },
+  {
+    "rank": 14,
+    "word": "ze",
+    "translation": "they / she"
+  },
+  {
+    "rank": 15,
+    "word": "op",
+    "translation": "on"
+  },
+  {
+    "rank": 16,
+    "word": "te",
+    "translation": "to / too"
+  },
+  {
+    "rank": 17,
+    "word": "hij",
+    "translation": "he"
+  },
+  {
+    "rank": 18,
+    "word": "zijn",
+    "translation": "his / to be"
+  },
+  {
+    "rank": 19,
+    "word": "er",
+    "translation": "there"
+  },
+  {
+    "rank": 20,
+    "word": "maar",
+    "translation": "but"
+  },
+  {
+    "rank": 21,
+    "word": "me",
+    "translation": "me"
+  },
+  {
+    "rank": 22,
+    "word": "die",
+    "translation": "that / who"
+  },
+  {
+    "rank": 23,
+    "word": "heb",
+    "translation": "have"
+  },
+  {
+    "rank": 24,
+    "word": "voor",
+    "translation": "for"
+  },
+  {
+    "rank": 25,
+    "word": "met",
+    "translation": "with"
+  },
+  {
+    "rank": 26,
+    "word": "als",
+    "translation": "as / if"
+  },
+  {
+    "rank": 27,
+    "word": "ben",
+    "translation": "am"
+  },
+  {
+    "rank": 28,
+    "word": "was",
+    "translation": "was"
+  },
+  {
+    "rank": 29,
+    "word": "mijn",
+    "translation": "my"
+  },
+  {
+    "rank": 30,
+    "word": "u",
+    "translation": "you (formal)"
+  },
+  {
+    "rank": 31,
+    "word": "dit",
+    "translation": "this"
+  },
+  {
+    "rank": 32,
+    "word": "aan",
+    "translation": "on / to"
+  },
+  {
+    "rank": 33,
+    "word": "om",
+    "translation": "to / around"
+  },
+  {
+    "rank": 34,
+    "word": "hier",
+    "translation": "here"
+  },
+  {
+    "rank": 35,
+    "word": "naar",
+    "translation": "to"
+  },
+  {
+    "rank": 36,
+    "word": "dan",
+    "translation": "then / than"
+  },
+  {
+    "rank": 37,
+    "word": "jij",
+    "translation": "you (emphatic)"
+  },
+  {
+    "rank": 38,
+    "word": "zo",
+    "translation": "so"
+  },
+  {
+    "rank": 39,
+    "word": "weet",
+    "translation": "know"
+  },
+  {
+    "rank": 40,
+    "word": "ja",
+    "translation": "yes"
+  },
+  {
+    "rank": 41,
+    "word": "kan",
+    "translation": "can"
+  },
+  {
+    "rank": 42,
+    "word": "geen",
+    "translation": "no / none"
+  },
+  {
+    "rank": 43,
+    "word": "nog",
+    "translation": "yet / still"
+  },
+  {
+    "rank": 44,
+    "word": "wel",
+    "translation": "well / surely"
+  },
+  {
+    "rank": 45,
+    "word": "wil",
+    "translation": "want"
+  },
+  {
+    "rank": 46,
+    "word": "moet",
+    "translation": "must"
+  },
+  {
+    "rank": 47,
+    "word": "goed",
+    "translation": "good"
+  },
+  {
+    "rank": 48,
+    "word": "hem",
+    "translation": "him"
+  },
+  {
+    "rank": 49,
+    "word": "hebben",
+    "translation": "to have"
+  },
+  {
+    "rank": 50,
+    "word": "nee",
+    "translation": "no"
+  },
+  {
+    "rank": 51,
+    "word": "heeft",
+    "translation": "has"
+  },
+  {
+    "rank": 52,
+    "word": "waar",
+    "translation": "where / true"
+  },
+  {
+    "rank": 53,
+    "word": "nu",
+    "translation": "now"
+  },
+  {
+    "rank": 54,
+    "word": "hoe",
+    "translation": "how"
+  },
+  {
+    "rank": 55,
+    "word": "ga",
+    "translation": "go"
+  },
+  {
+    "rank": 56,
+    "word": "kom",
+    "translation": "come"
+  },
+  {
+    "rank": 57,
+    "word": "uit",
+    "translation": "out / from"
+  },
+  {
+    "rank": 58,
+    "word": "gaan",
+    "translation": "to go"
+  },
+  {
+    "rank": 59,
+    "word": "bent",
+    "translation": "are"
+  },
+  {
+    "rank": 60,
+    "word": "haar",
+    "translation": "her / hair"
+  },
+  {
+    "rank": 61,
+    "word": "doen",
+    "translation": "to do"
+  },
+  {
+    "rank": 62,
+    "word": "ook",
+    "translation": "also"
+  },
+  {
+    "rank": 63,
+    "word": "mij",
+    "translation": "me"
+  },
+  {
+    "rank": 64,
+    "word": "over",
+    "translation": "about / over"
+  },
+  {
+    "rank": 65,
+    "word": "of",
+    "translation": "or"
+  },
+  {
+    "rank": 66,
+    "word": "daar",
+    "translation": "there"
+  },
+  {
+    "rank": 67,
+    "word": "zou",
+    "translation": "would"
+  },
+  {
+    "rank": 68,
+    "word": "al",
+    "translation": "already / all"
+  },
+  {
+    "rank": 69,
+    "word": "jullie",
+    "translation": "you (plural)"
+  },
+  {
+    "rank": 70,
+    "word": "zal",
+    "translation": "shall / will"
+  },
+  {
+    "rank": 71,
+    "word": "bij",
+    "translation": "at / with / by"
+  },
+  {
+    "rank": 72,
+    "word": "ons",
+    "translation": "us / our"
+  },
+  {
+    "rank": 73,
+    "word": "gaat",
+    "translation": "goes"
+  },
+  {
+    "rank": 74,
+    "word": "hebt",
+    "translation": "have"
+  },
+  {
+    "rank": 75,
+    "word": "meer",
+    "translation": "more"
+  },
+  {
+    "rank": 76,
+    "word": "waarom",
+    "translation": "why"
+  },
+  {
+    "rank": 77,
+    "word": "iets",
+    "translation": "something"
+  },
+  {
+    "rank": 78,
+    "word": "deze",
+    "translation": "these"
+  },
+  {
+    "rank": 79,
+    "word": "laat",
+    "translation": "late / let"
+  },
+  {
+    "rank": 80,
+    "word": "had",
+    "translation": "had"
+  },
+  {
+    "rank": 81,
+    "word": "doe",
+    "translation": "do"
+  },
+  {
+    "rank": 82,
+    "word": "moeten",
+    "translation": "must"
+  },
+  {
+    "rank": 83,
+    "word": "wie",
+    "translation": "who"
+  },
+  {
+    "rank": 84,
+    "word": "jou",
+    "translation": "you (object)"
+  },
+  {
+    "rank": 85,
+    "word": "alles",
+    "translation": "everything"
+  },
+  {
+    "rank": 86,
+    "word": "denk",
+    "translation": "think"
+  },
+  {
+    "rank": 87,
+    "word": "kunnen",
+    "translation": "can"
+  },
+  {
+    "rank": 88,
+    "word": "eens",
+    "translation": "once"
+  },
+  {
+    "rank": 89,
+    "word": "echt",
+    "translation": "really"
+  },
+  {
+    "rank": 90,
+    "word": "weg",
+    "translation": "away / road"
+  },
+  {
+    "rank": 91,
+    "word": "door",
+    "translation": "through / by"
+  },
+  {
+    "rank": 92,
+    "word": "man",
+    "translation": "man"
+  },
+  {
+    "rank": 93,
+    "word": "toch",
+    "translation": "yet / though"
+  },
+  {
+    "rank": 94,
+    "word": "zien",
+    "translation": "to see"
+  },
+  {
+    "rank": 95,
+    "word": "oke",
+    "translation": "okay"
+  },
+  {
+    "rank": 96,
+    "word": "alleen",
+    "translation": "only / alone"
+  },
+  {
+    "rank": 97,
+    "word": "nou",
+    "translation": "well / now"
+  },
+  {
+    "rank": 98,
+    "word": "dus",
+    "translation": "so / therefore"
+  },
+  {
+    "rank": 99,
+    "word": "nooit",
+    "translation": "never"
+  },
+  {
+    "rank": 100,
+    "word": "terug",
+    "translation": "back"
+  },
+  {
+    "rank": 101,
+    "word": "laten",
+    "translation": "to let"
+  },
+  {
+    "rank": 102,
+    "word": "mee",
+    "translation": "with / along"
+  },
+  {
+    "rank": 103,
+    "word": "even",
+    "translation": "just / moment"
+  },
+  {
+    "rank": 104,
+    "word": "hou",
+    "translation": "hold / love"
+  },
+  {
+    "rank": 105,
+    "word": "komt",
+    "translation": "comes"
+  },
+  {
+    "rank": 106,
+    "word": "niets",
+    "translation": "nothing"
+  },
+  {
+    "rank": 107,
+    "word": "zei",
+    "translation": "said"
+  },
+  {
+    "rank": 108,
+    "word": "misschien",
+    "translation": "maybe"
+  },
+  {
+    "rank": 109,
+    "word": "kijk",
+    "translation": "look"
+  },
+  {
+    "rank": 110,
+    "word": "iemand",
+    "translation": "someone"
+  },
+  {
+    "rank": 111,
+    "word": "komen",
+    "translation": "to come"
+  },
+  {
+    "rank": 112,
+    "word": "tot",
+    "translation": "to / until"
+  },
+  {
+    "rank": 113,
+    "word": "veel",
+    "translation": "much / many"
+  },
+  {
+    "rank": 114,
+    "word": "worden",
+    "translation": "to become"
+  },
+  {
+    "rank": 115,
+    "word": "onze",
+    "translation": "our"
+  },
+  {
+    "rank": 116,
+    "word": "mensen",
+    "translation": "people"
+  },
+  {
+    "rank": 117,
+    "word": "zeg",
+    "translation": "say"
+  },
+  {
+    "rank": 118,
+    "word": "leven",
+    "translation": "life / to live"
+  },
+  {
+    "rank": 119,
+    "word": "zeggen",
+    "translation": "to say"
+  },
+  {
+    "rank": 120,
+    "word": "weer",
+    "translation": "again / weather"
+  },
+  {
+    "rank": 121,
+    "word": "gewoon",
+    "translation": "just / simply"
+  },
+  {
+    "rank": 122,
+    "word": "nodig",
+    "translation": "necessary"
+  },
+  {
+    "rank": 123,
+    "word": "wij",
+    "translation": "we"
+  },
+  {
+    "rank": 124,
+    "word": "twee",
+    "translation": "two"
+  },
+  {
+    "rank": 125,
+    "word": "tijd",
+    "translation": "time"
+  },
+  {
+    "rank": 126,
+    "word": "tegen",
+    "translation": "against / to"
+  },
+  {
+    "rank": 127,
+    "word": "uw",
+    "translation": "your (formal)"
+  },
+  {
+    "rank": 128,
+    "word": "toen",
+    "translation": "then / when"
+  },
+  {
+    "rank": 129,
+    "word": "zit",
+    "translation": "sit"
+  },
+  {
+    "rank": 130,
+    "word": "net",
+    "translation": "just / barely"
+  },
+  {
+    "rank": 131,
+    "word": "weten",
+    "translation": "to know"
+  },
+  {
+    "rank": 132,
+    "word": "heel",
+    "translation": "very / whole"
+  },
+  {
+    "rank": 133,
+    "word": "maken",
+    "translation": "to make"
+  },
+  {
+    "rank": 134,
+    "word": "wordt",
+    "translation": "becomes"
+  },
+  {
+    "rank": 135,
+    "word": "dood",
+    "translation": "dead / death"
+  },
+  {
+    "rank": 136,
+    "word": "mag",
+    "translation": "may"
+  },
+  {
+    "rank": 137,
+    "word": "altijd",
+    "translation": "always"
+  },
+  {
+    "rank": 138,
+    "word": "af",
+    "translation": "off / done"
+  },
+  {
+    "rank": 139,
+    "word": "wacht",
+    "translation": "wait"
+  },
+  {
+    "rank": 140,
+    "word": "geef",
+    "translation": "give"
+  },
+  {
+    "rank": 141,
+    "word": "dag",
+    "translation": "day"
+  },
+  {
+    "rank": 142,
+    "word": "omdat",
+    "translation": "because"
+  },
+  {
+    "rank": 143,
+    "word": "zeker",
+    "translation": "sure / certain"
+  },
+  {
+    "rank": 144,
+    "word": "zie",
+    "translation": "see"
+  },
+  {
+    "rank": 145,
+    "word": "allemaal",
+    "translation": "all / everyone"
+  },
+  {
+    "rank": 146,
+    "word": "gedaan",
+    "translation": "done"
+  },
+  {
+    "rank": 147,
+    "word": "oh",
+    "translation": "oh"
+  },
+  {
+    "rank": 148,
+    "word": "dank",
+    "translation": "thanks"
+  },
+  {
+    "rank": 149,
+    "word": "huis",
+    "translation": "house"
+  },
+  {
+    "rank": 150,
+    "word": "he",
+    "translation": "hey"
+  },
+  {
+    "rank": 151,
+    "word": "zij",
+    "translation": "they / she"
+  },
+  {
+    "rank": 152,
+    "word": "jaar",
+    "translation": "year"
+  },
+  {
+    "rank": 153,
+    "word": "vader",
+    "translation": "father"
+  },
+  {
+    "rank": 154,
+    "word": "doet",
+    "translation": "does"
+  },
+  {
+    "rank": 155,
+    "word": "zoals",
+    "translation": "like / such as"
+  },
+  {
+    "rank": 156,
+    "word": "jouw",
+    "translation": "your"
+  },
+  {
+    "rank": 157,
+    "word": "vrouw",
+    "translation": "woman / wife"
+  },
+  {
+    "rank": 158,
+    "word": "geld",
+    "translation": "money"
+  },
+  {
+    "rank": 159,
+    "word": "hun",
+    "translation": "their / them"
+  },
+  {
+    "rank": 160,
+    "word": "mr",
+    "translation": "mister"
+  },
+  {
+    "rank": 161,
+    "word": "god",
+    "translation": "god"
+  },
+  {
+    "rank": 162,
+    "word": "kunt",
+    "translation": "can"
+  },
+  {
+    "rank": 163,
+    "word": "keer",
+    "translation": "time (occurrence)"
+  },
+  {
+    "rank": 164,
+    "word": "dacht",
+    "translation": "thought"
+  },
+  {
+    "rank": 165,
+    "word": "erg",
+    "translation": "very / bad"
+  },
+  {
+    "rank": 166,
+    "word": "willen",
+    "translation": "to want"
+  },
+  {
+    "rank": 167,
+    "word": "anders",
+    "translation": "otherwise"
+  },
+  {
+    "rank": 168,
+    "word": "zitten",
+    "translation": "to sit"
+  },
+  {
+    "rank": 169,
+    "word": "iedereen",
+    "translation": "everyone"
+  },
+  {
+    "rank": 170,
+    "word": "een",
+    "translation": "one"
+  },
+  {
+    "rank": 171,
+    "word": "andere",
+    "translation": "other"
+  },
+  {
+    "rank": 172,
+    "word": "zullen",
+    "translation": "shall / will"
+  },
+  {
+    "rank": 173,
+    "word": "niks",
+    "translation": "nothing"
+  },
+  {
+    "rank": 174,
+    "word": "niemand",
+    "translation": "nobody"
+  },
+  {
+    "rank": 175,
+    "word": "wilt",
+    "translation": "want (formal)"
+  },
+  {
+    "rank": 176,
+    "word": "bedankt",
+    "translation": "thanks"
+  },
+  {
+    "rank": 177,
+    "word": "binnen",
+    "translation": "inside / within"
+  },
+  {
+    "rank": 178,
+    "word": "beter",
+    "translation": "better"
+  },
+  {
+    "rank": 179,
+    "word": "spijt",
+    "translation": "regret"
+  },
+  {
+    "rank": 180,
+    "word": "maak",
+    "translation": "make"
+  },
+  {
+    "rank": 181,
+    "word": "hallo",
+    "translation": "hello"
+  },
+  {
+    "rank": 182,
+    "word": "neem",
+    "translation": "take"
+  },
+  {
+    "rank": 183,
+    "word": "vind",
+    "translation": "find"
+  },
+  {
+    "rank": 184,
+    "word": "staat",
+    "translation": "stands / state"
+  },
+  {
+    "rank": 185,
+    "word": "werk",
+    "translation": "work / job"
+  },
+  {
+    "rank": 186,
+    "word": "zich",
+    "translation": "himself/herself"
+  },
+  {
+    "rank": 187,
+    "word": "moeder",
+    "translation": "mother"
+  },
+  {
+    "rank": 188,
+    "word": "gezien",
+    "translation": "seen"
+  },
+  {
+    "rank": 189,
+    "word": "waren",
+    "translation": "were"
+  },
+  {
+    "rank": 190,
+    "word": "wilde",
+    "translation": "wanted"
+  },
+  {
+    "rank": 191,
+    "word": "praten",
+    "translation": "to talk"
+  },
+  {
+    "rank": 192,
+    "word": "hele",
+    "translation": "whole / entire"
+  },
+  {
+    "rank": 193,
+    "word": "genoeg",
+    "translation": "enough"
+  },
+  {
+    "rank": 194,
+    "word": "meneer",
+    "translation": "sir"
+  },
+  {
+    "rank": 195,
+    "word": "bedoel",
+    "translation": "mean"
+  },
+  {
+    "rank": 196,
+    "word": "klaar",
+    "translation": "ready / done"
+  },
+  {
+    "rank": 197,
+    "word": "vinden",
+    "translation": "to find"
+  },
+  {
+    "rank": 198,
+    "word": "kon",
+    "translation": "could"
+  },
+  {
+    "rank": 199,
+    "word": "mooi",
+    "translation": "beautiful"
+  },
+  {
+    "rank": 200,
+    "word": "leuk",
+    "translation": "fun / nice"
+  },
+  {
+    "rank": 201,
+    "word": "luister",
+    "translation": "listen"
+  },
+  {
+    "rank": 202,
+    "word": "ziet",
+    "translation": "sees"
+  },
+  {
+    "rank": 203,
+    "word": "toe",
+    "translation": "to / towards"
+  },
+  {
+    "rank": 204,
+    "word": "na",
+    "translation": "after"
+  },
+  {
+    "rank": 205,
+    "word": "sorry",
+    "translation": "sorry"
+  },
+  {
+    "rank": 206,
+    "word": "elkaar",
+    "translation": "each other"
+  },
+  {
+    "rank": 207,
+    "word": "blijf",
+    "translation": "stay"
+  },
+  {
+    "rank": 208,
+    "word": "uur",
+    "translation": "hour"
+  },
+  {
+    "rank": 209,
+    "word": "zegt",
+    "translation": "says"
+  },
+  {
+    "rank": 210,
+    "word": "vast",
+    "translation": "firm / stuck"
+  },
+  {
+    "rank": 211,
+    "word": "drie",
+    "translation": "three"
+  },
+  {
+    "rank": 212,
+    "word": "alsjeblieft",
+    "translation": "please"
+  },
+  {
+    "rank": 213,
+    "word": "alle",
+    "translation": "all"
+  },
+  {
+    "rank": 214,
+    "word": "natuurlijk",
+    "translation": "of course"
+  },
+  {
+    "rank": 215,
+    "word": "maakt",
+    "translation": "makes"
+  },
+  {
+    "rank": 216,
+    "word": "gek",
+    "translation": "crazy"
+  },
+  {
+    "rank": 217,
+    "word": "helpen",
+    "translation": "to help"
+  },
+  {
+    "rank": 218,
+    "word": "verdomme",
+    "translation": "damn"
+  },
+  {
+    "rank": 219,
+    "word": "grote",
+    "translation": "big / large"
+  },
+  {
+    "rank": 220,
+    "word": "lang",
+    "translation": "long / tall"
+  },
+  {
+    "rank": 221,
+    "word": "wist",
+    "translation": "knew"
+  },
+  {
+    "rank": 222,
+    "word": "dingen",
+    "translation": "things"
+  },
+  {
+    "rank": 223,
+    "word": "helemaal",
+    "translation": "completely"
+  },
+  {
+    "rank": 224,
+    "word": "graag",
+    "translation": "gladly"
+  },
+  {
+    "rank": 225,
+    "word": "eerste",
+    "translation": "first"
+  },
+  {
+    "rank": 226,
+    "word": "krijgen",
+    "translation": "to get"
+  },
+  {
+    "rank": 227,
+    "word": "blijven",
+    "translation": "to stay"
+  },
+  {
+    "rank": 228,
+    "word": "werd",
+    "translation": "became"
+  },
+  {
+    "rank": 229,
+    "word": "zonder",
+    "translation": "without"
+  },
+  {
+    "rank": 230,
+    "word": "houden",
+    "translation": "to hold / keep"
+  },
+  {
+    "rank": 231,
+    "word": "naam",
+    "translation": "name"
+  },
+  {
+    "rank": 232,
+    "word": "vriend",
+    "translation": "friend"
+  },
+  {
+    "rank": 233,
+    "word": "kijken",
+    "translation": "to look"
+  },
+  {
+    "rank": 234,
+    "word": "beetje",
+    "translation": "bit / little"
+  },
+  {
+    "rank": 235,
+    "word": "jongen",
+    "translation": "boy"
+  },
+  {
+    "rank": 236,
+    "word": "steeds",
+    "translation": "continuously"
+  },
+  {
+    "rank": 237,
+    "word": "auto",
+    "translation": "car"
+  },
+  {
+    "rank": 238,
+    "word": "goede",
+    "translation": "good"
+  },
+  {
+    "rank": 239,
+    "word": "snel",
+    "translation": "fast"
+  },
+  {
+    "rank": 240,
+    "word": "geven",
+    "translation": "to give"
+  },
+  {
+    "rank": 241,
+    "word": "geweest",
+    "translation": "been"
+  },
+  {
+    "rank": 242,
+    "word": "achter",
+    "translation": "behind"
+  },
+  {
+    "rank": 243,
+    "word": "ooit",
+    "translation": "ever"
+  },
+  {
+    "rank": 244,
+    "word": "wanneer",
+    "translation": "when"
+  },
+  {
+    "rank": 245,
+    "word": "kinderen",
+    "translation": "children"
+  },
+  {
+    "rank": 246,
+    "word": "onder",
+    "translation": "under"
+  },
+  {
+    "rank": 247,
+    "word": "bang",
+    "translation": "afraid"
+  },
+  {
+    "rank": 248,
+    "word": "ging",
+    "translation": "went"
+  },
+  {
+    "rank": 249,
+    "word": "hand",
+    "translation": "hand"
+  },
+  {
+    "rank": 250,
+    "word": "vertellen",
+    "translation": "to tell"
+  },
+  {
+    "rank": 251,
+    "word": "eten",
+    "translation": "to eat"
+  },
+  {
+    "rank": 252,
+    "word": "jongens",
+    "translation": "boys / guys"
+  },
+  {
+    "rank": 253,
+    "word": "hoor",
+    "translation": "hear"
+  },
+  {
+    "rank": 254,
+    "word": "kwam",
+    "translation": "came"
+  },
+  {
+    "rank": 255,
+    "word": "idee",
+    "translation": "idea"
+  },
+  {
+    "rank": 256,
+    "word": "paar",
+    "translation": "few / couple"
+  },
+  {
+    "rank": 257,
+    "word": "zag",
+    "translation": "saw"
+  },
+  {
+    "rank": 258,
+    "word": "moest",
+    "translation": "had to"
+  },
+  {
+    "rank": 259,
+    "word": "wereld",
+    "translation": "world"
+  },
+  {
+    "rank": 260,
+    "word": "zorgen",
+    "translation": "worries / care"
+  },
+  {
+    "rank": 261,
+    "word": "deed",
+    "translation": "did"
+  },
+  {
+    "rank": 262,
+    "word": "gebeurd",
+    "translation": "happened"
+  },
+  {
+    "rank": 263,
+    "word": "nieuwe",
+    "translation": "new"
+  },
+  {
+    "rank": 264,
+    "word": "vraag",
+    "translation": "question"
+  },
+  {
+    "rank": 265,
+    "word": "morgen",
+    "translation": "tomorrow"
+  },
+  {
+    "rank": 266,
+    "word": "staan",
+    "translation": "to stand"
+  },
+  {
+    "rank": 267,
+    "word": "vragen",
+    "translation": "to ask"
+  },
+  {
+    "rank": 268,
+    "word": "laatste",
+    "translation": "last"
+  },
+  {
+    "rank": 269,
+    "word": "lijkt",
+    "translation": "seems"
+  },
+  {
+    "rank": 270,
+    "word": "geweldig",
+    "translation": "amazing"
+  },
+  {
+    "rank": 271,
+    "word": "want",
+    "translation": "because"
+  },
+  {
+    "rank": 272,
+    "word": "vandaag",
+    "translation": "today"
+  },
+  {
+    "rank": 273,
+    "word": "zelf",
+    "translation": "self"
+  },
+  {
+    "rank": 274,
+    "word": "kun",
+    "translation": "can (informal)"
+  },
+  {
+    "rank": 275,
+    "word": "nemen",
+    "translation": "to take"
+  },
+  {
+    "rank": 276,
+    "word": "beste",
+    "translation": "best"
+  },
+  {
+    "rank": 277,
+    "word": "heen",
+    "translation": "to / towards"
+  },
+  {
+    "rank": 278,
+    "word": "ie",
+    "translation": "he (informal)"
+  },
+  {
+    "rank": 279,
+    "word": "zelfs",
+    "translation": "even"
+  },
+  {
+    "rank": 280,
+    "word": "meisje",
+    "translation": "girl"
+  },
+  {
+    "rank": 281,
+    "word": "ken",
+    "translation": "know"
+  },
+  {
+    "rank": 282,
+    "word": "stop",
+    "translation": "stop"
+  },
+  {
+    "rank": 283,
+    "word": "rustig",
+    "translation": "calm"
+  },
+  {
+    "rank": 284,
+    "word": "enige",
+    "translation": "only"
+  },
+  {
+    "rank": 285,
+    "word": "buiten",
+    "translation": "outside"
+  },
+  {
+    "rank": 286,
+    "word": "thuis",
+    "translation": "home"
+  },
+  {
+    "rank": 287,
+    "word": "gezegd",
+    "translation": "said"
+  },
+  {
+    "rank": 288,
+    "word": "kleine",
+    "translation": "small"
+  },
+  {
+    "rank": 289,
+    "word": "geloof",
+    "translation": "faith / belief"
+  },
+  {
+    "rank": 290,
+    "word": "eerst",
+    "translation": "first"
+  },
+  {
+    "rank": 291,
+    "word": "mannen",
+    "translation": "men"
+  },
+  {
+    "rank": 292,
+    "word": "hadden",
+    "translation": "had"
+  },
+  {
+    "rank": 293,
+    "word": "samen",
+    "translation": "together"
+  },
+  {
+    "rank": 294,
+    "word": "vertel",
+    "translation": "tell"
+  },
+  {
+    "rank": 295,
+    "word": "denken",
+    "translation": "to think"
+  },
+  {
+    "rank": 296,
+    "word": "halen",
+    "translation": "to fetch"
+  },
+  {
+    "rank": 297,
+    "word": "hen",
+    "translation": "them"
+  },
+  {
+    "rank": 298,
+    "word": "eigen",
+    "translation": "own"
+  },
+  {
+    "rank": 299,
+    "word": "hoop",
+    "translation": "hope"
+  },
+  {
+    "rank": 300,
+    "word": "zoon",
+    "translation": "son"
+  },
+  {
+    "rank": 301,
+    "word": "krijg",
+    "translation": "get"
+  },
+  {
+    "rank": 302,
+    "word": "denkt",
+    "translation": "thinks"
+  },
+  {
+    "rank": 303,
+    "word": "open",
+    "translation": "open"
+  },
+  {
+    "rank": 304,
+    "word": "probleem",
+    "translation": "problem"
+  },
+  {
+    "rank": 305,
+    "word": "elke",
+    "translation": "each / every"
+  },
+  {
+    "rank": 306,
+    "word": "zouden",
+    "translation": "would"
+  },
+  {
+    "rank": 307,
+    "word": "horen",
+    "translation": "to hear"
+  },
+  {
+    "rank": 308,
+    "word": "pak",
+    "translation": "suit / grab"
+  },
+  {
+    "rank": 309,
+    "word": "geleden",
+    "translation": "ago"
+  },
+  {
+    "rank": 310,
+    "word": "orde",
+    "translation": "order"
+  },
+  {
+    "rank": 311,
+    "word": "wou",
+    "translation": "wanted"
+  },
+  {
+    "rank": 312,
+    "word": "bijna",
+    "translation": "almost"
+  },
+  {
+    "rank": 313,
+    "word": "gelijk",
+    "translation": "equal / right"
+  },
+  {
+    "rank": 314,
+    "word": "vrienden",
+    "translation": "friends"
+  },
+  {
+    "rank": 315,
+    "word": "kant",
+    "translation": "side"
+  },
+  {
+    "rank": 316,
+    "word": "houdt",
+    "translation": "holds / loves"
+  },
+  {
+    "rank": 317,
+    "word": "begrijp",
+    "translation": "understand"
+  },
+  {
+    "rank": 318,
+    "word": "politie",
+    "translation": "police"
+  },
+  {
+    "rank": 319,
+    "word": "gebeurt",
+    "translation": "happens"
+  },
+  {
+    "rank": 320,
+    "word": "eigenlijk",
+    "translation": "actually"
+  },
+  {
+    "rank": 321,
+    "word": "soms",
+    "translation": "sometimes"
+  },
+  {
+    "rank": 322,
+    "word": "wachten",
+    "translation": "to wait"
+  },
+  {
+    "rank": 323,
+    "word": "kind",
+    "translation": "child"
+  },
+  {
+    "rank": 324,
+    "word": "hoofd",
+    "translation": "head"
+  },
+  {
+    "rank": 325,
+    "word": "vanavond",
+    "translation": "tonight"
+  },
+  {
+    "rank": 326,
+    "word": "precies",
+    "translation": "exactly"
+  },
+  {
+    "rank": 327,
+    "word": "geeft",
+    "translation": "gives"
+  },
+  {
+    "rank": 328,
+    "word": "alsof",
+    "translation": "as if"
+  },
+  {
+    "rank": 329,
+    "word": "ding",
+    "translation": "thing"
+  },
+  {
+    "rank": 330,
+    "word": "voel",
+    "translation": "feel"
+  },
+  {
+    "rank": 331,
+    "word": "gevonden",
+    "translation": "found"
+  },
+  {
+    "rank": 332,
+    "word": "probeer",
+    "translation": "try"
+  },
+  {
+    "rank": 333,
+    "word": "zet",
+    "translation": "put / set"
+  },
+  {
+    "rank": 334,
+    "word": "verder",
+    "translation": "further"
+  },
+  {
+    "rank": 335,
+    "word": "help",
+    "translation": "help"
+  },
+  {
+    "rank": 336,
+    "word": "heet",
+    "translation": "is called / hot"
+  },
+  {
+    "rank": 337,
+    "word": "dagen",
+    "translation": "days"
+  },
+  {
+    "rank": 338,
+    "word": "familie",
+    "translation": "family"
+  },
+  {
+    "rank": 339,
+    "word": "haal",
+    "translation": "fetch / get"
+  },
+  {
+    "rank": 340,
+    "word": "pas",
+    "translation": "just / only"
+  },
+  {
+    "rank": 341,
+    "word": "werken",
+    "translation": "to work"
+  },
+  {
+    "rank": 342,
+    "word": "volgende",
+    "translation": "next"
+  },
+  {
+    "rank": 343,
+    "word": "krijgt",
+    "translation": "gets"
+  },
+  {
+    "rank": 344,
+    "word": "gehad",
+    "translation": "had"
+  },
+  {
+    "rank": 345,
+    "word": "'t",
+    "translation": "(het)"
+  },
+  {
+    "rank": 346,
+    "word": "eruit",
+    "translation": "out of it"
+  },
+  {
+    "rank": 347,
+    "word": "gehoord",
+    "translation": "heard"
+  },
+  {
+    "rank": 348,
+    "word": "zat",
+    "translation": "sat"
+  },
+  {
+    "rank": 349,
+    "word": "bel",
+    "translation": "call"
+  },
+  {
+    "rank": 350,
+    "word": "he",
+    "translation": "huh / right?"
+  },
+  {
+    "rank": 351,
+    "word": "oude",
+    "translation": "old"
+  },
+  {
+    "rank": 352,
+    "word": "vermoord",
+    "translation": "murdered"
+  },
+  {
+    "rank": 353,
+    "word": "vijf",
+    "translation": "five"
+  },
+  {
+    "rank": 354,
+    "word": "schiet",
+    "translation": "shoot"
+  },
+  {
+    "rank": 355,
+    "word": "plaats",
+    "translation": "place"
+  },
+  {
+    "rank": 356,
+    "word": "manier",
+    "translation": "way / manner"
+  },
+  {
+    "rank": 357,
+    "word": "stad",
+    "translation": "city"
+  },
+  {
+    "rank": 358,
+    "word": "gemaakt",
+    "translation": "made"
+  },
+  {
+    "rank": 359,
+    "word": "hoeveel",
+    "translation": "how much"
+  },
+  {
+    "rank": 360,
+    "word": "ogen",
+    "translation": "eyes"
+  },
+  {
+    "rank": 361,
+    "word": "best",
+    "translation": "best"
+  },
+  {
+    "rank": 362,
+    "word": "zoek",
+    "translation": "search"
+  },
+  {
+    "rank": 363,
+    "word": "vroeg",
+    "translation": "early / asked"
+  },
+  {
+    "rank": 364,
+    "word": "word",
+    "translation": "become"
+  },
+  {
+    "rank": 365,
+    "word": "jezelf",
+    "translation": "yourself"
+  },
+  {
+    "rank": 366,
+    "word": "daarom",
+    "translation": "therefore"
+  },
+  {
+    "rank": 367,
+    "word": "spelen",
+    "translation": "to play"
+  },
+  {
+    "rank": 368,
+    "word": "geloven",
+    "translation": "to believe"
+  },
+  {
+    "rank": 369,
+    "word": "minuten",
+    "translation": "minutes"
+  },
+  {
+    "rank": 370,
+    "word": "slecht",
+    "translation": "bad"
+  },
+  {
+    "rank": 371,
+    "word": "school",
+    "translation": "school"
+  },
+  {
+    "rank": 372,
+    "word": "pijn",
+    "translation": "pain"
+  },
+  {
+    "rank": 373,
+    "word": "vindt",
+    "translation": "finds"
+  },
+  {
+    "rank": 374,
+    "word": "moment",
+    "translation": "moment"
+  },
+  {
+    "rank": 375,
+    "word": "blij",
+    "translation": "happy"
+  },
+  {
+    "rank": 376,
+    "word": "welke",
+    "translation": "which"
+  },
+  {
+    "rank": 377,
+    "word": "kamer",
+    "translation": "room"
+  },
+  {
+    "rank": 378,
+    "word": "water",
+    "translation": "water"
+  },
+  {
+    "rank": 379,
+    "word": "kans",
+    "translation": "chance"
+  },
+  {
+    "rank": 380,
+    "word": "schat",
+    "translation": "darling"
+  },
+  {
+    "rank": 381,
+    "word": "dollar",
+    "translation": "dollar"
+  },
+  {
+    "rank": 382,
+    "word": "land",
+    "translation": "country / land"
+  },
+  {
+    "rank": 383,
+    "word": "vier",
+    "translation": "four"
+  },
+  {
+    "rank": 384,
+    "word": "werkt",
+    "translation": "works"
+  },
+  {
+    "rank": 385,
+    "word": "deur",
+    "translation": "door"
+  },
+  {
+    "rank": 386,
+    "word": "brengen",
+    "translation": "to bring"
+  },
+  {
+    "rank": 387,
+    "word": "broer",
+    "translation": "brother"
+  },
+  {
+    "rank": 388,
+    "word": "breng",
+    "translation": "bring"
+  },
+  {
+    "rank": 389,
+    "word": "mooie",
+    "translation": "beautiful"
+  },
+  {
+    "rank": 390,
+    "word": "zoeken",
+    "translation": "to search"
+  },
+  {
+    "rank": 391,
+    "word": "lekker",
+    "translation": "tasty / nice"
+  },
+  {
+    "rank": 392,
+    "word": "later",
+    "translation": "later"
+  },
+  {
+    "rank": 393,
+    "word": "wees",
+    "translation": "be (imperative)"
+  },
+  {
+    "rank": 394,
+    "word": "juist",
+    "translation": "correct"
+  },
+  {
+    "rank": 395,
+    "word": "vooruit",
+    "translation": "forward"
+  },
+  {
+    "rank": 396,
+    "word": "klootzak",
+    "translation": "bastard"
+  },
+  {
+    "rank": 397,
+    "word": "volgens",
+    "translation": "according to"
+  },
+  {
+    "rank": 398,
+    "word": "alstublieft",
+    "translation": "please (formal)"
+  },
+  {
+    "rank": 399,
+    "word": "groot",
+    "translation": "big"
+  },
+  {
+    "rank": 400,
+    "word": "ligt",
+    "translation": "lies / depends"
+  },
+  {
+    "rank": 401,
+    "word": "boven",
+    "translation": "above"
+  },
+  {
+    "rank": 402,
+    "word": "ergens",
+    "translation": "somewhere"
+  },
+  {
+    "rank": 403,
+    "word": "spreken",
+    "translation": "to speak"
+  },
+  {
+    "rank": 404,
+    "word": "blijft",
+    "translation": "stays"
+  },
+  {
+    "rank": 405,
+    "word": "papa",
+    "translation": "dad"
+  },
+  {
+    "rank": 406,
+    "word": "prima",
+    "translation": "fine"
+  },
+  {
+    "rank": 407,
+    "word": "handen",
+    "translation": "hands"
+  },
+  {
+    "rank": 408,
+    "word": "sta",
+    "translation": "stand"
+  },
+  {
+    "rank": 409,
+    "word": "tussen",
+    "translation": "between"
+  },
+  {
+    "rank": 410,
+    "word": "praat",
+    "translation": "talk"
+  },
+  {
+    "rank": 411,
+    "word": "vond",
+    "translation": "found"
+  },
+  {
+    "rank": 412,
+    "word": "verteld",
+    "translation": "told"
+  },
+  {
+    "rank": 413,
+    "word": "soort",
+    "translation": "type / kind"
+  },
+  {
+    "rank": 414,
+    "word": "zoveel",
+    "translation": "so much"
+  },
+  {
+    "rank": 415,
+    "word": "week",
+    "translation": "week"
+  },
+  {
+    "rank": 416,
+    "word": "proberen",
+    "translation": "to try"
+  },
+  {
+    "rank": 417,
+    "word": "problemen",
+    "translation": "problems"
+  },
+  {
+    "rank": 418,
+    "word": "hulp",
+    "translation": "help (noun)"
+  },
+  {
+    "rank": 419,
+    "word": "echte",
+    "translation": "real"
+  },
+  {
+    "rank": 420,
+    "word": "kent",
+    "translation": "knows"
+  },
+  {
+    "rank": 421,
+    "word": "vrouwen",
+    "translation": "women"
+  },
+  {
+    "rank": 422,
+    "word": "vergeten",
+    "translation": "to forget"
+  },
+  {
+    "rank": 423,
+    "word": "plan",
+    "translation": "plan"
+  },
+  {
+    "rank": 424,
+    "word": "mevrouw",
+    "translation": "madam"
+  },
+  {
+    "rank": 425,
+    "word": "dokter",
+    "translation": "doctor"
+  },
+  {
+    "rank": 426,
+    "word": "pakken",
+    "translation": "to grab"
+  },
+  {
+    "rank": 427,
+    "word": "beginnen",
+    "translation": "to begin"
+  },
+  {
+    "rank": 428,
+    "word": "nacht",
+    "translation": "night"
+  },
+  {
+    "rank": 429,
+    "word": "kop",
+    "translation": "head / cup"
+  },
+  {
+    "rank": 430,
+    "word": "betekent",
+    "translation": "means"
+  },
+  {
+    "rank": 431,
+    "word": "klopt",
+    "translation": "correct"
+  },
+  {
+    "rank": 432,
+    "word": "bed",
+    "translation": "bed"
+  },
+  {
+    "rank": 433,
+    "word": "stoppen",
+    "translation": "to stop"
+  },
+  {
+    "rank": 434,
+    "word": "hoi",
+    "translation": "hi"
+  },
+  {
+    "rank": 435,
+    "word": "lopen",
+    "translation": "to walk"
+  },
+  {
+    "rank": 436,
+    "word": "klein",
+    "translation": "small"
+  },
+  {
+    "rank": 437,
+    "word": "mama",
+    "translation": "mom"
+  },
+  {
+    "rank": 438,
+    "word": "gebruiken",
+    "translation": "to use"
+  },
+  {
+    "rank": 439,
+    "word": "doden",
+    "translation": "to kill"
+  },
+  {
+    "rank": 440,
+    "word": "vrij",
+    "translation": "free"
+  },
+  {
+    "rank": 441,
+    "word": "liefde",
+    "translation": "love"
+  },
+  {
+    "rank": 442,
+    "word": "zult",
+    "translation": "shall / will"
+  },
+  {
+    "rank": 443,
+    "word": "zorg",
+    "translation": "care"
+  },
+  {
+    "rank": 444,
+    "word": "zaak",
+    "translation": "case / business"
+  },
+  {
+    "rank": 445,
+    "word": "los",
+    "translation": "loose"
+  },
+  {
+    "rank": 446,
+    "word": "bellen",
+    "translation": "to call"
+  },
+  {
+    "rank": 447,
+    "word": "ervan",
+    "translation": "of it"
+  },
+  {
+    "rank": 448,
+    "word": "mis",
+    "translation": "miss / wrong"
+  },
+  {
+    "rank": 449,
+    "word": "hart",
+    "translation": "heart"
+  },
+  {
+    "rank": 450,
+    "word": "beneden",
+    "translation": "downstairs"
+  },
+  {
+    "rank": 451,
+    "word": "verhaal",
+    "translation": "story"
+  },
+  {
+    "rank": 452,
+    "word": "wakker",
+    "translation": "awake"
+  },
+  {
+    "rank": 453,
+    "word": "sir",
+    "translation": "sir"
+  },
+  {
+    "rank": 454,
+    "word": "voordat",
+    "translation": "before"
+  },
+  {
+    "rank": 455,
+    "word": "voorbij",
+    "translation": "past"
+  },
+  {
+    "rank": 456,
+    "word": "leren",
+    "translation": "to learn"
+  },
+  {
+    "rank": 457,
+    "word": "vol",
+    "translation": "full"
+  },
+  {
+    "rank": 458,
+    "word": "tien",
+    "translation": "ten"
+  },
+  {
+    "rank": 459,
+    "word": "slapen",
+    "translation": "to sleep"
+  },
+  {
+    "rank": 460,
+    "word": "druk",
+    "translation": "busy / pressure"
+  },
+  {
+    "rank": 461,
+    "word": "zodat",
+    "translation": "so that"
+  },
+  {
+    "rank": 462,
+    "word": "neer",
+    "translation": "down"
+  },
+  {
+    "rank": 463,
+    "word": "nummer",
+    "translation": "number"
+  },
+  {
+    "rank": 464,
+    "word": "hoeft",
+    "translation": "need (neg.)"
+  },
+  {
+    "rank": 465,
+    "word": "'n",
+    "translation": "(een)"
+  },
+  {
+    "rank": 466,
+    "word": "dochter",
+    "translation": "daughter"
+  },
+  {
+    "rank": 467,
+    "word": "jezus",
+    "translation": "Jesus"
+  },
+  {
+    "rank": 468,
+    "word": "foto",
+    "translation": "photo"
+  },
+  {
+    "rank": 469,
+    "word": "vergeet",
+    "translation": "forget"
+  },
+  {
+    "rank": 470,
+    "word": "dicht",
+    "translation": "close / shut"
+  },
+  {
+    "rank": 471,
+    "word": "gelukkig",
+    "translation": "happy / fortunately"
+  },
+  {
+    "rank": 472,
+    "word": "snap",
+    "translation": "understand"
+  },
+  {
+    "rank": 473,
+    "word": "zoiets",
+    "translation": "something like"
+  },
+  {
+    "rank": 474,
+    "word": "gekomen",
+    "translation": "come"
+  },
+  {
+    "rank": 475,
+    "word": "baby",
+    "translation": "baby"
+  },
+  {
+    "rank": 476,
+    "word": "gebeuren",
+    "translation": "to happen"
+  },
+  {
+    "rank": 477,
+    "word": "ok",
+    "translation": "okay"
+  },
+  {
+    "rank": 478,
+    "word": "moeilijk",
+    "translation": "difficult"
+  },
+  {
+    "rank": 479,
+    "word": "meteen",
+    "translation": "immediately"
+  },
+  {
+    "rank": 480,
+    "word": "gezicht",
+    "translation": "face"
+  },
+  {
+    "rank": 481,
+    "word": "dr",
+    "translation": "Dr."
+  },
+  {
+    "rank": 482,
+    "word": "stel",
+    "translation": "couple / set"
+  },
+  {
+    "rank": 483,
+    "word": "sinds",
+    "translation": "since"
+  },
+  {
+    "rank": 484,
+    "word": "zes",
+    "translation": "six"
+  },
+  {
+    "rank": 485,
+    "word": "begin",
+    "translation": "begin / start"
+  },
+  {
+    "rank": 486,
+    "word": "plek",
+    "translation": "place / spot"
+  },
+  {
+    "rank": 487,
+    "word": "drinken",
+    "translation": "to drink"
+  },
+  {
+    "rank": 488,
+    "word": "hey",
+    "translation": "hey"
+  },
+  {
+    "rank": 489,
+    "word": "vermoorden",
+    "translation": "to murder"
+  },
+  {
+    "rank": 490,
+    "word": "zaken",
+    "translation": "business"
+  },
+  {
+    "rank": 491,
+    "word": "begrepen",
+    "translation": "understood"
+  },
+  {
+    "rank": 492,
+    "word": "ver",
+    "translation": "far"
+  },
+  {
+    "rank": 493,
+    "word": "hetzelfde",
+    "translation": "the same"
+  },
+  {
+    "rank": 494,
+    "word": "ander",
+    "translation": "other"
+  },
+  {
+    "rank": 495,
+    "word": "bezig",
+    "translation": "busy"
+  },
+  {
+    "rank": 496,
+    "word": "liggen",
+    "translation": "to lie (down)"
+  },
+  {
+    "rank": 497,
+    "word": "per",
+    "translation": "per"
+  },
+  {
+    "rank": 498,
+    "word": "oud",
+    "translation": "old"
+  },
+  {
+    "rank": 499,
+    "word": "gaf",
+    "translation": "gave"
+  },
+  {
+    "rank": 500,
+    "word": "eraan",
+    "translation": "on it / to it"
+  },
+  {
+    "rank": 501,
+    "word": "eerder",
+    "translation": "earlier"
+  },
+  {
+    "rank": 502,
+    "word": "baas",
+    "translation": "boss"
+  },
+  {
+    "rank": 503,
+    "word": "agent",
+    "translation": "officer"
+  },
+  {
+    "rank": 504,
+    "word": "oorlog",
+    "translation": "war"
+  },
+  {
+    "rank": 505,
+    "word": "mond",
+    "translation": "mouth"
+  },
+  {
+    "rank": 506,
+    "word": "waarschijnlijk",
+    "translation": "probably"
+  },
+  {
+    "rank": 507,
+    "word": "film",
+    "translation": "film / movie"
+  },
+  {
+    "rank": 508,
+    "word": "rust",
+    "translation": "rest"
+  },
+  {
+    "rank": 509,
+    "word": "zeer",
+    "translation": "very / sore"
+  },
+  {
+    "rank": 510,
+    "word": "vallen",
+    "translation": "to fall"
+  },
+  {
+    "rank": 511,
+    "word": "sterven",
+    "translation": "to die"
+  },
+  {
+    "rank": 512,
+    "word": "hond",
+    "translation": "dog"
+  },
+  {
+    "rank": 513,
+    "word": "mogen",
+    "translation": "may / allowed"
+  },
+  {
+    "rank": 514,
+    "word": "waarheid",
+    "translation": "truth"
+  },
+  {
+    "rank": 515,
+    "word": "rond",
+    "translation": "around"
+  },
+  {
+    "rank": 516,
+    "word": "geluk",
+    "translation": "luck / happiness"
+  },
+  {
+    "rank": 517,
+    "word": "heren",
+    "translation": "gentlemen"
+  },
+  {
+    "rank": 518,
+    "word": "jaren",
+    "translation": "years"
+  },
+  {
+    "rank": 519,
+    "word": "vent",
+    "translation": "guy"
+  },
+  {
+    "rank": 520,
+    "word": "hoorde",
+    "translation": "heard"
+  },
+  {
+    "rank": 521,
+    "word": "terwijl",
+    "translation": "while"
+  },
+  {
+    "rank": 522,
+    "word": "mam",
+    "translation": "mom"
+  },
+  {
+    "rank": 523,
+    "word": "avond",
+    "translation": "evening"
+  },
+  {
+    "rank": 524,
+    "word": "nieuws",
+    "translation": "news"
+  },
+  {
+    "rank": 525,
+    "word": "aardig",
+    "translation": "kind / nice"
+  },
+  {
+    "rank": 526,
+    "word": "maanden",
+    "translation": "months"
+  },
+  {
+    "rank": 527,
+    "word": "welkom",
+    "translation": "welcome"
+  },
+  {
+    "rank": 528,
+    "word": "veilig",
+    "translation": "safe"
+  },
+  {
+    "rank": 529,
+    "word": "schatje",
+    "translation": "sweetheart"
+  },
+  {
+    "rank": 530,
+    "word": "fijn",
+    "translation": "fine / nice"
+  },
+  {
+    "rank": 531,
+    "word": "mogelijk",
+    "translation": "possible"
+  },
+  {
+    "rank": 532,
+    "word": "stuk",
+    "translation": "piece"
+  },
+  {
+    "rank": 533,
+    "word": "redden",
+    "translation": "to save"
+  },
+  {
+    "rank": 534,
+    "word": "rest",
+    "translation": "rest / remainder"
+  },
+  {
+    "rank": 535,
+    "word": "hoort",
+    "translation": "hears / belongs"
+  },
+  {
+    "rank": 536,
+    "word": "he",
+    "translation": "hey"
+  },
+  {
+    "rank": 537,
+    "word": "bloed",
+    "translation": "blood"
+  },
+  {
+    "rank": 538,
+    "word": "vriendin",
+    "translation": "girlfriend"
+  },
+  {
+    "rank": 539,
+    "word": "stil",
+    "translation": "quiet"
+  },
+  {
+    "rank": 540,
+    "word": "langs",
+    "translation": "along"
+  },
+  {
+    "rank": 541,
+    "word": "eerlijk",
+    "translation": "honest"
+  },
+  {
+    "rank": 542,
+    "word": "recht",
+    "translation": "right / law"
+  },
+  {
+    "rank": 543,
+    "word": "vandaan",
+    "translation": "from"
+  },
+  {
+    "rank": 544,
+    "word": "ermee",
+    "translation": "with it"
+  },
+  {
+    "rank": 545,
+    "word": "betalen",
+    "translation": "to pay"
+  },
+  {
+    "rank": 546,
+    "word": "voelt",
+    "translation": "feels"
+  },
+  {
+    "rank": 547,
+    "word": "kennen",
+    "translation": "to know"
+  },
+  {
+    "rank": 548,
+    "word": "kerel",
+    "translation": "guy / bloke"
+  },
+  {
+    "rank": 549,
+    "word": "schuld",
+    "translation": "debt / fault"
+  },
+  {
+    "rank": 550,
+    "word": "buurt",
+    "translation": "neighborhood"
+  },
+  {
+    "rank": 551,
+    "word": "fout",
+    "translation": "mistake"
+  },
+  {
+    "rank": 552,
+    "word": "reden",
+    "translation": "reason"
+  },
+  {
+    "rank": 553,
+    "word": "ouders",
+    "translation": "parents"
+  },
+  {
+    "rank": 554,
+    "word": "overal",
+    "translation": "everywhere"
+  },
+  {
+    "rank": 555,
+    "word": "belangrijk",
+    "translation": "important"
+  },
+  {
+    "rank": 556,
+    "word": "hard",
+    "translation": "hard / loud"
+  },
+  {
+    "rank": 557,
+    "word": "kapitein",
+    "translation": "captain"
+  },
+  {
+    "rank": 558,
+    "word": "telefoon",
+    "translation": "telephone"
+  },
+  {
+    "rank": 559,
+    "word": "kreeg",
+    "translation": "got"
+  },
+  {
+    "rank": 560,
+    "word": "duidelijk",
+    "translation": "clear"
+  },
+  {
+    "rank": 561,
+    "word": "pa",
+    "translation": "dad"
+  },
+  {
+    "rank": 562,
+    "word": "mezelf",
+    "translation": "myself"
+  },
+  {
+    "rank": 563,
+    "word": "woord",
+    "translation": "word"
+  },
+  {
+    "rank": 564,
+    "word": "straks",
+    "translation": "later"
+  },
+  {
+    "rank": 565,
+    "word": "boek",
+    "translation": "book"
+  },
+  {
+    "rank": 566,
+    "word": "prachtig",
+    "translation": "gorgeous"
+  },
+  {
+    "rank": 567,
+    "word": "heer",
+    "translation": "gentleman"
+  },
+  {
+    "rank": 568,
+    "word": "klinkt",
+    "translation": "sounds"
+  },
+  {
+    "rank": 569,
+    "word": "erop",
+    "translation": "on it"
+  },
+  {
+    "rank": 570,
+    "word": "anderen",
+    "translation": "others"
+  },
+  {
+    "rank": 571,
+    "word": "liet",
+    "translation": "let"
+  },
+  {
+    "rank": 572,
+    "word": "vanaf",
+    "translation": "from"
+  },
+  {
+    "rank": 573,
+    "word": "vaak",
+    "translation": "often"
+  },
+  {
+    "rank": 574,
+    "word": "baan",
+    "translation": "job"
+  },
+  {
+    "rank": 575,
+    "word": "zin",
+    "translation": "sentence / desire"
+  },
+  {
+    "rank": 576,
+    "word": "eentje",
+    "translation": "one"
+  },
+  {
+    "rank": 577,
+    "word": "generaal",
+    "translation": "general"
+  },
+  {
+    "rank": 578,
+    "word": "spullen",
+    "translation": "stuff"
+  },
+  {
+    "rank": 579,
+    "word": "zwarte",
+    "translation": "black"
+  },
+  {
+    "rank": 580,
+    "word": "pistool",
+    "translation": "gun"
+  },
+  {
+    "rank": 581,
+    "word": "toekomst",
+    "translation": "future"
+  },
+  {
+    "rank": 582,
+    "word": "bank",
+    "translation": "bank / couch"
+  },
+  {
+    "rank": 583,
+    "word": "degene",
+    "translation": "the one"
+  },
+  {
+    "rank": 584,
+    "word": "goedemorgen",
+    "translation": "good morning"
+  },
+  {
+    "rank": 585,
+    "word": "langer",
+    "translation": "longer"
+  },
+  {
+    "rank": 586,
+    "word": "slechts",
+    "translation": "only"
+  },
+  {
+    "rank": 587,
+    "word": "informatie",
+    "translation": "information"
+  },
+  {
+    "rank": 588,
+    "word": "schrijven",
+    "translation": "to write"
+  },
+  {
+    "rank": 589,
+    "word": "ieder",
+    "translation": "each"
+  },
+  {
+    "rank": 590,
+    "word": "verliefd",
+    "translation": "in love"
+  },
+  {
+    "rank": 591,
+    "word": "veranderd",
+    "translation": "changed"
+  },
+  {
+    "rank": 592,
+    "word": "probeerde",
+    "translation": "tried"
+  },
+  {
+    "rank": 593,
+    "word": "tenminste",
+    "translation": "at least"
+  },
+  {
+    "rank": 594,
+    "word": "slaan",
+    "translation": "to hit"
+  },
+  {
+    "rank": 595,
+    "word": "luisteren",
+    "translation": "to listen"
+  },
+  {
+    "rank": 596,
+    "word": "vliegtuig",
+    "translation": "airplane"
+  },
+  {
+    "rank": 597,
+    "word": "kwamen",
+    "translation": "came"
+  },
+  {
+    "rank": 598,
+    "word": "begrijpt",
+    "translation": "understands"
+  },
+  {
+    "rank": 599,
+    "word": "makkelijk",
+    "translation": "easy"
+  },
+  {
+    "rank": 600,
+    "word": "boos",
+    "translation": "angry"
+  },
+  {
+    "rank": 601,
+    "word": "boot",
+    "translation": "boat"
+  },
+  {
+    "rank": 602,
+    "word": "geest",
+    "translation": "spirit / ghost"
+  },
+  {
+    "rank": 603,
+    "word": "gingen",
+    "translation": "went"
+  },
+  {
+    "rank": 604,
+    "word": "ter",
+    "translation": "to the / at the"
+  },
+  {
+    "rank": 605,
+    "word": "ongeluk",
+    "translation": "accident"
+  },
+  {
+    "rank": 606,
+    "word": "trouwens",
+    "translation": "by the way"
+  },
+  {
+    "rank": 607,
+    "word": "succes",
+    "translation": "success"
+  },
+  {
+    "rank": 608,
+    "word": "vliegen",
+    "translation": "to fly"
+  },
+  {
+    "rank": 609,
+    "word": "lange",
+    "translation": "long"
+  },
+  {
+    "rank": 610,
+    "word": "maand",
+    "translation": "month"
+  },
+  {
+    "rank": 611,
+    "word": "vraagt",
+    "translation": "asks"
+  },
+  {
+    "rank": 612,
+    "word": "gebeurde",
+    "translation": "happened"
+  },
+  {
+    "rank": 613,
+    "word": "kijkt",
+    "translation": "looks"
+  },
+  {
+    "rank": 614,
+    "word": "meester",
+    "translation": "master"
+  },
+  {
+    "rank": 615,
+    "word": "koud",
+    "translation": "cold"
+  },
+  {
+    "rank": 616,
+    "word": "onderzoek",
+    "translation": "research"
+  },
+  {
+    "rank": 617,
+    "word": "kleren",
+    "translation": "clothes"
+  },
+  {
+    "rank": 618,
+    "word": "lul",
+    "translation": "jerk (slang)"
+  },
+  {
+    "rank": 619,
+    "word": "stom",
+    "translation": "stupid"
+  },
+  {
+    "rank": 620,
+    "word": "spreek",
+    "translation": "speak"
+  },
+  {
+    "rank": 621,
+    "word": "feest",
+    "translation": "party"
+  },
+  {
+    "rank": 622,
+    "word": "jawel",
+    "translation": "yes (emphatic)"
+  },
+  {
+    "rank": 623,
+    "word": "weinig",
+    "translation": "few / little"
+  },
+  {
+    "rank": 624,
+    "word": "liefje",
+    "translation": "darling"
+  },
+  {
+    "rank": 625,
+    "word": "schip",
+    "translation": "ship"
+  },
+  {
+    "rank": 626,
+    "word": "behalve",
+    "translation": "except"
+  },
+  {
+    "rank": 627,
+    "word": "vreselijk",
+    "translation": "terrible"
+  },
+  {
+    "rank": 628,
+    "word": "bal",
+    "translation": "ball"
+  },
+  {
+    "rank": 629,
+    "word": "hotel",
+    "translation": "hotel"
+  },
+  {
+    "rank": 630,
+    "word": "controle",
+    "translation": "control"
+  },
+  {
+    "rank": 631,
+    "word": "genomen",
+    "translation": "taken"
+  },
+  {
+    "rank": 632,
+    "word": "wonen",
+    "translation": "to live"
+  },
+  {
+    "rank": 633,
+    "word": "honger",
+    "translation": "hunger"
+  },
+  {
+    "rank": 634,
+    "word": "sterk",
+    "translation": "strong"
+  },
+  {
+    "rank": 635,
+    "word": "juiste",
+    "translation": "correct"
+  },
+  {
+    "rank": 636,
+    "word": "zak",
+    "translation": "bag / pocket"
+  },
+  {
+    "rank": 637,
+    "word": "volgen",
+    "translation": "to follow"
+  },
+  {
+    "rank": 638,
+    "word": "geheim",
+    "translation": "secret"
+  },
+  {
+    "rank": 639,
+    "word": "probeert",
+    "translation": "tries"
+  },
+  {
+    "rank": 640,
+    "word": "ene",
+    "translation": "one"
+  },
+  {
+    "rank": 641,
+    "word": "contact",
+    "translation": "contact"
+  },
+  {
+    "rank": 642,
+    "word": "verkopen",
+    "translation": "to sell"
+  },
+  {
+    "rank": 643,
+    "word": "show",
+    "translation": "show"
+  },
+  {
+    "rank": 644,
+    "word": "hoef",
+    "translation": "need (neg.)"
+  },
+  {
+    "rank": 645,
+    "word": "gedood",
+    "translation": "killed"
+  },
+  {
+    "rank": 646,
+    "word": "welk",
+    "translation": "which"
+  },
+  {
+    "rank": 647,
+    "word": "iedere",
+    "translation": "every"
+  },
+  {
+    "rank": 648,
+    "word": "meter",
+    "translation": "meter"
+  },
+  {
+    "rank": 649,
+    "word": "zolang",
+    "translation": "as long as"
+  },
+  {
+    "rank": 650,
+    "word": "sturen",
+    "translation": "to send"
+  },
+  {
+    "rank": 651,
+    "word": "rot",
+    "translation": "rotten"
+  },
+  {
+    "rank": 652,
+    "word": "begonnen",
+    "translation": "started"
+  },
+  {
+    "rank": 653,
+    "word": "woont",
+    "translation": "lives"
+  },
+  {
+    "rank": 654,
+    "word": "absoluut",
+    "translation": "absolutely"
+  },
+  {
+    "rank": 655,
+    "word": "beschermen",
+    "translation": "to protect"
+  },
+  {
+    "rank": 656,
+    "word": "bestaat",
+    "translation": "exists"
+  },
+  {
+    "rank": 657,
+    "word": "dienst",
+    "translation": "service"
+  },
+  {
+    "rank": 658,
+    "word": "moe",
+    "translation": "tired"
+  },
+  {
+    "rank": 659,
+    "word": "rug",
+    "translation": "back (body)"
+  },
+  {
+    "rank": 660,
+    "word": "geboren",
+    "translation": "born"
+  },
+  {
+    "rank": 661,
+    "word": "naast",
+    "translation": "next to"
+  },
+  {
+    "rank": 662,
+    "word": "afgelopen",
+    "translation": "past / last"
+  },
+  {
+    "rank": 663,
+    "word": "wegwezen",
+    "translation": "get out"
+  },
+  {
+    "rank": 664,
+    "word": "bewijs",
+    "translation": "evidence"
+  },
+  {
+    "rank": 665,
+    "word": "lachen",
+    "translation": "to laugh"
+  },
+  {
+    "rank": 666,
+    "word": "jong",
+    "translation": "young"
+  },
+  {
+    "rank": 667,
+    "word": "jonge",
+    "translation": "young (emph.)"
+  },
+  {
+    "rank": 668,
+    "word": "lijken",
+    "translation": "to seem"
+  },
+  {
+    "rank": 669,
+    "word": "erover",
+    "translation": "about it"
+  },
+  {
+    "rank": 670,
+    "word": "gered",
+    "translation": "saved"
+  },
+  {
+    "rank": 671,
+    "word": "wilden",
+    "translation": "wanted"
+  },
+  {
+    "rank": 672,
+    "word": "voorstellen",
+    "translation": "to introduce"
+  },
+  {
+    "rank": 673,
+    "word": "reis",
+    "translation": "journey"
+  },
+  {
+    "rank": 674,
+    "word": "advocaat",
+    "translation": "lawyer"
+  },
+  {
+    "rank": 675,
+    "word": "afspraak",
+    "translation": "appointment"
+  },
+  {
+    "rank": 676,
+    "word": "raak",
+    "translation": "hit"
+  },
+  {
+    "rank": 677,
+    "word": "verkeerde",
+    "translation": "wrong"
+  },
+  {
+    "rank": 678,
+    "word": "schelen",
+    "translation": "to matter"
+  },
+  {
+    "rank": 679,
+    "word": "gevaarlijk",
+    "translation": "dangerous"
+  },
+  {
+    "rank": 680,
+    "word": "rij",
+    "translation": "row"
+  },
+  {
+    "rank": 681,
+    "word": "voelde",
+    "translation": "felt"
+  },
+  {
+    "rank": 682,
+    "word": "gestolen",
+    "translation": "stolen"
+  },
+  {
+    "rank": 683,
+    "word": "kolonel",
+    "translation": "colonel"
+  },
+  {
+    "rank": 684,
+    "word": "maat",
+    "translation": "mate / measure"
+  },
+  {
+    "rank": 685,
+    "word": "volg",
+    "translation": "follow"
+  },
+  {
+    "rank": 686,
+    "word": "gedacht",
+    "translation": "thought"
+  },
+  {
+    "rank": 687,
+    "word": "dame",
+    "translation": "lady"
+  },
+  {
+    "rank": 688,
+    "word": "dragen",
+    "translation": "to carry/wear"
+  },
+  {
+    "rank": 689,
+    "word": "prijs",
+    "translation": "price"
+  },
+  {
+    "rank": 690,
+    "word": "lukt",
+    "translation": "succeeds"
+  },
+  {
+    "rank": 691,
+    "word": "kont",
+    "translation": "butt"
+  },
+  {
+    "rank": 692,
+    "word": "geleerd",
+    "translation": "learned"
+  },
+  {
+    "rank": 693,
+    "word": "betaald",
+    "translation": "paid"
+  },
+  {
+    "rank": 694,
+    "word": "speelt",
+    "translation": "plays"
+  },
+  {
+    "rank": 695,
+    "word": "hel",
+    "translation": "hell"
+  },
+  {
+    "rank": 696,
+    "word": "trekken",
+    "translation": "to pull"
+  },
+  {
+    "rank": 697,
+    "word": "geraakt",
+    "translation": "touched/hit"
+  },
+  {
+    "rank": 698,
+    "word": "mocht",
+    "translation": "was allowed"
+  },
+  {
+    "rank": 699,
+    "word": "stem",
+    "translation": "voice / vote"
+  },
+  {
+    "rank": 700,
+    "word": "missen",
+    "translation": "to miss"
+  },
+  {
+    "rank": 701,
+    "word": "jammer",
+    "translation": "pity"
+  },
+  {
+    "rank": 702,
+    "word": "seks",
+    "translation": "sex"
+  },
+  {
+    "rank": 703,
+    "word": "ma",
+    "translation": "mom"
+  },
+  {
+    "rank": 704,
+    "word": "bekend",
+    "translation": "known"
+  },
+  {
+    "rank": 705,
+    "word": "doel",
+    "translation": "goal"
+  },
+  {
+    "rank": 706,
+    "word": "amerikaans",
+    "translation": "American"
+  },
+  {
+    "rank": 707,
+    "word": "camera",
+    "translation": "camera"
+  },
+  {
+    "rank": 708,
+    "word": "leuke",
+    "translation": "fun / nice"
+  },
+  {
+    "rank": 709,
+    "word": "helpt",
+    "translation": "helps"
+  },
+  {
+    "rank": 710,
+    "word": "regels",
+    "translation": "rules"
+  },
+  {
+    "rank": 711,
+    "word": "gevaar",
+    "translation": "danger"
+  },
+  {
+    "rank": 712,
+    "word": "sla",
+    "translation": "hit / lettuce"
+  },
+  {
+    "rank": 713,
+    "word": "erger",
+    "translation": "worse"
+  },
+  {
+    "rank": 714,
+    "word": "red",
+    "translation": "save"
+  },
+  {
+    "rank": 715,
+    "word": "raar",
+    "translation": "weird"
+  },
+  {
+    "rank": 716,
+    "word": "derde",
+    "translation": "third"
+  },
+  {
+    "rank": 717,
+    "word": "raken",
+    "translation": "to hit"
+  },
+  {
+    "rank": 718,
+    "word": "arme",
+    "translation": "poor"
+  },
+  {
+    "rank": 719,
+    "word": "zweer",
+    "translation": "swear"
+  },
+  {
+    "rank": 720,
+    "word": "vertrouw",
+    "translation": "trust"
+  },
+  {
+    "rank": 721,
+    "word": "seconden",
+    "translation": "seconds"
+  },
+  {
+    "rank": 722,
+    "word": "totdat",
+    "translation": "until"
+  },
+  {
+    "rank": 723,
+    "word": "rennen",
+    "translation": "to run"
+  },
+  {
+    "rank": 724,
+    "word": "paard",
+    "translation": "horse"
+  },
+  {
+    "rank": 725,
+    "word": "tafel",
+    "translation": "table"
+  },
+  {
+    "rank": 726,
+    "word": "geweldige",
+    "translation": "amazing"
+  },
+  {
+    "rank": 727,
+    "word": "sneller",
+    "translation": "faster"
+  },
+  {
+    "rank": 728,
+    "word": "steek",
+    "translation": "stab / stitch"
+  },
+  {
+    "rank": 729,
+    "word": "moesten",
+    "translation": "had to"
+  },
+  {
+    "rank": 730,
+    "word": "wagen",
+    "translation": "car / wagon"
+  },
+  {
+    "rank": 731,
+    "word": "grapje",
+    "translation": "joke"
+  },
+  {
+    "rank": 732,
+    "word": "groep",
+    "translation": "group"
+  },
+  {
+    "rank": 733,
+    "word": "kaart",
+    "translation": "map / card"
+  },
+  {
+    "rank": 734,
+    "word": "moordenaar",
+    "translation": "murderer"
+  },
+  {
+    "rank": 735,
+    "word": "wedstrijd",
+    "translation": "match / game"
+  },
+  {
+    "rank": 736,
+    "word": "via",
+    "translation": "via"
+  },
+  {
+    "rank": 737,
+    "word": "gefeliciteerd",
+    "translation": "congratulations"
+  },
+  {
+    "rank": 738,
+    "word": "gaten",
+    "translation": "holes"
+  },
+  {
+    "rank": 739,
+    "word": "macht",
+    "translation": "power"
+  },
+  {
+    "rank": 740,
+    "word": "dom",
+    "translation": "dumb"
+  },
+  {
+    "rank": 741,
+    "word": "nadat",
+    "translation": "after"
+  },
+  {
+    "rank": 742,
+    "word": "leek",
+    "translation": "seemed"
+  },
+  {
+    "rank": 743,
+    "word": "raad",
+    "translation": "advice"
+  },
+  {
+    "rank": 744,
+    "word": "band",
+    "translation": "band / tire"
+  },
+  {
+    "rank": 745,
+    "word": "tuurlijk",
+    "translation": "of course"
+  },
+  {
+    "rank": 746,
+    "word": "zover",
+    "translation": "so far"
+  },
+  {
+    "rank": 747,
+    "word": "arm",
+    "translation": "arm"
+  },
+  {
+    "rank": 748,
+    "word": "ruimte",
+    "translation": "space"
+  },
+  {
+    "rank": 749,
+    "word": "gebracht",
+    "translation": "brought"
+  },
+  {
+    "rank": 750,
+    "word": "dromen",
+    "translation": "dreams"
+  },
+  {
+    "rank": 751,
+    "word": "zodra",
+    "translation": "as soon as"
+  },
+  {
+    "rank": 752,
+    "word": "zwaar",
+    "translation": "heavy"
+  },
+  {
+    "rank": 753,
+    "word": "kerk",
+    "translation": "church"
+  },
+  {
+    "rank": 754,
+    "word": "schuldig",
+    "translation": "guilty"
+  },
+  {
+    "rank": 755,
+    "word": "rijk",
+    "translation": "rich"
+  },
+  {
+    "rank": 756,
+    "word": "ziel",
+    "translation": "soul"
+  },
+  {
+    "rank": 757,
+    "word": "geprobeerd",
+    "translation": "tried"
+  },
+  {
+    "rank": 758,
+    "word": "oog",
+    "translation": "eye"
+  },
+  {
+    "rank": 759,
+    "word": "vlucht",
+    "translation": "flight"
+  },
+  {
+    "rank": 760,
+    "word": "vanuit",
+    "translation": "from"
+  },
+  {
+    "rank": 761,
+    "word": "vorige",
+    "translation": "previous"
+  },
+  {
+    "rank": 762,
+    "word": "allen",
+    "translation": "all"
+  },
+  {
+    "rank": 763,
+    "word": "uh",
+    "translation": "uh"
+  },
+  {
+    "rank": 764,
+    "word": "herinneren",
+    "translation": "to remember"
+  },
+  {
+    "rank": 765,
+    "word": "vooral",
+    "translation": "especially"
+  },
+  {
+    "rank": 766,
+    "word": "meiden",
+    "translation": "girls"
+  },
+  {
+    "rank": 767,
+    "word": "eind",
+    "translation": "end"
+  },
+  {
+    "rank": 768,
+    "word": "oma",
+    "translation": "grandma"
+  },
+  {
+    "rank": 769,
+    "word": "viel",
+    "translation": "fell"
+  },
+  {
+    "rank": 770,
+    "word": "zuster",
+    "translation": "sister"
+  },
+  {
+    "rank": 771,
+    "word": "gelooft",
+    "translation": "believes"
+  },
+  {
+    "rank": 772,
+    "word": "wet",
+    "translation": "law"
+  },
+  {
+    "rank": 773,
+    "word": "kapot",
+    "translation": "broken"
+  },
+  {
+    "rank": 774,
+    "word": "gooi",
+    "translation": "throw"
+  },
+  {
+    "rank": 775,
+    "word": "haast",
+    "translation": "rush / almost"
+  },
+  {
+    "rank": 776,
+    "word": "gedachten",
+    "translation": "thoughts"
+  },
+  {
+    "rank": 777,
+    "word": "negen",
+    "translation": "nine"
+  },
+  {
+    "rank": 778,
+    "word": "bewijzen",
+    "translation": "to prove"
+  },
+  {
+    "rank": 779,
+    "word": "eer",
+    "translation": "honor"
+  },
+  {
+    "rank": 780,
+    "word": "brief",
+    "translation": "letter"
+  },
+  {
+    "rank": 781,
+    "word": "dronken",
+    "translation": "drunk"
+  },
+  {
+    "rank": 782,
+    "word": "drugs",
+    "translation": "drugs"
+  },
+  {
+    "rank": 783,
+    "word": "teken",
+    "translation": "sign"
+  },
+  {
+    "rank": 784,
+    "word": "duurt",
+    "translation": "lasts"
+  },
+  {
+    "rank": 785,
+    "word": "sleutel",
+    "translation": "key"
+  },
+  {
+    "rank": 786,
+    "word": "onmogelijk",
+    "translation": "impossible"
+  },
+  {
+    "rank": 787,
+    "word": "zee",
+    "translation": "sea"
+  },
+  {
+    "rank": 788,
+    "word": "ouwe",
+    "translation": "old (informal)"
+  },
+  {
+    "rank": 789,
+    "word": "namen",
+    "translation": "names"
+  },
+  {
+    "rank": 790,
+    "word": "regel",
+    "translation": "rule"
+  },
+  {
+    "rank": 791,
+    "word": "lijn",
+    "translation": "line"
+  },
+  {
+    "rank": 792,
+    "word": "kost",
+    "translation": "costs"
+  },
+  {
+    "rank": 793,
+    "word": "zon",
+    "translation": "sun"
+  },
+  {
+    "rank": 794,
+    "word": "stap",
+    "translation": "step"
+  },
+  {
+    "rank": 795,
+    "word": "licht",
+    "translation": "light"
+  },
+  {
+    "rank": 796,
+    "word": "deel",
+    "translation": "part"
+  },
+  {
+    "rank": 797,
+    "word": "tweede",
+    "translation": "second"
+  },
+  {
+    "rank": 798,
+    "word": "geworden",
+    "translation": "become"
+  },
+  {
+    "rank": 799,
+    "word": "dezelfde",
+    "translation": "the same"
+  }
+]
