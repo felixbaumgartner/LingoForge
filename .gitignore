@@ -25,3 +25,5 @@ book-text.txt
 *.njsproj
 *.sln
 *.sw?
+
+.vercel
