@@ -1,15 +1,26 @@
 import { useMemo } from 'react';
-import { AlertTriangle, TrendingDown, Trophy } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { AlertTriangle, TrendingDown, Trophy, Zap } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { getWeakWords, getMasteryBreakdown, getWordsDueForReview, wordPerfKey } from '../lib/persistence';
 import type { Language } from '../types/language';
 
 export function WeakWords({ language }: { language: Language }) {
   const wordPerformance = useAppStore((s) => s.wordPerformance);
+  const navigate = useNavigate();
 
   const weakWords = useMemo(() => getWeakWords(wordPerformance, language, 8), [wordPerformance, language]);
   const mastery = useMemo(() => getMasteryBreakdown(wordPerformance, language), [wordPerformance, language]);
-  const dueCount = useMemo(() => getWordsDueForReview(wordPerformance, language).length, [wordPerformance, language]);
+  // Count words needing review: SRS-due words + struggling words
+  const dueForReview = useMemo(() => getWordsDueForReview(wordPerformance, language), [wordPerformance, language]);
+  const needsReviewCount = useMemo(() => {
+    const dueRanks = new Set(dueForReview.map((wp) => wp.rank));
+    // Also count struggling words not already in the due list
+    for (const wp of weakWords) {
+      dueRanks.add(wp.rank);
+    }
+    return dueRanks.size;
+  }, [dueForReview, weakWords]);
 
   const totalTracked = mastery.mastered + mastery.learning + mastery.struggling;
 
@@ -85,8 +96,8 @@ export function WeakWords({ language }: { language: Language }) {
           <p className="text-[10px] text-slate-500 uppercase tracking-wider">Mastered</p>
         </div>
         <div className="bg-slate-800/50 rounded-xl p-3 text-center">
-          <p className="text-lg font-bold text-amber-400 tabular-nums">{dueCount}</p>
-          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Due Review</p>
+          <p className="text-lg font-bold text-amber-400 tabular-nums">{needsReviewCount}</p>
+          <p className="text-[10px] text-slate-500 uppercase tracking-wider">Need Review</p>
         </div>
       </div>
 
@@ -120,6 +131,15 @@ export function WeakWords({ language }: { language: Language }) {
               );
             })}
           </div>
+
+          {/* Practice button */}
+          <button
+            onClick={() => navigate(`/review/${language}`)}
+            className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-red-500/20 to-amber-500/20 border border-red-500/30 hover:border-red-500/50 text-white font-medium text-sm transition-all duration-200 hover:from-red-500/30 hover:to-amber-500/30"
+          >
+            <Zap className="w-4 h-4 text-amber-400" />
+            Practice Weak Words
+          </button>
         </div>
       )}
 
