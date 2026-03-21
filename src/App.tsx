@@ -11,6 +11,7 @@ import { useAuth } from './hooks/useAuth';
 import { useAppStore } from './store/appStore';
 import { loadProgressFromFirestore, loadWordPerfFromFirestore, mergeWordPerformance } from './lib/progressSync';
 import { loadProgress, saveProgress, loadWordPerformance, saveWordPerformance } from './lib/persistence';
+import type { ProgressMap } from './types/progress';
 import { Loader2 } from 'lucide-react';
 
 function LessonRouter() {
@@ -77,8 +78,8 @@ function AppContent() {
 }
 
 // Merge local and Firestore progress — take the most complete version
-function mergeProgress(local: Record<string, any>, remote: Record<string, any>): any {
-  const result = { ...local };
+function mergeProgress(local: Record<string, any>, remote: Record<string, any>): ProgressMap {
+  const result: Record<string, any> = { ...local };
   for (const lang of ['spanish', 'french', 'dutch']) {
     if (!remote[lang]) continue;
     if (!result[lang]) {
@@ -100,8 +101,8 @@ function mergeProgress(local: Record<string, any>, remote: Record<string, any>):
     }
   }
   // Save merged result back to localStorage
-  saveProgress(result);
-  return result;
+  saveProgress(result as ProgressMap);
+  return result as ProgressMap;
 }
 
 function App() {

@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { AlertTriangle, TrendingDown, BookOpen, Trophy } from 'lucide-react';
+import { AlertTriangle, TrendingDown, Trophy } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { getWeakWords, getMasteryBreakdown, getWordsDueForReview, wordPerfKey } from '../lib/persistence';
 import type { Language } from '../types/language';

@@ -5,7 +5,6 @@ import {
   recordWordResult,
   recordWordRating,
   getWeakWords,
-  getWordsDueForReview,
   getMasteryBreakdown,
   wordPerfKey,
   loadWordPerformance,
