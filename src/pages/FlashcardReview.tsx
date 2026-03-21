@@ -1,5 +1,5 @@
 import { useEffect, useState, useMemo } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
 import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { AudioPlayer } from '../components/AudioPlayer';
@@ -11,6 +11,8 @@ const CARDS_PER_SESSION = 30;
 
 export function FlashcardReview() {
   const { language } = useParams<{ language: string }>();
+  const [searchParams] = useSearchParams();
+  const focusWeak = searchParams.get('focus') === 'weak';
   const navigate = useNavigate();
   const progress = useAppStore((s) => s.progress);
   const wordPerformance = useAppStore((s) => s.wordPerformance);
@@ -52,16 +54,26 @@ export function FlashcardReview() {
   // Load words and pick session cards
   useEffect(() => {
     fetchWords(lang).then((allWords) => {
-      // Include words the user has tracked OR words from completed levels
-      const pool = allWords.filter((w) => trackedRanks.has(w.rank) || w.rank <= completedWordCount);
+      const weakRanks = new Set(getWeakWords(wordPerformance, lang, 30).map((wp) => wp.rank));
 
-      if (pool.length === 0) {
-        setLoadError('No words to review yet. Complete a lesson first!');
-        return;
+      let pool: Word[];
+      if (focusWeak) {
+        // Only show weak words
+        pool = allWords.filter((w) => weakRanks.has(w.rank));
+        if (pool.length === 0) {
+          setLoadError('No weak words to practice. Great job!');
+          return;
+        }
+      } else {
+        // Include words the user has tracked OR words from completed levels
+        pool = allWords.filter((w) => trackedRanks.has(w.rank) || w.rank <= completedWordCount);
+        if (pool.length === 0) {
+          setLoadError('No words to review yet. Complete a lesson first!');
+          return;
+        }
       }
 
       // Prioritize: weak words first, then due for review, then hard-rated, then rest
-      const weakRanks = new Set(getWeakWords(wordPerformance, lang, 30).map((wp) => wp.rank));
       const dueWords = new Set(getWordsDueForReview(wordPerformance, lang).map((wp) => wp.rank));
 
       pool.sort((a, b) => {
@@ -87,7 +99,7 @@ export function FlashcardReview() {
       console.error('Failed to load words:', err);
       setLoadError('Failed to load words. Please try again.');
     });
-  }, [lang, completedWordCount, trackedRanks, wordPerformance]);
+  }, [lang, completedWordCount, trackedRanks, wordPerformance, focusWeak]);
 
   if (words.length === 0) {
     return (
@@ -157,7 +169,7 @@ export function FlashcardReview() {
         Review &middot; {lang}
       </div>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-display font-bold text-white">Flashcard Review</h2>
+        <h2 className="text-2xl font-display font-bold text-white">{focusWeak ? 'Weak Words Practice' : 'Flashcard Review'}</h2>
         <span className="text-sm text-slate-500 tabular-nums font-medium">{currentIndex + 1} / {words.length}</span>
       </div>
 

@@ -134,7 +134,7 @@ export function WeakWords({ language }: { language: Language }) {
 
           {/* Practice button */}
           <button
-            onClick={() => navigate(`/review/${language}`)}
+            onClick={() => navigate(`/review/${language}?focus=weak`)}
             className="mt-4 w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-red-500/20 to-amber-500/20 border border-red-500/30 hover:border-red-500/50 text-white font-medium text-sm transition-all duration-200 hover:from-red-500/30 hover:to-amber-500/30"
           >
             <Zap className="w-4 h-4 text-amber-400" />
