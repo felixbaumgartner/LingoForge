@@ -12,7 +12,6 @@ function InteractivePassage({ passage, vocabulary }: {
   passage: string;
   vocabulary: { word: string; translation: string }[];
 }) {
-  // Build a lookup map: lowercase word -> translation
   const vocabMap = useMemo(() => {
     const map = new Map<string, string>();
     for (const v of vocabulary) {
@@ -21,7 +20,6 @@ function InteractivePassage({ passage, vocabulary }: {
     return map;
   }, [vocabulary]);
 
-  // Build a regex that matches any vocab word (case-insensitive, whole word)
   const pattern = useMemo(() => {
     if (vocabulary.length === 0) return null;
     const escaped = vocabulary.map((v) =>
@@ -63,10 +61,14 @@ export function ReadingLesson() {
   const { language, level, lesson: lessonParam } = useParams<{ language: string; type: string; level: string; lesson: string }>();
   const navigate = useNavigate();
   const completeLesson = useAppStore((s) => s.completeLesson);
+  const recordWord = useAppStore((s) => s.recordWord);
   const { lesson, isLoading, error, loadLesson } = useLesson();
   const [answers, setAnswers] = useState<Record<number, number>>({});
   const [submitted, setSubmitted] = useState(false);
   const [showTranslation, setShowTranslation] = useState<number | null>(null);
+  // Vocab quiz state
+  const [vocabAnswers, setVocabAnswers] = useState<Record<number, number>>({});
+  const [vocabSubmitted, setVocabSubmitted] = useState(false);
 
   const lang = language as Language;
   const lvl = Number(level);
@@ -78,8 +80,25 @@ export function ReadingLesson() {
       setAnswers({});
       setSubmitted(false);
       setShowTranslation(null);
+      setVocabAnswers({});
+      setVocabSubmitted(false);
     }
   }, [lang, lvl, lessonNum, loadLesson]);
+
+  // Build vocab quiz — must be before early returns to satisfy React hooks rules
+  const data = (lesson?.type === 'reading' ? lesson : null) as ReadingLessonType | null;
+  const corpusWords = data?.corpusWords ?? [];
+  const vocabQuizItems = useMemo(() => {
+    if (corpusWords.length === 0) return [];
+    const translations = corpusWords.map((w) => w.translation);
+    return corpusWords.map((w, idx) => {
+      const wrong = translations.filter((_, i) => i !== idx).sort(() => Math.random() - 0.5).slice(0, 3);
+      const options = [...wrong, w.translation].sort(() => Math.random() - 0.5);
+      const correctIdx = options.indexOf(w.translation);
+      return { word: w.word, rank: w.rank, translation: w.translation, options, correctIndex: correctIdx };
+    });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(corpusWords)]);
 
   if (isLoading) {
     return (
@@ -104,9 +123,8 @@ export function ReadingLesson() {
     );
   }
 
-  if (!lesson || lesson.type !== 'reading') return null;
+  if (!data) return null;
 
-  const data = lesson as ReadingLessonType;
   const totalQuestions = data.questions?.length ?? 0;
   const correctCount = submitted
     ? data.questions.filter((q, i) => answers[i] === q.correctIndex).length
@@ -114,10 +132,24 @@ export function ReadingLesson() {
   const score = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;
   const passed = score >= 60;
 
+  const vocabCorrectCount = vocabSubmitted
+    ? vocabQuizItems.filter((item, i) => vocabAnswers[i] === item.correctIndex).length
+    : 0;
+
   function handleSubmit() {
     setSubmitted(true);
     if (passed) {
       completeLesson(lang, 'reading', lvl, lessonNum, score);
+    }
+  }
+
+  function handleVocabSubmit() {
+    setVocabSubmitted(true);
+    // Record per-word performance
+    for (let i = 0; i < vocabQuizItems.length; i++) {
+      const item = vocabQuizItems[i];
+      const correct = vocabAnswers[i] === item.correctIndex;
+      recordWord(lang, item.rank, item.word, item.translation, correct);
     }
   }
 
@@ -226,6 +258,54 @@ export function ReadingLesson() {
         >
           Check Answers
         </button>
+      ) : !vocabSubmitted && vocabQuizItems.length > 0 ? (
+        <>
+          {/* Comprehension result */}
+          <div className="glass rounded-2xl p-6 mb-8 text-center relative overflow-hidden noise">
+            <p className="text-lg font-display font-bold text-white mb-1">{correctCount}/{totalQuestions} comprehension correct</p>
+            <p className="text-sm text-slate-400">
+              {passed ? 'Great reading! Now test your vocabulary below.' : 'You need 60% to pass. Complete the vocab quiz, then you can retry.'}
+            </p>
+          </div>
+
+          {/* Vocab Quiz */}
+          <div className="mb-8">
+            <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">Vocabulary Quiz</h3>
+            <p className="text-xs text-slate-500 mb-4">Match each word to its English translation</p>
+            <div className="space-y-5">
+              {vocabQuizItems.map((item, qi) => (
+                <div key={qi}>
+                  <p className="text-white font-medium mb-2">{qi + 1}. <span className="text-emerald-400">{item.word}</span></p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {item.options.map((opt, oi) => {
+                      const isSelected = vocabAnswers[qi] === oi;
+                      return (
+                        <button
+                          key={oi}
+                          onClick={() => setVocabAnswers({ ...vocabAnswers, [qi]: oi })}
+                          className={`text-left px-3 py-2 rounded-lg border transition-colors text-sm ${
+                            isSelected ? 'border-emerald-500 bg-slate-700 text-white'
+                            : 'border-slate-700 bg-slate-800 text-slate-300 hover:border-slate-600'
+                          }`}
+                        >
+                          {opt}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={handleVocabSubmit}
+            disabled={Object.keys(vocabAnswers).length < vocabQuizItems.length}
+            className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 disabled:from-slate-700 disabled:to-slate-700 disabled:text-slate-500 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-emerald-500/20 disabled:shadow-none"
+          >
+            Submit Vocabulary Quiz
+          </button>
+        </>
       ) : (
         <div className="glass rounded-2xl p-8 text-center relative overflow-hidden noise">
           <div className={`w-16 h-16 rounded-2xl mx-auto mb-4 flex items-center justify-center ${
@@ -233,14 +313,17 @@ export function ReadingLesson() {
           }`}>
             <CheckCircle2 className={`w-8 h-8 ${passed ? 'text-emerald-400' : 'text-amber-400'}`} />
           </div>
-          <p className="text-2xl font-display font-bold text-white mb-1">{correctCount}/{totalQuestions} correct</p>
+          <p className="text-2xl font-display font-bold text-white mb-1">{correctCount}/{totalQuestions} comprehension</p>
+          {vocabQuizItems.length > 0 && (
+            <p className="text-lg text-slate-300 mb-1">{vocabCorrectCount}/{vocabQuizItems.length} vocabulary</p>
+          )}
           <p className="text-sm text-slate-400 mb-6">
-            {passed ? 'Excellent work! On to the next one.' : 'You need 60% to pass. Give it another shot!'}
+            {passed ? 'Excellent work! On to the next one.' : 'You need 60% comprehension to pass. Give it another shot!'}
           </p>
           <div className="flex gap-3 justify-center">
             {!passed && (
               <button
-                onClick={() => { setAnswers({}); setSubmitted(false); }}
+                onClick={() => { setAnswers({}); setSubmitted(false); setVocabAnswers({}); setVocabSubmitted(false); }}
                 className="px-6 py-2.5 glass-light hover:bg-slate-700/50 text-white rounded-xl font-medium transition-colors"
               >
                 Retry

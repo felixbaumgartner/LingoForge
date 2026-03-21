@@ -4,6 +4,7 @@ import { BookOpen, Pencil, Mic, RotateCcw, Lock, ChevronDown, ChevronRight, Chec
 import { useAppStore } from '../store/appStore';
 import { LanguageSelector } from '../components/LanguageSelector';
 import { ProgressBar } from '../components/ProgressBar';
+import { WeakWords } from '../components/WeakWords';
 import {
   isLessonUnlocked,
   isSectionUnlocked,
@@ -80,6 +81,11 @@ export function Dashboard() {
             />
           ))}
         </div>
+      </div>
+
+      {/* Word Mastery */}
+      <div className="mb-8">
+        <WeakWords language={language} />
       </div>
 
       {/* Flashcard review button */}

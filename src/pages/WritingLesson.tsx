@@ -3,13 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { ArrowLeft, Loader2, CheckCircle2 } from 'lucide-react';
 import { useLesson } from '../hooks/useLesson';
 import { useAppStore } from '../store/appStore';
-import { LESSONS_PER_LEVEL, TOTAL_LEVELS } from '../lib/persistence';
+import { LESSONS_PER_LEVEL, TOTAL_LEVELS, normalizeAnswer } from '../lib/persistence';
 import type { Language } from '../types/language';
-import type { WritingLesson as WritingLessonType, WritingExercise } from '../types/lesson';
-
-function normalizeAnswer(s: string): string {
-  return s.toLowerCase().trim().replace(/[.!?,;:]/g, '');
-}
+import type { WritingLesson as WritingLessonType, WritingExercise, CorpusWord } from '../types/lesson';
 
 function ExerciseItem({ exercise, submitted, userAnswer, onAnswer }: {
   exercise: WritingExercise;
@@ -107,6 +103,7 @@ export function WritingLesson() {
   const { language, level, lesson: lessonParam } = useParams<{ language: string; type: string; level: string; lesson: string }>();
   const navigate = useNavigate();
   const completeLesson = useAppStore((s) => s.completeLesson);
+  const recordWord = useAppStore((s) => s.recordWord);
   const { lesson, isLoading, error, loadLesson } = useLesson();
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -165,6 +162,27 @@ export function WritingLesson() {
   function handleSubmit() {
     setSubmitted(true);
     if (passed) completeLesson(lang, 'writing', lvl, lessonNum, score);
+
+    // Record per-word performance using corpus words
+    const corpusWords: CorpusWord[] = data.corpusWords ?? [];
+    if (corpusWords.length > 0) {
+      const corpusMap = new Map(corpusWords.map((w) => [w.word.toLowerCase(), w]));
+      for (let i = 0; i < exercises.length; i++) {
+        const ex = exercises[i];
+        let correct: boolean;
+        if (ex.type === 'multiple-choice') {
+          correct = answers[i] === String(ex.correctIndex);
+        } else {
+          correct = normalizeAnswer(answers[i] || '') === normalizeAnswer(ex.answer);
+        }
+        // Map exercise to corpus word: use answer word or exercise.word
+        const targetWord = (ex.answer || ex.word || '').toLowerCase();
+        const corpus = corpusMap.get(targetWord);
+        if (corpus) {
+          recordWord(lang, corpus.rank, corpus.word, corpus.translation, correct);
+        }
+      }
+    }
   }
 
   function goToNext() {

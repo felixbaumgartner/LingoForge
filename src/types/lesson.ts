@@ -1,10 +1,17 @@
 export type LessonType = 'reading' | 'writing' | 'speaking';
 
+export interface CorpusWord {
+  rank: number;
+  word: string;
+  translation: string;
+}
+
 export interface ReadingLesson {
   language: string;
   type: 'reading';
   level: number;
   wordRange: [number, number];
+  corpusWords?: CorpusWord[];
   title: string;
   passage: string;
   passageTranslation: string;
@@ -38,6 +45,7 @@ export interface WritingLesson {
   type: 'writing';
   level: number;
   wordRange: [number, number];
+  corpusWords?: CorpusWord[];
   title: string;
   exercises: WritingExercise[];
 }
@@ -47,6 +55,7 @@ export interface SpeakingLesson {
   type: 'speaking';
   level: number;
   wordRange: [number, number];
+  corpusWords?: CorpusWord[];
   title: string;
   pronunciationCards: {
     word: string;

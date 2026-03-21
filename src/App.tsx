@@ -9,8 +9,8 @@ import { FlashcardReview } from './pages/FlashcardReview';
 import { Login } from './pages/Login';
 import { useAuth } from './hooks/useAuth';
 import { useAppStore } from './store/appStore';
-import { loadProgressFromFirestore } from './lib/progressSync';
-import { loadProgress, saveProgress } from './lib/persistence';
+import { loadProgressFromFirestore, loadWordPerfFromFirestore, mergeWordPerformance } from './lib/progressSync';
+import { loadProgress, saveProgress, loadWordPerformance, saveWordPerformance } from './lib/persistence';
 import { Loader2 } from 'lucide-react';
 
 function LessonRouter() {
@@ -25,6 +25,7 @@ function AppContent() {
   const { user, loading } = useAuth();
   const setUid = useAppStore((s) => s.setUid);
   const setProgress = useAppStore((s) => s.setProgress);
+  const setWordPerformance = useAppStore((s) => s.setWordPerformance);
 
   useEffect(() => {
     if (user) {
@@ -32,16 +33,24 @@ function AppContent() {
       // Load progress from Firestore and merge with localStorage
       loadProgressFromFirestore(user.uid).then((firestoreProgress) => {
         if (firestoreProgress) {
-          // Merge: Firestore is source of truth, but keep any local progress too
           const localProgress = loadProgress();
           const merged = mergeProgress(localProgress, firestoreProgress);
           setProgress(merged);
         }
       }).catch(console.error);
+      // Load word performance from Firestore and merge
+      loadWordPerfFromFirestore(user.uid).then((remoteWp) => {
+        if (remoteWp) {
+          const localWp = loadWordPerformance();
+          const merged = mergeWordPerformance(localWp, remoteWp);
+          saveWordPerformance(merged);
+          setWordPerformance(merged);
+        }
+      }).catch(console.error);
     } else {
       setUid(null);
     }
-  }, [user, setUid, setProgress]);
+  }, [user, setUid, setProgress, setWordPerformance]);
 
   if (loading) {
     return (

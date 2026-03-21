@@ -4,10 +4,8 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { AudioPlayer } from '../components/AudioPlayer';
 import { fetchWords } from '../api/client';
-import { loadFlashcardData, saveFlashcardData } from '../lib/persistence';
-import { saveFlashcardsToFirestore } from '../lib/progressSync';
+import { getWordsDueForReview, wordPerfKey } from '../lib/persistence';
 import type { Language, Word } from '../types/language';
-import type { FlashcardData } from '../types/progress';
 
 const CARDS_PER_SESSION = 30;
 
@@ -15,6 +13,8 @@ export function FlashcardReview() {
   const { language } = useParams<{ language: string }>();
   const navigate = useNavigate();
   const progress = useAppStore((s) => s.progress);
+  const wordPerformance = useAppStore((s) => s.wordPerformance);
+  const rateWord = useAppStore((s) => s.rateWord);
   const lang = language as Language;
 
   const [words, setWords] = useState<Word[]>([]);
@@ -30,7 +30,7 @@ export function FlashcardReview() {
     let maxLevel = 0;
     for (const type of ['reading', 'writing', 'speaking'] as const) {
       for (let lvl = 1; lvl <= 16; lvl++) {
-        if (langProgress[type]?.[lvl]?.completed) {
+        if (langProgress[type]?.[`${lvl}-1`]?.completed) {
           maxLevel = Math.max(maxLevel, lvl);
         }
       }
@@ -42,21 +42,27 @@ export function FlashcardReview() {
   useEffect(() => {
     fetchWords(lang).then((allWords) => {
       const pool = allWords.filter((w) => w.rank <= completedWordCount);
-      // Prioritize words rated 'hard' or not yet seen
-      const flashcardData = loadFlashcardData().filter((f) => f.language === lang);
-      const hardRanks = new Set(flashcardData.filter((f) => f.rating === 'hard').map((f) => f.wordRank));
 
-      // Sort: hard words first, then unseen, then easy
+      // Prioritize words due for review, then words rated 'hard', then unseen
+      const dueWords = new Set(getWordsDueForReview(wordPerformance, lang).map((wp) => wp.rank));
+
       pool.sort((a, b) => {
-        const aHard = hardRanks.has(a.rank) ? 0 : 1;
-        const bHard = hardRanks.has(b.rank) ? 0 : 1;
+        const aDue = dueWords.has(a.rank) ? 0 : 1;
+        const bDue = dueWords.has(b.rank) ? 0 : 1;
+        if (aDue !== bDue) return aDue - bDue;
+
+        const aPerf = wordPerformance[wordPerfKey(lang, a.rank)];
+        const bPerf = wordPerformance[wordPerfKey(lang, b.rank)];
+        const aHard = aPerf?.rating === 'hard' ? 0 : 1;
+        const bHard = bPerf?.rating === 'hard' ? 0 : 1;
         if (aHard !== bHard) return aHard - bHard;
+
         return Math.random() - 0.5;
       });
 
       setWords(pool.slice(0, CARDS_PER_SESSION));
     });
-  }, [lang, completedWordCount]);
+  }, [lang, completedWordCount, wordPerformance]);
 
   if (words.length === 0) {
     return (
@@ -95,29 +101,7 @@ export function FlashcardReview() {
   const card = words[currentIndex];
 
   function handleRate(rating: 'hard' | 'moderate' | 'easy') {
-    const data = loadFlashcardData();
-    const existing = data.findIndex((f) => f.wordRank === card.rank && f.language === lang);
-    const now = new Date().toISOString();
-    const daysUntilNext = rating === 'hard' ? 1 : rating === 'moderate' ? 3 : 7;
-    const nextReview = new Date(Date.now() + daysUntilNext * 86400000).toISOString();
-
-    const entry: FlashcardData = {
-      wordRank: card.rank,
-      language: lang,
-      rating,
-      lastSeen: now,
-      nextReview,
-      reviewCount: existing >= 0 ? data[existing].reviewCount + 1 : 1,
-    };
-
-    if (existing >= 0) {
-      data[existing] = entry;
-    } else {
-      data.push(entry);
-    }
-    saveFlashcardData(data);
-    const uid = useAppStore.getState().uid;
-    if (uid) saveFlashcardsToFirestore(uid, data).catch(console.error);
+    rateWord(lang, card.rank, card.word, card.translation, rating);
     setRated(true);
   }
 

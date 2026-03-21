@@ -78,6 +78,11 @@ router.post('/generate', async (req, res) => {
       level,
       lesson: lessonNum,
       wordRange: [lessonStart + 1, lessonEnd],
+      corpusWords: lessonWords.map((w: { rank: number; word: string; translation: string }) => ({
+        rank: w.rank,
+        word: w.word,
+        translation: w.translation,
+      })),
       ...lessonData,
     });
   } catch (error) {

@@ -6,14 +6,18 @@ import { useAppStore } from '../store/appStore';
 import { AudioPlayer } from '../components/AudioPlayer';
 import { LESSONS_PER_LEVEL, TOTAL_LEVELS } from '../lib/persistence';
 import type { Language } from '../types/language';
-import type { SpeakingLesson as SpeakingLessonType } from '../types/lesson';
+import type { SpeakingLesson as SpeakingLessonType, CorpusWord } from '../types/lesson';
+
+type Rating = 'hard' | 'moderate' | 'easy';
 
 export function SpeakingLesson() {
   const { language, level, lesson: lessonParam } = useParams<{ language: string; type: string; level: string; lesson: string }>();
   const navigate = useNavigate();
   const completeLesson = useAppStore((s) => s.completeLesson);
+  const rateWord = useAppStore((s) => s.rateWord);
   const { lesson, isLoading, error, loadLesson } = useLesson();
   const [cardIndex, setCardIndex] = useState(0);
+  const [cardRatings, setCardRatings] = useState<Record<number, Rating>>({});
 
   const lang = language as Language;
   const lvl = Number(level);
@@ -23,6 +27,7 @@ export function SpeakingLesson() {
     if (lang && lvl && lessonNum) {
       loadLesson(lang, 'speaking', lvl, lessonNum);
       setCardIndex(0);
+      setCardRatings({});
     }
   }, [lang, lvl, lessonNum, loadLesson]);
 
@@ -55,8 +60,30 @@ export function SpeakingLesson() {
   const cards = data.pronunciationCards ?? [];
   const phrases = data.phrases ?? [];
   const dialogue = data.dialogue ?? [];
+  const corpusWords: CorpusWord[] = data.corpusWords ?? [];
+
+  const allCardsRated = cards.length > 0 && Object.keys(cardRatings).length >= cards.length;
+
+  function handleRate(rating: Rating) {
+    setCardRatings((prev) => ({ ...prev, [cardIndex]: rating }));
+    // Auto-advance to next card after rating
+    if (cardIndex < cards.length - 1) {
+      setTimeout(() => setCardIndex(cardIndex + 1), 300);
+    }
+  }
 
   function handleComplete() {
+    // Record per-word performance from self-ratings
+    const corpusMap = new Map(corpusWords.map((w) => [w.word.toLowerCase(), w]));
+    for (let i = 0; i < cards.length; i++) {
+      const rating = cardRatings[i];
+      if (!rating) continue;
+      const corpus = corpusMap.get(cards[i].word.toLowerCase());
+      if (corpus) {
+        rateWord(lang, corpus.rank, corpus.word, corpus.translation, rating);
+      }
+    }
+
     completeLesson(lang, 'speaking', lvl, lessonNum);
     if (lessonNum < LESSONS_PER_LEVEL) {
       navigate(`/lesson/${lang}/speaking/${lvl}/${lessonNum + 1}`);
@@ -83,11 +110,66 @@ export function SpeakingLesson() {
           <h3 className="text-sm font-semibold text-slate-300 uppercase tracking-wider mb-4">
             Word Pronunciation ({cardIndex + 1}/{cards.length})
           </h3>
+
+          {/* Progress dots */}
+          <div className="flex gap-1.5 mb-4">
+            {cards.map((_, i) => (
+              <div
+                key={i}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  cardRatings[i] === 'easy' ? 'bg-emerald-400'
+                  : cardRatings[i] === 'moderate' ? 'bg-amber-400'
+                  : cardRatings[i] === 'hard' ? 'bg-red-400'
+                  : i === cardIndex ? 'bg-slate-400'
+                  : 'bg-slate-700'
+                }`}
+              />
+            ))}
+          </div>
+
           <div className="glass rounded-2xl p-10 text-center relative overflow-hidden noise">
             <p className="text-4xl font-display font-bold text-white mb-3">{cards[cardIndex].word}</p>
             <p className="text-slate-400 mb-1">{cards[cardIndex].translation}</p>
             <p className="text-xs text-slate-500 mb-5 italic">{cards[cardIndex].phoneticHint}</p>
             <AudioPlayer text={cards[cardIndex].word} language={lang} />
+
+            {/* Self-rating */}
+            <div className="mt-6">
+              <p className="text-xs text-slate-500 mb-3">How well can you pronounce this?</p>
+              <div className="flex gap-3 justify-center">
+                <button
+                  onClick={() => handleRate('hard')}
+                  className={`px-5 py-2 rounded-lg border transition-colors text-sm font-medium ${
+                    cardRatings[cardIndex] === 'hard'
+                      ? 'border-red-500 bg-red-500/20 text-red-300'
+                      : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-red-600/50 hover:text-red-400'
+                  }`}
+                >
+                  Hard
+                </button>
+                <button
+                  onClick={() => handleRate('moderate')}
+                  className={`px-5 py-2 rounded-lg border transition-colors text-sm font-medium ${
+                    cardRatings[cardIndex] === 'moderate'
+                      ? 'border-amber-500 bg-amber-500/20 text-amber-300'
+                      : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-amber-600/50 hover:text-amber-400'
+                  }`}
+                >
+                  Okay
+                </button>
+                <button
+                  onClick={() => handleRate('easy')}
+                  className={`px-5 py-2 rounded-lg border transition-colors text-sm font-medium ${
+                    cardRatings[cardIndex] === 'easy'
+                      ? 'border-emerald-500 bg-emerald-500/20 text-emerald-300'
+                      : 'border-slate-700 bg-slate-800 text-slate-400 hover:border-emerald-600/50 hover:text-emerald-400'
+                  }`}
+                >
+                  Easy
+                </button>
+              </div>
+            </div>
+
             <div className="flex justify-center gap-3 mt-6">
               <button
                 onClick={() => setCardIndex(Math.max(0, cardIndex - 1))}
@@ -152,10 +234,11 @@ export function SpeakingLesson() {
 
       <button
         onClick={handleComplete}
-        className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2"
+        disabled={!allCardsRated}
+        className="w-full py-3.5 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 disabled:from-slate-700 disabled:to-slate-700 disabled:text-slate-500 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-amber-500/20 disabled:shadow-none flex items-center justify-center gap-2"
       >
         <CheckCircle2 className="w-5 h-5" />
-        Complete & Next Lesson
+        {allCardsRated ? 'Complete & Next Lesson' : `Rate all ${cards.length} words to continue`}
       </button>
     </div>
   );
