@@ -187,6 +187,21 @@ describe('getWeakWords', () => {
     expect(weak[1].word).toBe('el');  // 67% accuracy
   });
 
+  it('excludes mastered words (80%+ accuracy with streak >= 2)', () => {
+    let map: WordPerformanceMap = {};
+    // Word at 100% with streak 3 — mastered, should NOT appear
+    map = recordWordResult(map, 'spanish', 1, 'la', 'the', true);
+    map = recordWordResult(map, 'spanish', 1, 'la', 'the', true);
+    map = recordWordResult(map, 'spanish', 1, 'la', 'the', true);
+    // Word at 50% — should appear
+    map = recordWordResult(map, 'spanish', 2, 'el', 'the', true);
+    map = recordWordResult(map, 'spanish', 2, 'el', 'the', false);
+
+    const weak = getWeakWords(map, 'spanish');
+    expect(weak).toHaveLength(1);
+    expect(weak[0].word).toBe('el');
+  });
+
   it('filters by language', () => {
     let map: WordPerformanceMap = {};
     map = recordWordResult(map, 'spanish', 1, 'la', 'the', false);

@@ -275,7 +275,14 @@ export function recordWordRating(
 
 export function getWeakWords(map: WordPerformanceMap, language: Language, limit = 10): WordPerformance[] {
   return Object.values(map)
-    .filter((wp) => wp.language === language && (wp.timesCorrect + wp.timesIncorrect) >= 2)
+    .filter((wp) => {
+      if (wp.language !== language) return false;
+      const total = wp.timesCorrect + wp.timesIncorrect;
+      if (total < 2) return false;
+      const acc = wp.timesCorrect / total;
+      // Only include words that aren't mastered (< 80% accuracy or streak < 2)
+      return acc < 0.8 || wp.streak < 2;
+    })
     .sort((a, b) => {
       const accA = a.timesCorrect / (a.timesCorrect + a.timesIncorrect);
       const accB = b.timesCorrect / (b.timesCorrect + b.timesIncorrect);

@@ -4,7 +4,7 @@ import { ArrowLeft, RotateCcw } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { AudioPlayer } from '../components/AudioPlayer';
 import { fetchWords } from '../api/client';
-import { getWordsDueForReview, wordPerfKey } from '../lib/persistence';
+import { getWordsDueForReview, getWeakWords, wordPerfKey } from '../lib/persistence';
 import type { Language, Word } from '../types/language';
 
 const CARDS_PER_SESSION = 30;
@@ -23,7 +23,16 @@ export function FlashcardReview() {
   const [rated, setRated] = useState(false);
   const [sessionComplete, setSessionComplete] = useState(false);
 
-  // Get completed word ranks
+  // Get the set of word ranks the user has encountered (from WordPerformance)
+  const trackedRanks = useMemo(() => {
+    return new Set(
+      Object.values(wordPerformance)
+        .filter((wp) => wp.language === lang)
+        .map((wp) => wp.rank)
+    );
+  }, [wordPerformance, lang]);
+
+  // Also get completed word count from level progress as a fallback
   const completedWordCount = useMemo(() => {
     const langProgress = progress[lang];
     if (!langProgress) return 0;
@@ -38,15 +47,28 @@ export function FlashcardReview() {
     return maxLevel * 50;
   }, [progress, lang]);
 
+  const [loadError, setLoadError] = useState<string | null>(null);
+
   // Load words and pick session cards
   useEffect(() => {
     fetchWords(lang).then((allWords) => {
-      const pool = allWords.filter((w) => w.rank <= completedWordCount);
+      // Include words the user has tracked OR words from completed levels
+      const pool = allWords.filter((w) => trackedRanks.has(w.rank) || w.rank <= completedWordCount);
 
-      // Prioritize words due for review, then words rated 'hard', then unseen
+      if (pool.length === 0) {
+        setLoadError('No words to review yet. Complete a lesson first!');
+        return;
+      }
+
+      // Prioritize: weak words first, then due for review, then hard-rated, then rest
+      const weakRanks = new Set(getWeakWords(wordPerformance, lang, 30).map((wp) => wp.rank));
       const dueWords = new Set(getWordsDueForReview(wordPerformance, lang).map((wp) => wp.rank));
 
       pool.sort((a, b) => {
+        const aWeak = weakRanks.has(a.rank) ? 0 : 1;
+        const bWeak = weakRanks.has(b.rank) ? 0 : 1;
+        if (aWeak !== bWeak) return aWeak - bWeak;
+
         const aDue = dueWords.has(a.rank) ? 0 : 1;
         const bDue = dueWords.has(b.rank) ? 0 : 1;
         if (aDue !== bDue) return aDue - bDue;
@@ -61,13 +83,23 @@ export function FlashcardReview() {
       });
 
       setWords(pool.slice(0, CARDS_PER_SESSION));
+    }).catch((err) => {
+      console.error('Failed to load words:', err);
+      setLoadError('Failed to load words. Please try again.');
     });
-  }, [lang, completedWordCount, wordPerformance]);
+  }, [lang, completedWordCount, trackedRanks, wordPerformance]);
 
   if (words.length === 0) {
     return (
       <div className="max-w-3xl mx-auto px-6 py-8 text-center">
-        <p className="text-slate-400">Loading flashcards...</p>
+        <button onClick={() => navigate('/')} className="flex items-center gap-2 text-slate-500 hover:text-white mb-8 text-sm transition-colors">
+          <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+        </button>
+        {loadError ? (
+          <p className="text-amber-400">{loadError}</p>
+        ) : (
+          <p className="text-slate-400">Loading flashcards...</p>
+        )}
       </div>
     );
   }
