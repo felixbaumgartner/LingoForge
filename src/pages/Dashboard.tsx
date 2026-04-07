@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BookOpen, Pencil, Mic, RotateCcw, Lock, ChevronDown, ChevronRight, Check, Circle, Sparkles } from 'lucide-react';
+import { BookOpen, Pencil, Mic, RotateCcw, Lock, ChevronDown, ChevronRight, Check, Circle, Sparkles, CircleDot } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { LanguageSelector } from '../components/LanguageSelector';
 import { ProgressBar } from '../components/ProgressBar';
@@ -142,6 +142,8 @@ export function Dashboard() {
                     className={`rounded-2xl overflow-hidden transition-all duration-300 ${
                       levelStatus === 'completed'
                         ? 'glass glow-emerald'
+                        : levelStatus === 'in-progress'
+                        ? 'glass border border-emerald-500/20'
                         : levelStatus === 'locked'
                         ? 'bg-slate-900/30 border border-slate-800/50'
                         : 'glass'
@@ -166,6 +168,10 @@ export function Dashboard() {
                           <div className="w-7 h-7 rounded-lg bg-emerald-500/20 flex items-center justify-center">
                             <Check className="w-4 h-4 text-emerald-400" />
                           </div>
+                        ) : levelStatus === 'in-progress' ? (
+                          <div className="w-7 h-7 rounded-lg bg-emerald-500/10 flex items-center justify-center">
+                            <CircleDot className="w-4 h-4 text-emerald-400" />
+                          </div>
                         ) : (
                           <div className="w-7 h-7 rounded-lg bg-slate-800/50 flex items-center justify-center">
                             {isExpanded ? (
@@ -185,7 +191,13 @@ export function Dashboard() {
                         </div>
                       </div>
                       <div className="flex items-center gap-3">
-                        <span className="text-xs font-medium text-slate-500 tabular-nums">
+                        <span className={`text-xs font-medium tabular-nums ${
+                          completedInLevel === LESSONS_PER_LEVEL
+                            ? 'text-emerald-400'
+                            : completedInLevel > 0
+                            ? 'text-emerald-400/70'
+                            : 'text-slate-500'
+                        }`}>
                           {completedInLevel}/{LESSONS_PER_LEVEL}
                         </span>
                         <div className="flex gap-1.5">
