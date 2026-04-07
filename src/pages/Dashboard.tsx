@@ -188,20 +188,22 @@ export function Dashboard() {
                         <span className="text-xs font-medium text-slate-500 tabular-nums">
                           {completedInLevel}/{LESSONS_PER_LEVEL}
                         </span>
-                        <div className="flex gap-1">
+                        <div className="flex gap-1.5">
                           {Array.from({ length: LESSONS_PER_LEVEL }, (_, i) => {
                             const status = getLessonStatus(section.type, level, i + 1);
                             return (
                               <div
                                 key={i}
-                                className={`w-2 h-2 rounded-full transition-colors ${
+                                className={`w-4 h-4 rounded-full flex items-center justify-center transition-colors ${
                                   status === 'completed'
-                                    ? 'bg-emerald-400'
+                                    ? 'bg-emerald-500 shadow-sm shadow-emerald-500/40'
                                     : status === 'available'
-                                    ? 'bg-slate-500'
+                                    ? 'border border-slate-500 bg-transparent'
                                     : 'bg-slate-800'
                                 }`}
-                              />
+                              >
+                                {status === 'completed' && <Check className="w-2.5 h-2.5 text-white stroke-[3]" />}
+                              </div>
                             );
                           })}
                         </div>
