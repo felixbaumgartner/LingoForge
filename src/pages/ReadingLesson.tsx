@@ -126,7 +126,7 @@ export function ReadingLesson() {
   if (!data) return null;
 
   const totalQuestions = data.questions?.length ?? 0;
-  const correctCount = submitted
+  const correctCount = data.questions
     ? data.questions.filter((q, i) => answers[i] === q.correctIndex).length
     : 0;
   const score = totalQuestions > 0 ? Math.round((correctCount / totalQuestions) * 100) : 0;

@@ -149,12 +149,10 @@ export function WritingLesson() {
   const exercises = data.exercises ?? [];
   const total = exercises.length;
 
-  const correctCount = submitted
-    ? exercises.filter((ex, i) => {
-        if (ex.type === 'multiple-choice') return answers[i] === String(ex.correctIndex);
-        return normalizeAnswer(answers[i] || '') === normalizeAnswer(ex.answer);
-      }).length
-    : 0;
+  const correctCount = exercises.filter((ex, i) => {
+    if (ex.type === 'multiple-choice') return answers[i] === String(ex.correctIndex);
+    return normalizeAnswer(answers[i] || '') === normalizeAnswer(ex.answer);
+  }).length;
 
   const score = total > 0 ? Math.round((correctCount / total) * 100) : 0;
   const passed = score >= 60;
