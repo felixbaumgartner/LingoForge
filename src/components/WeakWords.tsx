@@ -95,28 +95,34 @@ export function WeakWords({ language }: { language: Language }) {
       {/* Weak words list */}
       {weakWords.length > 0 && (
         <div>
-          <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-3 flex items-center gap-1.5">
+          <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1 flex items-center gap-1.5">
             <AlertTriangle className="w-3 h-3 text-red-400" />
             Words to Focus On
           </h4>
+          <p className="text-xs text-slate-600 mb-3">Your accuracy on words you've been getting wrong</p>
           <div className="space-y-1.5">
             {weakWords.map((wp) => {
               const total = wp.timesCorrect + wp.timesIncorrect;
               const accuracy = total > 0 ? Math.round((wp.timesCorrect / total) * 100) : 0;
               return (
-                <div key={wordPerfKey(wp.language, wp.rank)} className="flex items-center justify-between px-3 py-2 bg-slate-800/40 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <span className="text-sm font-medium text-white">{wp.word}</span>
-                    <span className="text-xs text-slate-500">{wp.translation}</span>
+                <div
+                  key={wordPerfKey(wp.language, wp.rank)}
+                  className="flex items-center justify-between gap-3 px-3 py-2.5 bg-slate-800/40 rounded-lg"
+                  title={`${wp.timesCorrect} correct out of ${total} attempts`}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="shrink-0 px-2 py-0.5 rounded-md bg-slate-700/60 text-sm font-semibold text-white">{wp.word}</span>
+                    <span className="text-sm text-slate-400 truncate">{wp.translation}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-16 h-1.5 bg-slate-700 rounded-full overflow-hidden">
+                  <div className="flex items-center gap-2 shrink-0">
+                    <span className="text-[10px] text-slate-600 tabular-nums">{wp.timesCorrect}/{total}</span>
+                    <div className="w-14 h-1.5 bg-slate-700 rounded-full overflow-hidden">
                       <div
                         className={`h-full rounded-full ${accuracy >= 50 ? 'bg-amber-500' : 'bg-red-500'}`}
                         style={{ width: `${accuracy}%` }}
                       />
                     </div>
-                    <span className="text-xs text-slate-500 tabular-nums w-8 text-right">{accuracy}%</span>
+                    <span className={`text-xs tabular-nums w-9 text-right ${accuracy >= 50 ? 'text-amber-400' : 'text-red-400'}`}>{accuracy}%</span>
                   </div>
                 </div>
               );
