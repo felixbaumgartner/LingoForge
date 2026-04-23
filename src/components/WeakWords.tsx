@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AlertTriangle, TrendingDown, Trophy, Zap } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
-import { getWeakWords, getMasteryBreakdown, getWordsDueForReview, wordPerfKey } from '../lib/persistence';
+import { getWeakWords, getMasteryBreakdown, wordPerfKey } from '../lib/persistence';
 import type { Language } from '../types/language';
 
 export function WeakWords({ language }: { language: Language }) {
@@ -11,18 +11,9 @@ export function WeakWords({ language }: { language: Language }) {
 
   const weakWords = useMemo(() => getWeakWords(wordPerformance, language, 8), [wordPerformance, language]);
   const mastery = useMemo(() => getMasteryBreakdown(wordPerformance, language), [wordPerformance, language]);
-  // Count words needing review: SRS-due words + struggling words
-  const dueForReview = useMemo(() => getWordsDueForReview(wordPerformance, language), [wordPerformance, language]);
-  const needsReviewCount = useMemo(() => {
-    const dueRanks = new Set(dueForReview.map((wp) => wp.rank));
-    // Also count struggling words not already in the due list
-    for (const wp of weakWords) {
-      dueRanks.add(wp.rank);
-    }
-    return dueRanks.size;
-  }, [dueForReview, weakWords]);
 
   const totalTracked = mastery.mastered + mastery.learning + mastery.struggling;
+  const needsReviewCount = totalTracked - mastery.mastered;
 
   if (totalTracked === 0) {
     return (
