@@ -233,6 +233,9 @@ export function recordWordResult(
   } else {
     updated.timesIncorrect = existing.timesIncorrect + 1;
     updated.streak = 0;
+    // If the user previously self-rated this word as "easy" but now got it wrong,
+    // clear the rating so it can re-enter the weak list.
+    if (existing.rating === 'easy') updated.rating = null;
   }
 
   // Basic SRS scheduling (SM-2 ready fields populated)
@@ -277,6 +280,8 @@ export function getWeakWords(map: WordPerformanceMap, language: Language, limit 
   return Object.values(map)
     .filter((wp) => {
       if (wp.language !== language) return false;
+      // User explicitly graduated this word from the weak list by rating it "Easy".
+      if (wp.rating === 'easy') return false;
       const total = wp.timesCorrect + wp.timesIncorrect;
       if (total < 2) return false;
       const acc = wp.timesCorrect / total;
@@ -304,6 +309,7 @@ export function getMasteryBreakdown(map: WordPerformanceMap, language: Language)
   for (const wp of words) {
     const total = wp.timesCorrect + wp.timesIncorrect;
     if (total === 0) continue;
+    if (wp.rating === 'easy') { mastered++; continue; }
     const acc = wp.timesCorrect / total;
     if (acc >= 0.8 && wp.streak >= 2) mastered++;
     else if (acc >= 0.5) learning++;

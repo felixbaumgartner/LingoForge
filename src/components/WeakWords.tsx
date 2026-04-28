@@ -99,7 +99,7 @@ export function WeakWords({ language }: { language: Language }) {
             <AlertTriangle className="w-3 h-3 text-red-400" />
             Words to Focus On
           </h4>
-          <p className="text-xs text-slate-600 mb-3">Your accuracy on words you've been getting wrong</p>
+          <p className="text-xs text-slate-600 mb-3">Practice and rate "Easy" to remove a word from this list</p>
           <div className="space-y-1.5">
             {weakWords.map((wp) => {
               const total = wp.timesCorrect + wp.timesIncorrect;
