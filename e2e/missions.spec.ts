@@ -275,8 +275,8 @@ test("leaving during recording stops every microphone track", async ({
     page.getByRole("button", { name: "Stop recording", exact: true }),
   ).toBeVisible();
   await page.getByRole("link", { name: "All missions", exact: true }).click();
-  expect(
-    await page.evaluate(
+  await expect.poll(() =>
+    page.evaluate(
       () =>
         (window as unknown as { __recordingTest: { stops: number } })
           .__recordingTest.stops,
