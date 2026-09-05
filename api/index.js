@@ -1,4 +1,5 @@
-import { buildLessonPrompt, isLessonContent } from '../shared/lessonContract.js';
+import { buildLessonPrompt } from '../shared/lessonContract.js';
+import { generateValidatedLesson, LessonGenerationError } from '../shared/lessonGeneration.js';
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
@@ -18,7 +19,7 @@ const BASE_URL = 'https://api.minimax.io/v1';
 async function chatCompletion(messages, options = {}) {
   const res = await fetch(`${BASE_URL}/chat/completions`, {
     method: 'POST',
-    signal: AbortSignal.timeout(55000),
+    signal: options.signal ?? AbortSignal.timeout(55000),
     headers: {
       Authorization: `Bearer ${API_KEY}`,
       'Content-Type': 'application/json',
@@ -26,6 +27,7 @@ async function chatCompletion(messages, options = {}) {
     body: JSON.stringify({
       model: 'minimax-m2.5',
       messages,
+      reasoning_split: true,
       temperature: options.temperature ?? 0.7,
       max_tokens: options.maxTokens ?? 4096,
     }),
@@ -35,7 +37,8 @@ async function chatCompletion(messages, options = {}) {
     throw new Error(`Minimax chat error ${res.status}: ${text}`);
   }
   const data = await res.json();
-  return data.choices[0].message.content;
+  if (data.base_resp?.status_code) throw new Error(`Minimax provider error ${data.base_resp.status_code}`);
+  return { content: data.choices?.[0]?.message?.content, finishReason: data.choices?.[0]?.finish_reason };
 }
 
 async function textToSpeech(text, language, speed = 1.0) {
@@ -106,24 +109,11 @@ app.post('/api/lessons/generate', async (req, res) => {
 
     if (lessonWords.length === 0) return res.status(400).json({ error: 'No words available' });
 
-    const { system, user } = buildLessonPrompt(lessonWords, type, language, level);
-    const response = await chatCompletion(
-      [{ role: 'system', content: system }, { role: 'user', content: user }],
-      { temperature: 0.7, maxTokens: 4096 }
-    );
-
-    let lessonData;
-    try {
-      const jsonMatch = response.match(/\{[\s\S]*\}/);
-      if (jsonMatch) lessonData = JSON.parse(jsonMatch[0]);
-      else throw new Error('No JSON found');
-    } catch {
-      return res.status(500).json({ error: 'Failed to parse generated lesson' });
-    }
-
-    if (!isLessonContent(lessonData, type)) return res.status(502).json({ error: 'The lesson was incomplete. Please try again.' });
+    const prompt = buildLessonPrompt(lessonWords, type, language, level);
+    const lessonData = await generateValidatedLesson(chatCompletion, prompt, type);
     res.json({ ...lessonData, language, type, level, lesson: lessonNum, wordRange: [lessonStart + 1, lessonEnd], corpusWords: lessonWords.map(({rank, word, translation}) => ({rank, word, translation})) });
   } catch (error) {
+    if (error instanceof LessonGenerationError) return res.status(502).json({ error: error.message });
     console.error('Lesson generation error:', error);
     res.status(500).json({ error: 'Failed to generate lesson' });
   }

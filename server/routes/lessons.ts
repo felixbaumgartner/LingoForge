@@ -1,4 +1,4 @@
-import { isLessonContent } from '../../shared/lessonContract.js';
+import { generateValidatedLesson, LessonGenerationError } from '../../shared/lessonGeneration.js';
 import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
@@ -49,34 +49,8 @@ router.post('/generate', async (req, res) => {
       return;
     }
 
-    const { system, user } = buildLessonPrompt(lessonWords, type as 'reading' | 'writing' | 'speaking', language, level);
-
-    const response = await chatCompletion(
-      [
-        { role: 'system', content: system },
-        { role: 'user', content: user },
-      ],
-      { temperature: 0.7, maxTokens: 4096 }
-    );
-
-    let lessonData;
-    try {
-      const jsonMatch = response.match(/\{[\s\S]*\}/);
-      if (jsonMatch) {
-        lessonData = JSON.parse(jsonMatch[0]);
-      } else {
-        throw new Error('No JSON found in response');
-      }
-    } catch {
-      console.error('Failed to parse lesson JSON:', response.substring(0, 500));
-      res.status(500).json({ error: 'Failed to parse generated lesson' });
-      return;
-    }
-
-    if (!isLessonContent(lessonData, type)) {
-      res.status(502).json({ error: 'The lesson was incomplete. Please try again.' });
-      return;
-    }
+    const prompt = buildLessonPrompt(lessonWords, type as 'reading' | 'writing' | 'speaking', language, level);
+    const lessonData = await generateValidatedLesson(chatCompletion, prompt, type);
     res.json({
       ...lessonData,
       language,
@@ -91,6 +65,10 @@ router.post('/generate', async (req, res) => {
       })),
     });
   } catch (error) {
+    if (error instanceof LessonGenerationError) {
+      res.status(502).json({ error: error.message });
+      return;
+    }
     console.error('Lesson generation error:', error);
     res.status(500).json({ error: 'Failed to generate lesson' });
   }

@@ -11,15 +11,16 @@ interface ChatMessage {
 interface ChatOptions {
   temperature?: number;
   maxTokens?: number;
+  signal?: AbortSignal;
 }
 
 export async function chatCompletion(
   messages: ChatMessage[],
   options: ChatOptions = {}
-): Promise<string> {
+): Promise<{ content: unknown; finishReason?: string }> {
   const res = await fetch(`${BASE_URL}/chat/completions`, {
     method: 'POST',
-    signal: AbortSignal.timeout(55000),
+    signal: options.signal ?? AbortSignal.timeout(55000),
     headers: {
       Authorization: `Bearer ${API_KEY}`,
       'Content-Type': 'application/json',
@@ -27,6 +28,7 @@ export async function chatCompletion(
     body: JSON.stringify({
       model: 'minimax-m2.5',
       messages,
+      reasoning_split: true,
       temperature: options.temperature ?? 0.7,
       max_tokens: options.maxTokens ?? 4096,
     }),
@@ -38,7 +40,8 @@ export async function chatCompletion(
   }
 
   const data = await res.json();
-  return data.choices[0].message.content;
+  if (data.base_resp?.status_code) throw new Error(`Minimax provider error ${data.base_resp.status_code}`);
+  return { content: data.choices?.[0]?.message?.content, finishReason: data.choices?.[0]?.finish_reason };
 }
 
 const VOICE_MAP: Record<string, string> = {
