@@ -1,62 +1,79 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import type { Language } from '../types/language';
 
-const LANG_CODES: Record<Language, string> = {
-  spanish: 'es-ES',
-  french: 'fr-FR',
-  dutch: 'nl-NL',
-};
+const LANG_CODES: Record<Language, string> = { spanish: 'es-ES', french: 'fr-FR', dutch: 'nl-NL' };
+let playbackOwner: symbol | null = null;
 
-// Ensure voices are loaded (some browsers load them async)
 function loadVoices(): Promise<SpeechSynthesisVoice[]> {
   const voices = speechSynthesis.getVoices();
-  if (voices.length > 0) return Promise.resolve(voices);
+  if (voices.length) return Promise.resolve(voices);
   return new Promise((resolve) => {
-    speechSynthesis.onvoiceschanged = () => {
+    function done() {
+      clearTimeout(timer);
+      speechSynthesis.removeEventListener('voiceschanged', done);
       resolve(speechSynthesis.getVoices());
-    };
-    // Timeout fallback in case event never fires
-    setTimeout(() => resolve(speechSynthesis.getVoices()), 500);
+    }
+    const timer = setTimeout(done, 700);
+    speechSynthesis.addEventListener('voiceschanged', done);
   });
 }
 
 export function useAudio() {
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const owner = useRef(Symbol('speech'));
+  const request = useRef(0);
+  const alive = useRef(true);
+  const supported = typeof speechSynthesis !== 'undefined' && typeof SpeechSynthesisUtterance !== 'undefined';
 
-  const play = useCallback(async (text: string, language: Language, speed: number = 1.0) => {
-    try {
-      // Cancel any ongoing speech
-      speechSynthesis.cancel();
-
-      const voices = await loadVoices();
-      const langCode = LANG_CODES[language];
-
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = langCode;
-      utterance.rate = speed;
-
-      // Find the best matching voice
-      const exactMatch = voices.find((v) => v.lang === langCode);
-      const partialMatch = voices.find((v) => v.lang.startsWith(langCode.split('-')[0]));
-      if (exactMatch) utterance.voice = exactMatch;
-      else if (partialMatch) utterance.voice = partialMatch;
-
-      utterance.onstart = () => setIsPlaying(true);
-      utterance.onend = () => setIsPlaying(false);
-      utterance.onerror = () => setIsPlaying(false);
-
-      // Speak immediately — must be synchronous from user gesture
-      speechSynthesis.speak(utterance);
-    } catch (err) {
-      console.error('Speech error:', err);
-      setIsPlaying(false);
-    }
+  useEffect(() => {
+    alive.current = true;
+    const instance = owner.current;
+    function invalidate() { request.current++; }
+    return () => {
+      alive.current = false;
+      invalidate();
+      if (playbackOwner === instance && typeof speechSynthesis !== 'undefined') { playbackOwner = null; speechSynthesis.cancel(); }
+    };
   }, []);
+
+  const play = useCallback(async (text: string, language: Language, speed = 1, onStarted?: () => void) => {
+    setError(null);
+    if (!supported) { setError('Audio is unavailable in this browser. Use the transcript or written example.'); return; }
+    const current = ++request.current;
+    playbackOwner = owner.current;
+    speechSynthesis.cancel();
+    setIsLoading(true);
+    try {
+      const voices = await loadVoices();
+      if (!alive.current || request.current !== current || playbackOwner !== owner.current) return;
+      const code = LANG_CODES[language];
+      const voice = voices.find((item) => item.lang.toLowerCase() === code.toLowerCase()) ?? voices.find((item) => item.lang.toLowerCase().startsWith(code.slice(0, 2)));
+      if (!voice) { setError('A voice for this language is not installed on your device. Use the transcript, or add a language voice in your device settings.'); return; }
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = code;
+      utterance.voice = voice;
+      utterance.rate = speed;
+      const isCurrent = () => alive.current && current === request.current;
+      utterance.onstart = () => { if (isCurrent()) { setIsPlaying(true); onStarted?.(); } };
+      utterance.onend = () => { if (isCurrent()) setIsPlaying(false); };
+      utterance.onerror = (event) => {
+        if (!isCurrent()) return;
+        setIsPlaying(false);
+        if (!['canceled', 'interrupted'].includes(event.error)) setError('Audio could not play. Try again or use the transcript.');
+      };
+      speechSynthesis.speak(utterance);
+    } catch {
+      if (alive.current && current === request.current) setError('Audio could not play. Try again or use the transcript.');
+    } finally { if (alive.current && current === request.current) setIsLoading(false); }
+  }, [supported]);
 
   const stop = useCallback(() => {
-    speechSynthesis.cancel();
+    request.current++;
+    if (playbackOwner === owner.current && typeof speechSynthesis !== 'undefined') { playbackOwner = null; speechSynthesis.cancel(); }
     setIsPlaying(false);
+    setIsLoading(false);
   }, []);
-
-  return { play, stop, isPlaying, isLoading: false };
+  return { play, stop, isPlaying, isLoading, error };
 }

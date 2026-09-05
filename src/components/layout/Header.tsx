@@ -53,6 +53,7 @@ export function Header() {
           : 'Saved on device';
   const links = [
     { to: '/', label: 'Today', icon: House },
+    { to: `/missions/${activeLanguage}`, label: 'Missions', icon: BookOpen },
     { to: `/practice/${activeLanguage}`, label: 'Practice', icon: Sparkles },
     { to: `/vocabulary/${activeLanguage}`, label: 'Vocabulary', icon: Library },
   ];
@@ -158,7 +159,7 @@ export function Header() {
         </div>
         <nav
           aria-label="Mobile navigation"
-          className="md:hidden grid grid-cols-3 gap-1 border-t border-slate-800/70 px-4 pb-2 pt-1.5"
+          className="md:hidden grid grid-cols-4 gap-1 border-t border-slate-800/70 px-2 pb-2 pt-1.5"
         >
           {links.map(({ to, label, icon: Icon }) => (
             <NavLink

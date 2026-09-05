@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   BookOpen,
@@ -88,6 +88,7 @@ export function Dashboard() {
 
   return (
     <main id="main-content" className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <Link to={`/missions/${language}`} className="study-hero rounded-2xl p-5 sm:p-6 flex items-center justify-between gap-4 mb-8 group"><div><p className="eyebrow text-emerald-300 mb-2">NEW · REAL-LIFE MISSIONS</p><p className="text-xl font-display font-semibold">Turn your words into a conversation.</p><p className="text-sm text-slate-400 mt-2">Listen, remember, respond — then see what stays with you a week later.</p></div><ArrowRight className="text-emerald-300 shrink-0 group-hover:translate-x-1 transition-transform" /></Link>
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-8">
         <div>
           <p className="eyebrow mb-3">

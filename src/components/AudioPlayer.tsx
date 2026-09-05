@@ -7,22 +7,23 @@ interface Props {
   text: string;
   language: Language;
   size?: 'sm' | 'md';
+  onPlaybackStart?: () => void;
 }
 
 const SPEEDS = [0.5, 0.75, 1, 1.25];
 
-export function AudioPlayer({ text, language, size = 'md' }: Props) {
-  const { play, stop, isPlaying, isLoading } = useAudio();
+export function AudioPlayer({ text, language, size = 'md', onPlaybackStart }: Props) {
+  const { play, stop, isPlaying, isLoading, error } = useAudio();
   const [speed, setSpeed] = useState(1);
 
   const iconSize = size === 'sm' ? 'w-3.5 h-3.5' : 'w-4 h-4';
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center gap-2">
       <button
         type="button"
         aria-label={isLoading ? 'Loading pronunciation' : isPlaying ? 'Stop pronunciation' : 'Play pronunciation'}
-        onClick={() => (isPlaying ? stop() : play(text, language, speed))}
+        onClick={() => (isPlaying ? stop() : play(text, language, speed, onPlaybackStart))}
         disabled={isLoading}
         className={`${
           size === 'sm' ? 'w-8 h-8' : 'w-10 h-10'
@@ -56,6 +57,7 @@ export function AudioPlayer({ text, language, size = 'md' }: Props) {
           ))}
         </div>
       )}
+      {error && <p role="alert" className="basis-full text-xs leading-relaxed text-amber-200 max-w-lg">{error}</p>}
     </div>
   );
 }

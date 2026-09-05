@@ -16,6 +16,14 @@ const FlashcardReview = lazy(() => import('./pages/FlashcardReview').then((modul
 const Login = lazy(() => import('./pages/Login').then((module) => ({ default: module.Login })));
 const DailyPractice = lazy(() => import('./pages/DailyPractice').then((module) => ({ default: module.DailyPractice })));
 const Vocabulary = lazy(() => import('./pages/Vocabulary').then((module) => ({ default: module.Vocabulary })));
+const MissionHub = lazy(() => import('./pages/MissionHub').then((module) => ({ default: module.MissionHub })));
+const MissionLesson = lazy(() => import('./pages/MissionLesson').then((module) => ({ default: module.MissionLesson })));
+const MistakePractice = lazy(() => import('./pages/MistakePractice').then((module) => ({ default: module.MistakePractice })));
+
+function MissionRouter() {
+  const location = useLocation();
+  return <MissionLesson key={`${location.pathname}${location.search}`} />;
+}
 
 function LoadingScreen() {
   return <div className="min-h-[60vh] flex items-center justify-center" role="status" aria-label="Loading your learning space"><Loader2 className="w-8 h-8 text-emerald-400 animate-spin" /></div>;
@@ -80,6 +88,9 @@ function AppContent() {
         <Route path="/review/:language" element={<PracticeRouter mode="review" />} />
         <Route path="/practice/:language" element={<PracticeRouter mode="practice" />} />
         <Route path="/vocabulary/:language" element={<PracticeRouter mode="vocabulary" />} />
+        <Route path="/missions/:language" element={<MissionHub />} />
+        <Route path="/missions/:language/clinic" element={<MistakePractice />} />
+        <Route path="/missions/:language/:missionId" element={<MissionRouter />} />
         <Route path="*" element={<MissingPage />} />
       </Routes>
     </Suspense>

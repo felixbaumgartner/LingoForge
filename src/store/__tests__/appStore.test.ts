@@ -3,9 +3,10 @@ import type { ProgressMap } from '../../types/progress';
 import { emptyProgress, loadAccount, saveAccountProgress } from '../../lib/accountStorage';
 
 const cloud = vi.hoisted(() => ({
-  loadProgress: vi.fn(), loadWords: vi.fn(), saveProgress: vi.fn(), saveWords: vi.fn(),
+  loadProgress: vi.fn(), loadWords: vi.fn(), saveProgress: vi.fn(), saveWords: vi.fn(), loadJournal: vi.fn(), saveJournal: vi.fn(),
 }));
 vi.mock('../../lib/firebase', () => ({ db: {} }));
+vi.mock('../../lib/learningJournalSync', () => ({ loadLearningJournalFromFirestore: cloud.loadJournal, saveLearningJournalToFirestore: cloud.saveJournal }));
 vi.mock('../../lib/progressSync', async (original) => ({
   ...await original<typeof import('../../lib/progressSync')>(),
   loadProgressFromFirestore: cloud.loadProgress,
@@ -15,6 +16,8 @@ vi.mock('../../lib/progressSync', async (original) => ({
 }));
 import { useAppStore } from '../appStore';
 import { mergeProgress } from '../../lib/progressSync';
+import { emptyLearningJournal, loadAccountLearningJournal } from '../../lib/learningJournal';
+import type { LearningAttempt, LearningJournal } from '../../types/mission';
 
 beforeEach(() => {
   const storage: Record<string, string> = {};
@@ -28,6 +31,76 @@ beforeEach(() => {
   cloud.loadWords.mockResolvedValue(null);
   cloud.saveProgress.mockResolvedValue(undefined);
   cloud.saveWords.mockResolvedValue(undefined);
+  cloud.loadJournal.mockResolvedValue(emptyLearningJournal());
+  cloud.saveJournal.mockResolvedValue(undefined);
+});
+
+const journalAttempt: LearningAttempt = {
+  id: 'event-1', sessionId: 'session-1', missionId: 'spanish-cafe', phraseId: 'coffee', language: 'spanish', concept: 'polite requests',
+  ability: 'recall', evidence: 'objective', correct: false, assisted: false, phase: 'practice', createdAt: '2026-01-01T00:00:00Z',
+};
+
+describe('learning journal lifecycle', () => {
+  it('writes an event exactly once and isolates account caches', async () => {
+    useAppStore.getState().setUid('alice');
+    const previous = useAppStore.getState().learningJournal;
+    Object.freeze(previous.attempts);
+    useAppStore.getState().recordLearningAttempt(journalAttempt);
+    useAppStore.getState().recordLearningAttempt({ ...journalAttempt, correct: true });
+    await vi.waitFor(() => expect(cloud.saveJournal).toHaveBeenCalledTimes(1));
+    expect(previous.attempts).toEqual({});
+    expect(useAppStore.getState().learningJournal.attempts['event-1'].correct).toBe(false);
+    useAppStore.getState().setUid('bob');
+    expect(useAppStore.getState().learningJournal).toEqual(emptyLearningJournal());
+    useAppStore.getState().setUid('alice');
+    expect(useAppStore.getState().learningJournal.attempts['event-1']).toBeDefined();
+    expect(loadAccountLearningJournal('bob').attempts).toEqual({});
+  });
+
+  it('keeps guest attempts in memory without local or cloud account writes', () => {
+    useAppStore.setState({ learningJournal: emptyLearningJournal() });
+    useAppStore.getState().recordLearningAttempt(journalAttempt);
+    expect(useAppStore.getState().learningJournal.attempts['event-1']).toBeDefined();
+    expect(cloud.saveJournal).not.toHaveBeenCalled();
+  });
+
+  it('retains successful legacy cloud loads when journal access is denied', async () => {
+    const remote = emptyProgress();
+    remote.french.writing['1-1'] = { completed: true };
+    cloud.loadProgress.mockResolvedValue(remote);
+    cloud.loadJournal.mockRejectedValue(new Error('permission-denied'));
+    useAppStore.getState().setUid('alice');
+    await useAppStore.getState().hydrateAccount('alice');
+    expect(useAppStore.getState().progress.french.writing['1-1']).toBeDefined();
+    expect(useAppStore.getState().hydrated).toBe(true);
+    expect(useAppStore.getState().syncStatus).toBe('error');
+    expect(cloud.saveJournal).not.toHaveBeenCalled();
+    cloud.loadJournal.mockResolvedValue(emptyLearningJournal());
+    await useAppStore.getState().retrySync();
+    expect(useAppStore.getState().syncStatus).toBe('saved');
+  });
+
+  it('ignores a late journal hydration after account switching', async () => {
+    let resolveAlice!: (value: LearningJournal) => void;
+    cloud.loadJournal.mockImplementationOnce(() => new Promise<LearningJournal>((resolve) => { resolveAlice = resolve; }));
+    useAppStore.getState().setUid('alice');
+    const loading = useAppStore.getState().hydrateAccount('alice');
+    useAppStore.getState().setUid('bob');
+    await useAppStore.getState().hydrateAccount('bob');
+    resolveAlice({ ...emptyLearningJournal(), attempts: { 'event-1': journalAttempt } });
+    await loading;
+    expect(useAppStore.getState().learningJournal).toEqual(emptyLearningJournal());
+    expect(loadAccountLearningJournal('bob')).toEqual(emptyLearningJournal());
+  });
+
+  it('preserves in-memory attempts when browser storage is denied', async () => {
+    vi.stubGlobal('localStorage', { getItem: () => { throw Error('blocked'); }, setItem: () => { throw Error('blocked'); } });
+    useAppStore.getState().setUid('alice');
+    useAppStore.getState().recordLearningAttempt(journalAttempt);
+    expect(useAppStore.getState().learningJournal.attempts['event-1']).toBeDefined();
+    await vi.waitFor(() => expect(cloud.saveJournal).toHaveBeenCalled());
+    expect(useAppStore.getState().syncError).toContain('Browser storage');
+  });
 });
 
 describe('account lifecycle', () => {

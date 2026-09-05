@@ -6,6 +6,11 @@ Practice Spanish, French, and Dutch through short daily sessions, contextual rea
 
 ## Learning experience
 
+- **Real-life missions:** Nine authored missions across Spanish, French, and Dutch cover café orders, introductions, and appointments. Choose a personal goal, learn four phrase chunks, follow a short listening story, recall phrases, and complete a communication task.
+- **Separate skill evidence:** Recognition, listening, recall, and use-in-context have separate histories. Hints and self-assessment never count as unaided objective success. Focused mistake practice revisits the actual phrase and ability that was difficult.
+- **Speaking rehearsal:** Record and replay an optional response locally, compare a model, assess a short task checklist, then improve your response. Microphone denial has a typed fallback. Audio recordings and free-text responses are not uploaded or stored in the progress journal.
+- **Delayed checks:** The first different-situation check is reserved for seven days after a completed mission. Later checks revisit it after 30 days. Early rehearsals use the original situation and never postpone the check. There is one authored transfer variation per mission; repeated checks are labeled retention checks, not new unseen tasks.
+
 - **Daily practice:** Ten-word sessions combine recognition and typed recall. Due and weak words take priority, while new words and least-recently-practiced words keep sessions moving forward. Ambiguous translation cues use recognition questions.
 - **Useful feedback:** Check answers, see corrections, and retry missed or assisted words. First-attempt results remain separate from correction practice.
 - **Three available skill tracks:** Start reading, writing, or speaking immediately; continue sequentially within each track across 16 levels and five lessons per level.
@@ -43,11 +48,15 @@ Vite runs at `http://localhost:5173`; Express runs at `http://localhost:3001`.
 
 Browser tests use installed Chrome on Windows and Playwright Chromium elsewhere (`npx playwright install --with-deps chromium`). The development-only harness renders real pages with deterministic lesson fixtures and local-only progress. It does not sign into Google, call the AI provider, or verify production Firestore permissions. Its fixtures are not bundled into the production application.
 
+Mission browser tests also cover microphone denial, stopping recording tracks on navigation, assisted listening, and first-attempt accounting. Speech lifecycle mocks verify the interface; voice quality and microphone hardware still require real-device testing.
+
 ## Architecture
 
 React 19, TypeScript, Vite, Tailwind CSS, Zustand, Express, Firebase, and MiniMax. Pages load on demand. `shared/lessonContract.js` supplies generation prompts and runtime lesson validation to both the local API and Vercel function. Clients validate cached and fetched lessons and cancel stale requests.
 
 Account storage and synchronization live in `src/lib/accountStorage.ts`, `src/lib/progressSync.ts`, and `src/store/appStore.ts`. Firestore transactions merge progress rather than replacing a stale remote snapshot. Concurrent counters for the same word use conservative maxima, not an event log, so simultaneous offline practice on multiple devices can undercount attempts.
+
+New mission attempts use immutable IDs in an account-scoped learning journal (`users/{uid}/data/learningJournal`) and merge by ID across devices. It retains up to 1,000 attempts and 300 completions, preserving initial practice anchors. Statistics describe retained history, not unlimited lifetime totals. Firestore rules must authorize the signed-in owner for this document; failed journal access leaves legacy progress usable and exposes sync retry. Exact-ID merging applies to the mission journal, not legacy word counters.
 
 Vercel serves `dist` and `api/index.js`; pushes to the connected main branch trigger production deployment. GitHub Actions runs lint, unit tests, the production build, and browser tests.
 
@@ -56,3 +65,5 @@ Vercel serves `dist` and `api/index.js`; pushes to the connected main branch tri
 The design draws on retrieval practice with feedback and a balance of meaning-focused input, output, and language-focused study. See [Nation's Four Strands](https://openaccess.wgtn.ac.nz/articles/journal_contribution/The_four_strands/12552167) and [Retrieval Practice: feedback](https://www.retrievalpractice.org/feedback/). These principles guide the product; they do not establish measured learning gains for this app.
 
 See [TODOS.md](./TODOS.md) for remaining work.
+
+Mission source notes, scope, and pending qualified-speaker review are documented in [the curriculum notes](./docs/mission-curriculum.md). Authored starter content is not a claim of independent human review or measured learning gains.
