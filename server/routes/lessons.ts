@@ -1,4 +1,5 @@
 import { generateValidatedLesson, LessonGenerationError } from '../../shared/lessonGeneration.js';
+import { shuffleLessonChoices } from '../../shared/lessonPresentation.js';
 import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
@@ -50,7 +51,7 @@ router.post('/generate', async (req, res) => {
     }
 
     const prompt = buildLessonPrompt(lessonWords, type as 'reading' | 'writing' | 'speaking', language, level);
-    const lessonData = await generateValidatedLesson(chatCompletion, prompt, type);
+    const lessonData = shuffleLessonChoices(await generateValidatedLesson(chatCompletion, prompt, type));
     res.json({
       ...lessonData,
       language,

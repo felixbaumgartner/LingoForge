@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { gradeWritingAnswer, getExerciseWord } from '../answerGrading';
-import { isLessonContent, buildLessonPrompt } from '../../../shared/lessonContract.js';
+import { isLessonContent, buildLessonPrompt, describeLessonIssues } from '../../../shared/lessonContract.js';
 import type { WritingExercise } from '../../types/lesson';
 
 const exercise: WritingExercise = { type: 'translation', instruction: 'Translate', sentence: 'I am here.', answer: 'Estoy aquí.', acceptedAnswers: ['Yo estoy aquí.'], corpusRank: 3 };
@@ -51,6 +51,25 @@ describe('shared lesson contract', () => {
   });
   it('accepts harmless empty optional fields from otherwise valid generation', () => {
     expect(isLessonContent({ title: 'Practice', objective: null, exercises: [{ ...exercise, hint: '', explanation: null, word: null, words: [], acceptedAnswers: null }] }, 'writing')).toBe(true);
+  });
+  it('rejects the live Spanish word-order mismatch and identifies the answer paths', () => {
+    const invalid = { title: 'Practice', exercises: [{ type: 'word-order', instruction: 'Put in order', words: ['casa', 'y', 'el', 'perro', 'en', 'está'], answer: 'El perro y el perro está en la casa', acceptedAnswers: ['El perro y el gato están en la casa'] }] };
+    expect(isLessonContent(invalid, 'writing')).toBe(false);
+    expect(describeLessonIssues(invalid, 'writing').map((issue) => issue.path)).toEqual(['$.exercises[0].answer', '$.exercises[0].acceptedAnswers[0]']);
+  });
+  it('compares word-order counts while ignoring case/punctuation but preserving accents', () => {
+    const order = { type: 'word-order', instruction: 'Put in order', words: ['café', 'el', 'en', 'el', 'está'], answer: 'El café está en el.', acceptedAnswers: [] };
+    const valid = (overrides: object) => isLessonContent({ title: 'Practice', exercises: [{ ...order, ...overrides }] }, 'writing');
+    expect(valid({})).toBe(true);
+    expect(valid({ answer: 'El café está en.' })).toBe(false);
+    expect(valid({ answer: 'El cafe está en el.' })).toBe(false);
+    expect(valid({ acceptedAnswers: ['El café está en.'] })).toBe(false);
+    expect(valid({ words: ['collègue', 'son', 'avec', 'Il', 'travaille'], answer: 'Il travaille avec son collègue.' })).toBe(true);
+  });
+  it('rejects equivalent multiple-choice options after formatting normalization', () => {
+    const choice = { type: 'multiple-choice', instruction: 'Choose', word: 'el', options: ['A) The', 'B) the.'], correctIndex: 0 };
+    expect(isLessonContent({ title: 'Practice', exercises: [choice] }, 'writing')).toBe(false);
+    expect(describeLessonIssues({ title: 'Practice', exercises: [choice] }, 'writing')[0].path).toBe('$.exercises[0].options');
   });
   it('prompts for natural supporting words, explanations, and stable corpus ranks', () => {
     const prompt = buildLessonPrompt([{ rank: 3, word: 'estar', translation: 'to be' }], 'writing', 'spanish', 1);

@@ -1,5 +1,6 @@
 import { buildLessonPrompt } from '../shared/lessonContract.js';
 import { generateValidatedLesson, LessonGenerationError } from '../shared/lessonGeneration.js';
+import { shuffleLessonChoices } from '../shared/lessonPresentation.js';
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
@@ -110,7 +111,7 @@ app.post('/api/lessons/generate', async (req, res) => {
     if (lessonWords.length === 0) return res.status(400).json({ error: 'No words available' });
 
     const prompt = buildLessonPrompt(lessonWords, type, language, level);
-    const lessonData = await generateValidatedLesson(chatCompletion, prompt, type);
+    const lessonData = shuffleLessonChoices(await generateValidatedLesson(chatCompletion, prompt, type));
     res.json({ ...lessonData, language, type, level, lesson: lessonNum, wordRange: [lessonStart + 1, lessonEnd], corpusWords: lessonWords.map(({rank, word, translation}) => ({rank, word, translation})) });
   } catch (error) {
     if (error instanceof LessonGenerationError) return res.status(502).json({ error: error.message });

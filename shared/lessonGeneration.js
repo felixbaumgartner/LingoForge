@@ -65,7 +65,8 @@ export async function generateValidatedLesson(complete, prompt, type, signal = A
   let failure = new LessonGenerationError('json');
   for (let attempt = 0; attempt < 2; attempt++) {
     signal.throwIfAborted();
-    const retryInstruction = attempt === 0 ? '' : '\nThe previous generation was incomplete or invalid JSON. Generate the entire lesson again as one complete JSON object. Keep examples and explanations concise. Do not include prose, code fences, or a partial continuation.';
+    const retryInstruction = attempt === 0 ? '' : '\nThe previous generation was incomplete or invalid JSON. Generate the entire lesson again as one complete JSON object. Keep examples and explanations concise. Do not include prose, code fences, or a partial continuation.'
+      + (failure.issues.length ? '\nCorrect these validation constraints: ' + failure.issues.map((issue) => `${issue.path}: ${issue.expected}`).join('; ') : '');
     // Network/auth/rate-limit errors intentionally propagate without another paid call.
     const response = await complete([
       { role: 'system', content: prompt.system },

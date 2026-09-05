@@ -66,6 +66,16 @@ describe('bounded generation recovery', () => {
     await expect(generateValidatedLesson(complete, prompt, 'writing')).rejects.toBeInstanceOf(LessonGenerationError);
     expect(complete).toHaveBeenCalledTimes(2);
   });
+  it('gives a retry the failed word-order constraint without including lesson content', async () => {
+    vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const invalid = { title: 'PRIVATE TITLE', exercises: [{ type: 'word-order', instruction: 'Order', words: ['el', 'perro'], answer: 'El perro duerme', acceptedAnswers: [] }] };
+    const complete = vi.fn().mockResolvedValueOnce({ content: JSON.stringify(invalid), finishReason: 'stop' }).mockResolvedValueOnce({ content: json, finishReason: 'stop' });
+    expect(await generateValidatedLesson(complete, prompt, 'writing')).toEqual(lesson);
+    const retry = complete.mock.calls[1][0][1].content;
+    expect(retry).toContain('$.exercises[0].answer: same word tokens as words');
+    expect(retry).not.toContain('PRIVATE');
+    expect(retry).not.toContain('perro');
+  });
   it('does not retry transport/auth errors or provider filters', async () => {
     for (const complete of [vi.fn().mockRejectedValue(new Error('401')), vi.fn().mockResolvedValue({ content: '', finishReason: 'content_filter' })]) {
       await expect(generateValidatedLesson(complete, prompt, 'writing')).rejects.toThrow();

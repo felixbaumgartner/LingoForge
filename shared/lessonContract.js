@@ -4,7 +4,14 @@ const object = (value) => value !== null && typeof value === 'object' && !Array.
 // safe to render; required fields below still need meaningful content.
 const optionalText = (value) => value == null || typeof value === 'string';
 const list = (value, check, min = 1) => Array.isArray(value) && value.length >= min && value.every(check);
-const choices = (item) => list(item.options, text, 2) && Number.isInteger(item.correctIndex) && item.correctIndex >= 0 && item.correctIndex < item.options.length;
+// Token comparison ignores presentation punctuation/case while preserving accents
+// and every repeated word. Apostrophes/hyphens split consistently in both inputs.
+const tokens = (value) => typeof value === 'string' ? value.normalize('NFC').toLowerCase().match(/[\p{L}\p{M}\p{N}]+/gu) ?? [] : [];
+const sameWordTokens = (words, answer) => Array.isArray(words) && typeof answer === 'string'
+  && tokens(words.join(' ')).length > 0
+  && JSON.stringify(tokens(words.join(' ')).sort()) === JSON.stringify(tokens(answer).sort());
+const distinctChoices = (options) => Array.isArray(options) && new Set(options.map((option) => tokens(typeof option === 'string' ? option.replace(/^[a-d][).:]\s*/i, '') : '').join(' '))).size === options.length;
+const choices = (item) => list(item.options, text, 2) && distinctChoices(item.options) && Number.isInteger(item.correctIndex) && item.correctIndex >= 0 && item.correctIndex < item.options.length;
 
 /** Validate content independently of transport metadata; old cached lessons remain usable. */
 export function isLessonContent(value, type) {
@@ -27,7 +34,8 @@ export function isLessonContent(value, type) {
     if (e.corpusRank !== undefined && (!Number.isInteger(e.corpusRank) || e.corpusRank < 1)) return false;
     if (e.type === 'multiple-choice') return text(e.word) && choices(e);
     if (!text(e.answer)) return false;
-    if (e.type === 'word-order') return list(e.words, text, 2);
+    if (e.type === 'word-order') return list(e.words, text, 2) && sameWordTokens(e.words, e.answer)
+      && (e.acceptedAnswers ?? []).every((answer) => sameWordTokens(e.words, answer));
     return ['translation', 'fill-in-blank'].includes(e.type) && text(e.sentence);
   });
 }
@@ -49,6 +57,7 @@ export function describeLessonIssues(value, type) {
   };
   const choice = (entry, path) => {
     check(list(entry.options, text, 2), `${path}.options`, 'array with at least 2 nonempty strings', entry.options);
+    if (list(entry.options, text, 2)) check(distinctChoices(entry.options), `${path}.options`, 'distinct options after ignoring case and punctuation', entry.options);
     check(Number.isInteger(entry.correctIndex) && entry.correctIndex >= 0 && entry.correctIndex < (entry.options?.length ?? 0), `${path}.correctIndex`, 'zero-based integer within options', entry.correctIndex);
   };
   check(object(value), '$', 'object', value);
@@ -69,7 +78,11 @@ export function describeLessonIssues(value, type) {
     if (entry.type === 'multiple-choice') { required(entry, 'word', path); choice(entry, path); }
     else {
       required(entry, 'answer', path);
-      if (entry.type === 'word-order') check(list(entry.words, text, 2), `${path}.words`, 'array with at least 2 nonempty strings', entry.words);
+      if (entry.type === 'word-order') {
+        check(list(entry.words, text, 2), `${path}.words`, 'array with at least 2 nonempty strings', entry.words);
+        if (list(entry.words, text, 2) && text(entry.answer)) check(sameWordTokens(entry.words, entry.answer), `${path}.answer`, 'same word tokens as words, including accents and duplicate counts', entry.answer);
+        if (list(entry.words, text, 2) && Array.isArray(entry.acceptedAnswers)) entry.acceptedAnswers.forEach((answer, index) => check(sameWordTokens(entry.words, answer), `${path}.acceptedAnswers[${index}]`, 'same word tokens as words, including accents and duplicate counts', answer));
+      }
       else required(entry, 'sentence', path);
     }
   });
@@ -108,7 +121,7 @@ Include 8-10 vocabulary entries and 4 comprehension questions with exactly one v
 For multiple-choice, correctIndex MUST be an unquoted integer 0, 1, 2, or 3, not a letter, answer string, or one-based index. Every word-order words field MUST be an array of strings, not a sentence. Copy each type name exactly as shown. Omit irrelevant fields; do not use null for corpusRank. All answers and examples must be actual ${languageName}, not placeholder descriptions.
 Include 10 exercises: 3 fill-in-blank, 2 translation, 2 word-order, 3 multiple-choice. Every exercise has instruction, corpusRank (the supplied rank of the main word being assessed), and a specific explanation.
 Translation: sentence is English; answer is an idiomatic target-language sentence; acceptedAnswers includes common equally valid translations (pronoun omission, common synonymous phrasing, formal/informal variants where the prompt allows them).
-Word-order: words is a shuffled token array; answer uses exactly those tokens in a grammatical order. Include acceptedAnswers for other valid orders.
+Word-order: FIRST write a short grammatical answer, THEN split that answer into its word tokens and shuffle those exact tokens into words. Do not add, remove, repeat, conjugate, or change accents on any token when writing the answer or acceptedAnswers. Every accepted answer must use exactly the same words and duplicate counts; use [] when no alternative order is needed.
 Multiple-choice: word is the target word, options has 4 distinct English meanings, correctIndex is the zero-based answer index. Vary answer positions. No ambiguous distractors.
 Never accept an answer with a different meaning just because its spelling is similar.` };
   return { system, user: `${common}Return {${header},"pronunciationCards":[{"word":"target word","translation":"English meaning","phoneticHint":"Approximate pronunciation, with stressed syllable indicated"}],"phrases":[{"phrase":"Useful target-language phrase","translation":"English meaning","context":"Specific situation where you would say this"}],"dialogue":[{"speaker":"A","line":"Target-language line","translation":"English meaning"}]}.
