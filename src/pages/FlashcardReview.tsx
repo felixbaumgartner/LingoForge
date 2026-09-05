@@ -1,237 +1,359 @@
-import { useEffect, useState, useMemo } from 'react';
-import { useParams, useNavigate, useSearchParams } from 'react-router-dom';
-import { ArrowLeft, RotateCcw } from 'lucide-react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, Check, Loader2, RotateCcw } from 'lucide-react';
 import { useAppStore } from '../store/appStore';
 import { AudioPlayer } from '../components/AudioPlayer';
 import { fetchWords } from '../api/client';
-import { getWordsDueForReview, getWeakWords, wordPerfKey } from '../lib/persistence';
-import type { Language, Word } from '../types/language';
+import { CARDS_PER_SESSION, selectReviewWords, type ReviewFocus } from '../lib/review';
+import { LANGUAGES, type Language, type Word } from '../types/language';
 
-const CARDS_PER_SESSION = 30;
+type Rating = 'hard' | 'moderate' | 'easy';
+const RATINGS: { value: Rating; label: string; hint: string; color: string }[] = [
+  {
+    value: 'hard',
+    label: 'Hard',
+    hint: 'Review in 1 day',
+    color: 'border-red-500/40 bg-red-500/10 text-red-300 hover:bg-red-500/20',
+  },
+  {
+    value: 'moderate',
+    label: 'Moderate',
+    hint: 'Review in 3 days',
+    color: 'border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20',
+  },
+  {
+    value: 'easy',
+    label: 'Easy',
+    hint: 'Review in 7 days',
+    color: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20',
+  },
+];
+const TITLES: Record<ReviewFocus, string> = {
+  all: 'Flashcard Review',
+  weak: 'Weak Words Practice',
+  due: 'Due for Review',
+};
+const EMPTY: Record<ReviewFocus, string> = {
+  all: 'No words to review yet. Complete your first lesson to get started.',
+  weak: 'No weak words to practice right now. Try reviewing all your words.',
+  due: 'You’re all caught up. No words are due right now.',
+};
 
 export function FlashcardReview() {
   const { language } = useParams<{ language: string }>();
   const [searchParams] = useSearchParams();
-  const focusWeak = searchParams.get('focus') === 'weak';
+  const navigate = useNavigate();
+  const lang = LANGUAGES.find((item) => item.id === language);
+  const focusParam = searchParams.get('focus');
+  const focus: ReviewFocus = focusParam === 'weak' || focusParam === 'due' ? focusParam : 'all';
+  if (!lang)
+    return (
+      <div className="p-8 text-center">
+        <p>Choose a supported language to review.</p>
+        <button className="mt-4 text-emerald-400" onClick={() => navigate('/')}>
+          Back to Dashboard
+        </button>
+      </div>
+    );
+  return <Review key={`${lang.id}-${focus}`} language={lang.id} focus={focus} />;
+}
+
+function Review({ language, focus }: { language: Language; focus: ReviewFocus }) {
   const navigate = useNavigate();
   const progress = useAppStore((s) => s.progress);
   const wordPerformance = useAppStore((s) => s.wordPerformance);
-  const rateWord = useAppStore((s) => s.rateWord);
-  const lang = language as Language;
+  const [corpus, setCorpus] = useState<Word[] | null>(null);
+  const [error, setError] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  const [session, setSession] = useState<Word[] | null>(null);
 
-  const [words, setWords] = useState<Word[]>([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [flipped, setFlipped] = useState(false);
-  const [rated, setRated] = useState(false);
-  const [sessionComplete, setSessionComplete] = useState(false);
-
-  // Get the set of word ranks the user has encountered (from WordPerformance)
-  const trackedRanks = useMemo(() => {
-    return new Set(
-      Object.values(wordPerformance)
-        .filter((wp) => wp.language === lang)
-        .map((wp) => wp.rank)
-    );
-  }, [wordPerformance, lang]);
-
-  // Also get completed word count from level progress as a fallback
-  const completedWordCount = useMemo(() => {
-    const langProgress = progress[lang];
-    if (!langProgress) return 0;
-    let maxLevel = 0;
-    for (const type of ['reading', 'writing', 'speaking'] as const) {
-      for (let lvl = 1; lvl <= 16; lvl++) {
-        if (langProgress[type]?.[`${lvl}-1`]?.completed) {
-          maxLevel = Math.max(maxLevel, lvl);
-        }
-      }
-    }
-    return maxLevel * 50;
-  }, [progress, lang]);
-
-  const [loadError, setLoadError] = useState<string | null>(null);
-
-  // Load words and pick session cards
   useEffect(() => {
-    fetchWords(lang).then((allWords) => {
-      const weakRanks = new Set(getWeakWords(wordPerformance, lang, 30).map((wp) => wp.rank));
-
-      let pool: Word[];
-      if (focusWeak) {
-        // Only show weak words
-        pool = allWords.filter((w) => weakRanks.has(w.rank));
-        if (pool.length === 0) {
-          setLoadError('No weak words to practice. Great job!');
-          return;
-        }
-      } else {
-        // Include words the user has tracked OR words from completed levels
-        pool = allWords.filter((w) => trackedRanks.has(w.rank) || w.rank <= completedWordCount);
-        if (pool.length === 0) {
-          setLoadError('No words to review yet. Complete a lesson first!');
-          return;
-        }
-      }
-
-      // Prioritize: weak words first, then due for review, then hard-rated, then rest
-      const dueWords = new Set(getWordsDueForReview(wordPerformance, lang).map((wp) => wp.rank));
-
-      pool.sort((a, b) => {
-        const aWeak = weakRanks.has(a.rank) ? 0 : 1;
-        const bWeak = weakRanks.has(b.rank) ? 0 : 1;
-        if (aWeak !== bWeak) return aWeak - bWeak;
-
-        const aDue = dueWords.has(a.rank) ? 0 : 1;
-        const bDue = dueWords.has(b.rank) ? 0 : 1;
-        if (aDue !== bDue) return aDue - bDue;
-
-        const aPerf = wordPerformance[wordPerfKey(lang, a.rank)];
-        const bPerf = wordPerformance[wordPerfKey(lang, b.rank)];
-        const aHard = aPerf?.rating === 'hard' ? 0 : 1;
-        const bHard = bPerf?.rating === 'hard' ? 0 : 1;
-        if (aHard !== bHard) return aHard - bHard;
-
-        return Math.random() - 0.5;
+    let cancelled = false;
+    fetchWords(language)
+      .then((words) => {
+        if (!cancelled) setCorpus(words);
+      })
+      .catch(() => {
+        if (!cancelled) setError(true);
       });
+    return () => {
+      cancelled = true;
+    };
+  }, [language, attempt]);
 
-      setWords(pool.slice(0, CARDS_PER_SESSION));
-    }).catch((err) => {
-      console.error('Failed to load words:', err);
-      setLoadError('Failed to load words. Please try again.');
-    });
-  }, [lang, completedWordCount, trackedRanks, wordPerformance, focusWeak]);
+  // Keep the lobby current as cloud progress arrives; freeze the deck only on Start.
+  const deck = useMemo(
+    () => selectReviewWords(corpus ?? [], progress, wordPerformance, language, focus),
+    [corpus, progress, wordPerformance, language, focus],
+  );
+  const languageLabel = LANGUAGES.find((item) => item.id === language)?.label;
 
-  if (words.length === 0) {
-    return (
-      <div className="max-w-3xl mx-auto px-6 py-8 text-center">
-        <button onClick={() => navigate('/')} className="flex items-center gap-2 text-slate-500 hover:text-white mb-8 text-sm transition-colors">
-          <ArrowLeft className="w-4 h-4" /> Back to Dashboard
-        </button>
-        {loadError ? (
-          <p className="text-amber-400">{loadError}</p>
-        ) : (
-          <p className="text-slate-400">Loading flashcards...</p>
-        )}
-      </div>
-    );
-  }
+  return (
+    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+      <button
+        onClick={() => navigate('/')}
+        className="flex items-center gap-2 text-slate-400 hover:text-white mb-8 text-sm transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" /> Back to Dashboard
+      </button>
+      <p className="mb-2 text-xs font-semibold text-amber-400 uppercase tracking-[0.15em]">
+        Review · {languageLabel}
+      </p>
+      <h1 className="text-2xl sm:text-3xl font-display font-bold text-white mb-6">{TITLES[focus]}</h1>
+      {session ? (
+        <ReviewSession words={session} language={language} onRestart={() => setSession(null)} />
+      ) : (
+        <>
+          <nav aria-label="Review mode" className="flex flex-wrap gap-2 mb-6">
+            {(['all', 'due', 'weak'] as const).map((mode) => (
+              <button
+                key={mode}
+                aria-current={focus === mode ? 'page' : undefined}
+                onClick={() => navigate(`/review/${language}${mode === 'all' ? '' : `?focus=${mode}`}`)}
+                className={`px-4 py-2 rounded-xl text-sm border transition-colors ${focus === mode ? 'border-amber-400/40 bg-amber-400/10 text-amber-300' : 'border-slate-700 text-slate-400 hover:text-white'}`}
+              >
+                {mode === 'all' ? 'All words' : mode === 'due' ? 'Due now' : 'Weak words'}
+              </button>
+            ))}
+          </nav>
+          <div className="glass rounded-2xl p-6 sm:p-10 text-center">
+            {error ? (
+              <div role="alert">
+                <p className="text-red-300 mb-4">Couldn’t load your words. Please try again.</p>
+                <button
+                  onClick={() => {
+                    setError(false);
+                    setAttempt((n) => n + 1);
+                  }}
+                  className="px-5 py-3 bg-slate-700 rounded-xl"
+                >
+                  Try again
+                </button>
+              </div>
+            ) : !corpus ? (
+              <p role="status" className="text-slate-400 flex justify-center gap-2">
+                <Loader2 className="w-5 h-5 animate-spin" /> Loading your words…
+              </p>
+            ) : deck.length === 0 ? (
+              <p role="status" className="text-slate-300">
+                {EMPTY[focus]}
+              </p>
+            ) : (
+              <>
+                <div className="w-14 h-14 rounded-2xl bg-amber-400/10 flex items-center justify-center mx-auto mb-5">
+                  <RotateCcw className="w-7 h-7 text-amber-400" />
+                </div>
+                <h2 className="text-xl font-semibold mb-3">A little practice, lasting progress.</h2>
+                <p className="text-slate-400 mb-2">
+                  {deck.length} {deck.length === 1 ? 'word' : 'words'} · Reveal each answer, then rate your
+                  recall.
+                </p>
+                <p className="text-sm text-slate-500 mb-6">
+                  {focus === 'due'
+                    ? 'Scheduled reviews, oldest first.'
+                    : focus === 'weak'
+                      ? 'A focused session for the words you find tricky.'
+                      : 'Due words first, followed by weak words and the rest.'}{' '}
+                  Up to {CARDS_PER_SESSION} cards per session.
+                </p>
+                <button
+                  onClick={() => setSession(deck)}
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl font-semibold"
+                >
+                  Start review <ArrowRight className="w-4 h-4" />
+                </button>
+              </>
+            )}
+          </div>
+        </>
+      )}
+    </main>
+  );
+}
 
-  if (sessionComplete) {
-    return (
-      <div className="max-w-3xl mx-auto px-6 py-8 text-center">
-        <RotateCcw className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
-        <h2 className="text-2xl font-bold text-white mb-2">Session Complete!</h2>
-        <p className="text-slate-400 mb-6">You reviewed {words.length} words.</p>
-        <div className="flex gap-3 justify-center">
-          <button
-            onClick={() => {
-              setCurrentIndex(0);
-              setFlipped(false);
-              setRated(false);
-              setSessionComplete(false);
-            }}
-            className="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg"
-          >
-            Review Again
-          </button>
-          <button onClick={() => navigate('/')} className="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg">
-            Back to Dashboard
-          </button>
-        </div>
-      </div>
-    );
-  }
+function ReviewSession({
+  words,
+  language,
+  onRestart,
+}: {
+  words: Word[];
+  language: Language;
+  onRestart: () => void;
+}) {
+  const navigate = useNavigate();
+  const rateWord = useAppStore((s) => s.rateWord);
+  const [index, setIndex] = useState(0);
+  const [revealed, setRevealed] = useState(false);
+  const [ratings, setRatings] = useState<Rating[]>([]);
+  const ratingLock = useRef(false);
+  const revealButton = useRef<HTMLButtonElement>(null);
+  const nextButton = useRef<HTMLButtonElement>(null);
+  const firstRating = useRef<HTMLButtonElement>(null);
+  const summary = useRef<HTMLHeadingElement>(null);
+  const complete = index === words.length;
+  const rated = ratings.length > index;
+  const card = words[index];
 
-  const card = words[currentIndex];
-
-  function handleRate(rating: 'hard' | 'moderate' | 'easy') {
-    rateWord(lang, card.rank, card.word, card.translation, rating);
-    setRated(true);
+  function handleRate(rating: Rating) {
+    if (!card || !revealed || rated || ratingLock.current) return;
+    ratingLock.current = true;
+    rateWord(language, card.rank, card.word, card.translation, rating);
+    setRatings((previous) => [...previous, rating]);
   }
 
   function handleNext() {
-    if (currentIndex + 1 >= words.length) {
-      setSessionComplete(true);
-    } else {
-      setCurrentIndex(currentIndex + 1);
-      setFlipped(false);
-      setRated(false);
-    }
+    if (!rated) return;
+    setIndex((previous) => previous + 1);
+    setRevealed(false);
+    ratingLock.current = false;
   }
 
+  useEffect(() => {
+    if (complete) summary.current?.focus();
+    else if (rated) nextButton.current?.focus();
+    else if (revealed) firstRating.current?.focus();
+    else revealButton.current?.focus();
+  }, [index, revealed, rated, complete]);
+
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.shiftKey || complete)
+        return;
+      const target = event.target as HTMLElement | null;
+      if (target?.closest('input, textarea, select, [contenteditable="true"]')) return;
+      if (revealed && !rated && ['1', '2', '3'].includes(event.key)) {
+        event.preventDefault();
+        handleRate(RATINGS[Number(event.key) - 1].value);
+      }
+    }
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  });
+
+  if (complete)
+    return (
+      <section className="glass rounded-2xl p-6 sm:p-10 text-center">
+        <Check className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
+        <h2 ref={summary} tabIndex={-1} className="text-2xl font-bold mb-2">
+          Session complete!
+        </h2>
+        <p className="text-slate-400 mb-6">
+          You reviewed {ratings.length} {ratings.length === 1 ? 'word' : 'words'}. Your ratings have been
+          saved.
+        </p>
+        <dl className="grid grid-cols-3 gap-2 sm:gap-4 mb-6">
+          {RATINGS.map((rating) => (
+            <div key={rating.value} className={`rounded-xl p-3 border ${rating.color}`}>
+              <dt className="text-sm">{rating.label}</dt>
+              <dd className="text-2xl font-bold tabular-nums mt-1">
+                {ratings.filter((value) => value === rating.value).length}
+              </dd>
+            </div>
+          ))}
+        </dl>
+        {ratings.includes('hard') && (
+          <p className="text-sm text-slate-400 mb-6">
+            Hard words are scheduled for tomorrow. Keep showing up — recall builds with practice.
+          </p>
+        )}
+        <div className="flex flex-wrap gap-3 justify-center">
+          <button onClick={onRestart} className="px-5 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl">
+            Review more words
+          </button>
+          <button
+            onClick={() => navigate('/')}
+            className="px-5 py-3 bg-emerald-600 hover:bg-emerald-500 rounded-xl"
+          >
+            Back to Dashboard
+          </button>
+        </div>
+      </section>
+    );
+
   return (
-    <div className="max-w-3xl mx-auto px-6 py-8">
-      <button onClick={() => navigate('/')} className="flex items-center gap-2 text-slate-500 hover:text-white mb-8 text-sm transition-colors">
-        <ArrowLeft className="w-4 h-4" /> Back to Dashboard
-      </button>
-
-      <div className="mb-1.5 text-xs font-semibold text-amber-400/80 uppercase tracking-[0.15em]">
-        Review &middot; {lang}
+    <section aria-label="Flashcard session">
+      <div className="flex justify-between text-sm text-slate-400 mb-3">
+        <span aria-live="polite">
+          Card {index + 1} of {words.length}
+        </span>
+        <span>{ratings.length} reviewed</span>
       </div>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-display font-bold text-white">{focusWeak ? 'Weak Words Practice' : 'Flashcard Review'}</h2>
-        <span className="text-sm text-slate-500 tabular-nums font-medium">{currentIndex + 1} / {words.length}</span>
-      </div>
-
-      {/* Progress bar */}
-      <div className="h-1.5 bg-slate-800/80 rounded-full mb-8 overflow-hidden">
+      <div
+        role="progressbar"
+        aria-label="Words reviewed"
+        aria-valuemin={0}
+        aria-valuemax={words.length}
+        aria-valuenow={ratings.length}
+        className="h-1.5 bg-slate-800 rounded-full mb-6 overflow-hidden"
+      >
         <div
-          className="h-full rounded-full transition-all duration-500 ease-out"
-          style={{ width: `${((currentIndex + 1) / words.length) * 100}%`, background: 'linear-gradient(90deg, #f59e0b, #f97316)' }}
+          className="h-full bg-amber-400 transition-all duration-300 motion-reduce:transition-none"
+          style={{ width: `${(ratings.length / words.length) * 100}%` }}
         />
       </div>
-
-      {/* Card */}
-      <button
-        onClick={() => setFlipped(!flipped)}
-        className="w-full glass rounded-2xl p-14 text-center hover:bg-white/[0.02] transition-all duration-300 mb-6 min-h-[260px] flex flex-col items-center justify-center relative overflow-hidden noise"
-      >
-        {!flipped ? (
-          <>
-            <p className="text-4xl font-display font-bold text-white mb-4">{card.word}</p>
-            <AudioPlayer text={card.word} language={lang} />
-            <p className="text-sm text-slate-500 mt-4">Tap to reveal translation</p>
-          </>
-        ) : (
-          <>
-            <p className="text-2xl font-bold text-white mb-2">{card.word}</p>
-            <p className="text-xl text-emerald-400 mb-2">{card.translation}</p>
-            <p className="text-sm text-slate-500 mt-2">Tap to flip back</p>
-          </>
-        )}
-      </button>
-
-      {/* Rating */}
-      {flipped && !rated && (
-        <div className="mb-6">
-          <p className="text-sm text-slate-400 text-center mb-3">How well did you know this?</p>
-          <div className="flex gap-3 justify-center">
-            <button onClick={() => handleRate('hard')} className="px-6 py-2.5 bg-red-600/20 border border-red-600/50 text-red-400 rounded-lg hover:bg-red-600/30" title="Keep practicing this word">
-              Hard
-            </button>
-            <button onClick={() => handleRate('moderate')} className="px-6 py-2.5 bg-amber-600/20 border border-amber-600/50 text-amber-400 rounded-lg hover:bg-amber-600/30" title="Show this word again later">
-              Moderate
-            </button>
-            <button onClick={() => handleRate('easy')} className="px-6 py-2.5 bg-emerald-600/20 border border-emerald-600/50 text-emerald-400 rounded-lg hover:bg-emerald-600/30" title="I know this — remove from weak words">
-              Easy
-            </button>
+      <div className="glass rounded-2xl p-6 sm:p-10 text-center mb-6 min-h-[280px] flex flex-col items-center justify-center">
+        <p className="text-xs uppercase tracking-widest text-slate-500 mb-4">Recall the meaning</p>
+        <h2 className="text-3xl sm:text-4xl font-display font-bold text-white break-words max-w-full mb-5">
+          {card.word}
+        </h2>
+        <AudioPlayer text={card.word} language={language} />
+        {revealed ? (
+          <div className="mt-6" aria-live="polite">
+            <p className="text-xl text-emerald-300">{card.translation}</p>
+            {card.notes && <p className="text-sm text-slate-400 mt-2">{card.notes}</p>}
           </div>
-          {focusWeak && (
-            <p className="text-[11px] text-slate-500 text-center mt-3">
-              Rating "Easy" graduates this word out of your weak list.
-            </p>
-          )}
-        </div>
+        ) : (
+          <button
+            ref={revealButton}
+            onClick={() => setRevealed(true)}
+            className="mt-6 px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-xl font-medium"
+          >
+            Reveal answer
+          </button>
+        )}
+      </div>
+      {revealed && !rated && (
+        <>
+          <p className="text-sm text-slate-400 text-center mb-3">How well did you remember?</p>
+          <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-3">
+            {RATINGS.map((rating, position) => (
+              <button
+                ref={position === 0 ? firstRating : undefined}
+                key={rating.value}
+                onClick={() => handleRate(rating.value)}
+                aria-keyshortcuts={String(position + 1)}
+                className={`px-2 py-3 rounded-xl border transition-colors ${rating.color}`}
+              >
+                <span className="block font-semibold">{rating.label}</span>
+                <span className="block text-[11px] sm:text-xs mt-1">{rating.hint}</span>
+              </button>
+            ))}
+          </div>
+          <p className="text-xs text-slate-500 text-center">Shortcuts: 1 Hard · 2 Moderate · 3 Easy</p>
+        </>
       )}
-
       {rated && (
-        <button
-          onClick={handleNext}
-          className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-medium rounded-xl transition-colors"
-        >
-          {currentIndex + 1 >= words.length ? 'Finish Session' : 'Next Card'}
-        </button>
+        <>
+          <p role="status" className="text-sm text-slate-400 text-center mb-3">
+            Saved as {RATINGS.find((rating) => rating.value === ratings[index])?.label.toLowerCase()}.{' '}
+            {ratings[index] === 'easy'
+              ? 'This word is out of your weak list.'
+              : 'Your next review is scheduled.'}
+          </p>
+          <button
+            ref={nextButton}
+            onClick={handleNext}
+            className="w-full py-3 bg-emerald-600 hover:bg-emerald-500 font-semibold rounded-xl"
+          >
+            {index + 1 === words.length ? 'Finish session' : 'Next card'}
+          </button>
+        </>
       )}
-    </div>
+      {!revealed && (
+        <p className="text-xs text-slate-500 text-center">
+          Press Space or Enter on Reveal answer to check your recall.
+        </p>
+      )}
+    </section>
   );
 }

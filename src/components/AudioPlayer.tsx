@@ -20,6 +20,8 @@ export function AudioPlayer({ text, language, size = 'md' }: Props) {
   return (
     <div className="flex items-center gap-2">
       <button
+        type="button"
+        aria-label={isLoading ? 'Loading pronunciation' : isPlaying ? 'Stop pronunciation' : 'Play pronunciation'}
         onClick={() => (isPlaying ? stop() : play(text, language, speed))}
         disabled={isLoading}
         className={`${
@@ -38,7 +40,10 @@ export function AudioPlayer({ text, language, size = 'md' }: Props) {
         <div className="flex gap-0.5 bg-slate-800/50 rounded-lg p-0.5">
           {SPEEDS.map((s) => (
             <button
+              type="button"
               key={s}
+              aria-label={`Playback speed ${s}x`}
+              aria-pressed={speed === s}
               onClick={() => setSpeed(s)}
               className={`px-2.5 py-1 text-xs rounded-md transition-all ${
                 speed === s

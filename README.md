@@ -11,6 +11,8 @@ An AI-powered language learning app that adapts to how you learn. Master 800 wor
 - **Per-Word Performance Tracking** — Tracks every word you get right or wrong across all lesson types, building a detailed picture of your vocabulary mastery
 - **Word Mastery Dashboard** — See your mastered, learning, and struggling words at a glance with accuracy percentages
 - **Weak Words Practice** — One-tap focused flashcard sessions targeting only the words you struggle with
+- **Focused Review Sessions** — Review all encountered words, weak words, or only scheduled words in stable sessions of up to 30 cards, available after your first lesson
+- **Keyboard-Friendly Practice** — Reveal answers with Space/Enter, rate with 1/2/3, and see a saved-rating summary at the end of each session
 - **Spaced Repetition (SRS)** — Words you get wrong come back sooner; words you master get longer intervals before review
 - **Text-to-Speech** — Listen to native pronunciation for every word, phrase, and passage
 - **Structured Progression** — 16 levels x 5 lessons per skill type, with sequential unlocking
@@ -23,7 +25,7 @@ An AI-powered language learning app that adapts to how you learn. Master 800 wor
 - **AI:** MiniMax API (lesson generation + TTS)
 - **Auth & Storage:** Firebase Authentication, Cloud Firestore
 - **Deployment:** Vercel (static + serverless)
-- **Testing:** Vitest (32 unit tests)
+- **Testing:** Vitest (50 unit tests)
 
 ## Getting Started
 
@@ -118,6 +120,12 @@ Every interaction records performance at the word level:
 - **Writing:** Each exercise maps to a specific corpus word (correct/incorrect)
 - **Speaking:** Self-rating per pronunciation card (hard/okay/easy)
 - **Flashcards:** Self-rating feeds the same unified data model
+
+### Flashcard Review
+
+Review includes tracked vocabulary and the exact 10 words from each completed lesson. Due reviews come first (oldest due date first), followed by weak words, then the least recently practiced words. Select **Due now** to practice only scheduled reviews.
+
+Each deck is fixed when you select **Start review**. Rating a word updates its progress immediately without changing the active deck. **Review more words** builds a fresh deck using your latest ratings; words rated Easy leave weak-word practice. Pronunciation and playback-speed controls work independently from the answer reveal.
 
 ### Word Mastery Categories
 

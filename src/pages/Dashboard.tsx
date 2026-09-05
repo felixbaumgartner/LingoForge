@@ -11,11 +11,12 @@ import {
   isLevelComplete,
   getCompletedLessonsInLevel,
   getCompletedLevelCount,
-  getTotalCompletedLevels,
+  getWordsDueForReview,
   TOTAL_LEVELS,
   LESSONS_PER_LEVEL,
 } from '../lib/persistence';
 import type { LessonType } from '../types/lesson';
+import { getReviewableRanks } from '../lib/review';
 
 const WORDS_PER_LEVEL = 50;
 const WORDS_PER_LESSON = 10;
@@ -28,10 +29,11 @@ const SECTIONS: { type: LessonType; label: string; icon: React.ReactNode; gradie
 
 export function Dashboard() {
   const navigate = useNavigate();
-  const { language, setLanguage, progress } = useAppStore();
+  const { language, setLanguage, progress, wordPerformance } = useAppStore();
   const [expandedLevel, setExpandedLevel] = useState<Record<string, boolean>>({});
 
-  const hasCompletedAny = getTotalCompletedLevels(progress, language) > 0;
+  const reviewableCount = getReviewableRanks(progress, wordPerformance, language).size;
+  const dueCount = getWordsDueForReview(wordPerformance, language).length;
 
   function toggleLevel(type: LessonType, level: number) {
     const key = `${type}-${level}`;
@@ -89,19 +91,20 @@ export function Dashboard() {
       </div>
 
       {/* Flashcard review button */}
-      {hasCompletedAny && (
-        <button
-          onClick={() => navigate(`/review/${language}`)}
-          className="mb-10 group flex items-center gap-3 px-6 py-4 rounded-2xl glass-light hover:border-amber-500/30 transition-all duration-300 glow-amber"
-        >
+      {reviewableCount > 0 && (
+        <div className="mb-10 flex flex-col sm:flex-row sm:items-center gap-4 px-5 py-5 rounded-2xl glass-light">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 flex items-center justify-center shadow-lg shadow-amber-500/20">
             <RotateCcw className="w-5 h-5 text-white" />
           </div>
-          <div className="text-left">
-            <p className="text-white font-semibold text-sm">Review Flashcards</p>
-            <p className="text-xs text-slate-500">Revisit words from completed lessons</p>
+          <div className="text-left flex-1">
+            <h3 className="text-white font-semibold">{dueCount > 0 ? `${dueCount} ${dueCount === 1 ? 'word' : 'words'} due for review` : 'Keep your words fresh'}</h3>
+            <p className="text-sm text-slate-400 mt-1">{reviewableCount} {reviewableCount === 1 ? 'word' : 'words'} ready to practice · Up to 30 cards per session</p>
           </div>
-        </button>
+          <div className="flex flex-wrap gap-2">
+            {dueCount > 0 && <button onClick={() => navigate(`/review/${language}?focus=due`)} className="px-4 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-slate-950 text-sm font-semibold">Review due words</button>}
+            <button onClick={() => navigate(`/review/${language}`)} className="px-4 py-3 rounded-xl bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold">Review all words</button>
+          </div>
+        </div>
       )}
 
       {/* Lesson sections */}
