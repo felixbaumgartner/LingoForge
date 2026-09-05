@@ -26,6 +26,16 @@ describe('lesson JSON extraction', () => {
       expect(() => parseLessonResponse(content, 'writing')).toThrow(LessonGenerationError);
     }
   });
+  it('distinguishes JSON syntax failure from safe field-level schema diagnostics', () => {
+    try { parseLessonResponse('not JSON', 'writing'); } catch (error) { expect(error.reason).toBe('json'); expect(error.issues).toEqual([]); }
+    const invalid = { title: 'PRIVATE LESSON TITLE', exercises: [{ type: 'multiple-choice', instruction: 'PRIVATE INSTRUCTION', word: 'PRIVATE WORD', options: ['PRIVATE ANSWER', 'other'], correctIndex: '0' }] };
+    try { parseLessonResponse(JSON.stringify(invalid), 'writing'); }
+    catch (error) {
+      expect(error.reason).toBe('schema');
+      expect(error.issues).toContainEqual({ path: '$.exercises[0].correctIndex', expected: 'zero-based integer within options', received: 'string' });
+      expect(JSON.stringify(error.issues)).not.toContain('PRIVATE');
+    }
+  });
 });
 
 describe('bounded generation recovery', () => {

@@ -32,6 +32,60 @@ export function isLessonContent(value, type) {
   });
 }
 
+/** Safe debugging metadata only: fixed field paths/types, never text or answers. */
+export function describeLessonIssues(value, type) {
+  const issues = [];
+  const valueType = (v) => v === null ? 'null' : Array.isArray(v) ? 'array' : typeof v === 'string' && !v.trim() ? 'empty string' : typeof v;
+  const check = (valid, path, expected, actual) => { if (!valid && issues.length < 20) issues.push({ path, expected, received: valueType(actual) }); };
+  const required = (entry, field, path) => check(text(entry?.[field]), `${path}.${field}`, 'nonempty string', entry?.[field]);
+  const optional = (entry, field, path) => check(optionalText(entry?.[field]), `${path}.${field}`, 'optional string', entry?.[field]);
+  const array = (items, path, inspect, min = 1) => {
+    check(Array.isArray(items) && items.length >= min, path, `array with at least ${min} items`, items);
+    if (!Array.isArray(items)) return;
+    items.slice(0, 30).forEach((entry, index) => {
+      check(object(entry), `${path}[${index}]`, 'object', entry);
+      if (object(entry)) inspect(entry, `${path}[${index}]`);
+    });
+  };
+  const choice = (entry, path) => {
+    check(list(entry.options, text, 2), `${path}.options`, 'array with at least 2 nonempty strings', entry.options);
+    check(Number.isInteger(entry.correctIndex) && entry.correctIndex >= 0 && entry.correctIndex < (entry.options?.length ?? 0), `${path}.correctIndex`, 'zero-based integer within options', entry.correctIndex);
+  };
+  check(object(value), '$', 'object', value);
+  if (!object(value)) return issues;
+  required(value, 'title', '$'); optional(value, 'objective', '$');
+  if (value.corpusWords !== undefined) array(value.corpusWords, '$.corpusWords', (entry, path) => {
+    check(Number.isInteger(entry.rank) && entry.rank >= 1, `${path}.rank`, 'positive integer', entry.rank);
+    required(entry, 'word', path); required(entry, 'translation', path);
+  }, 0);
+  if (type === 'writing') array(value.exercises, '$.exercises', (entry, path) => {
+    required(entry, 'instruction', path);
+    for (const field of ['sentence', 'word', 'explanation', 'hint']) optional(entry, field, path);
+    for (const field of ['words', 'acceptedAnswers']) if (entry[field] != null) check(list(entry[field], text, 0), `${path}.${field}`, 'array of nonempty strings', entry[field]);
+    if (entry.corpusRank !== undefined) check(Number.isInteger(entry.corpusRank) && entry.corpusRank >= 1, `${path}.corpusRank`, 'positive integer', entry.corpusRank);
+    const knownType = ['fill-in-blank', 'translation', 'word-order', 'multiple-choice'].includes(entry.type);
+    check(knownType, `${path}.type`, 'fill-in-blank | translation | word-order | multiple-choice', entry.type);
+    if (!knownType) return;
+    if (entry.type === 'multiple-choice') { required(entry, 'word', path); choice(entry, path); }
+    else {
+      required(entry, 'answer', path);
+      if (entry.type === 'word-order') check(list(entry.words, text, 2), `${path}.words`, 'array with at least 2 nonempty strings', entry.words);
+      else required(entry, 'sentence', path);
+    }
+  });
+  if (type === 'reading') {
+    required(value, 'passage', '$'); required(value, 'passageTranslation', '$');
+    array(value.vocabulary, '$.vocabulary', (entry, path) => { required(entry, 'word', path); required(entry, 'translation', path); optional(entry, 'exampleSentence', path); optional(entry, 'exampleTranslation', path); });
+    array(value.questions, '$.questions', (entry, path) => { required(entry, 'question', path); choice(entry, path); optional(entry, 'explanation', path); });
+  }
+  if (type === 'speaking') {
+    for (const [field, keys] of [['pronunciationCards', ['word', 'translation', 'phoneticHint']], ['phrases', ['phrase', 'translation', 'context']], ['dialogue', ['speaker', 'line', 'translation']]]) {
+      array(value[field], `$.${field}`, (entry, path) => keys.forEach((key) => required(entry, key, path)));
+    }
+  }
+  return issues;
+}
+
 export function buildLessonPrompt(words, type, language, level) {
   const languageName = language.charAt(0).toUpperCase() + language.slice(1);
   const system = `You are a careful ${languageName} teacher creating a short, useful lesson.
@@ -44,7 +98,14 @@ All instructions, objectives, explanations, and translations are in English. Tar
   const header = '"title":"Short situation-based title","objective":"By the end, you can ..."';
   if (type === 'reading') return { system, user: `${common}Return {${header},"passage":"4-6 connected target-language sentences","passageTranslation":"Faithful English translation","vocabulary":[{"word":"target word","translation":"meaning in this context","exampleSentence":"short example","exampleTranslation":"English example"}],"questions":[{"question":"Question about an explicitly stated detail","options":["option","option","option","option"],"correctIndex":0,"explanation":"Explain the correct answer using evidence from the passage"}]}.
 Include 8-10 vocabulary entries and 4 comprehension questions with exactly one valid answer each. Vary the correct answer positions.` };
-  if (type === 'writing') return { system, user: `${common}Return {${header},"exercises":[{"type":"fill-in-blank","instruction":"Fill in the blank","sentence":"Target-language sentence with _____","answer":"missing word","acceptedAnswers":[],"hint":"meaning, not the answer","corpusRank":${words[0].rank},"explanation":"Brief explanation of the word or grammar"}]}.
+  if (type === 'writing') return { system, user: `${common}Return one object with this exact structure. These four sample items show each variant; expand them to the requested 10 exercises:
+{${header},"exercises":[
+{"type":"fill-in-blank","instruction":"Fill in the blank","sentence":"Target-language sentence with _____","answer":"missing word","acceptedAnswers":[],"hint":"English meaning","corpusRank":${words[0].rank},"explanation":"Brief explanation of the word or grammar"},
+{"type":"translation","instruction":"Translate into ${languageName}","sentence":"English sentence to translate","answer":"Complete target-language translation","acceptedAnswers":["Another equally valid target-language translation"],"corpusRank":${words[0].rank},"explanation":"Explain the sentence pattern"},
+{"type":"word-order","instruction":"Put these words in order","words":["shuffled","target-language","tokens"],"answer":"Tokens in a grammatical sentence","acceptedAnswers":[],"corpusRank":${words[0].rank},"explanation":"Explain this word order"},
+{"type":"multiple-choice","instruction":"Choose the English meaning","word":"target vocabulary word","options":["correct meaning","incorrect meaning 1","incorrect meaning 2","incorrect meaning 3"],"correctIndex":0,"corpusRank":${words[0].rank},"explanation":"Explain the correct meaning"}
+]}.
+For multiple-choice, correctIndex MUST be an unquoted integer 0, 1, 2, or 3, not a letter, answer string, or one-based index. Every word-order words field MUST be an array of strings, not a sentence. Copy each type name exactly as shown. Omit irrelevant fields; do not use null for corpusRank. All answers and examples must be actual ${languageName}, not placeholder descriptions.
 Include 10 exercises: 3 fill-in-blank, 2 translation, 2 word-order, 3 multiple-choice. Every exercise has instruction, corpusRank (the supplied rank of the main word being assessed), and a specific explanation.
 Translation: sentence is English; answer is an idiomatic target-language sentence; acceptedAnswers includes common equally valid translations (pronoun omission, common synonymous phrasing, formal/informal variants where the prompt allows them).
 Word-order: words is a shuffled token array; answer uses exactly those tokens in a grammatical order. Include acceptedAnswers for other valid orders.
