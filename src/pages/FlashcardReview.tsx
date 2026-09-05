@@ -5,26 +5,24 @@ import { useAppStore } from '../store/appStore';
 import { AudioPlayer } from '../components/AudioPlayer';
 import { fetchWords } from '../api/client';
 import { CARDS_PER_SESSION, selectReviewWords, type ReviewFocus } from '../lib/review';
+import { getRatingIntervals, wordPerfKey } from '../lib/persistence';
 import { LANGUAGES, type Language, type Word } from '../types/language';
 
 type Rating = 'hard' | 'moderate' | 'easy';
-const RATINGS: { value: Rating; label: string; hint: string; color: string }[] = [
+const RATINGS: { value: Rating; label: string; color: string }[] = [
   {
     value: 'hard',
     label: 'Hard',
-    hint: 'Review in 1 day',
     color: 'border-red-500/40 bg-red-500/10 text-red-300 hover:bg-red-500/20',
   },
   {
     value: 'moderate',
     label: 'Moderate',
-    hint: 'Review in 3 days',
     color: 'border-amber-500/40 bg-amber-500/10 text-amber-300 hover:bg-amber-500/20',
   },
   {
     value: 'easy',
     label: 'Easy',
-    hint: 'Review in 7 days',
     color: 'border-emerald-500/40 bg-emerald-500/10 text-emerald-300 hover:bg-emerald-500/20',
   },
 ];
@@ -48,12 +46,12 @@ export function FlashcardReview() {
   const focus: ReviewFocus = focusParam === 'weak' || focusParam === 'due' ? focusParam : 'all';
   if (!lang)
     return (
-      <div className="p-8 text-center">
+      <main id="main-content" className="p-8 text-center">
         <p>Choose a supported language to review.</p>
         <button className="mt-4 text-emerald-400" onClick={() => navigate('/')}>
           Back to Dashboard
         </button>
-      </div>
+      </main>
     );
   return <Review key={`${lang.id}-${focus}`} language={lang.id} focus={focus} />;
 }
@@ -89,7 +87,7 @@ function Review({ language, focus }: { language: Language; focus: ReviewFocus })
   const languageLabel = LANGUAGES.find((item) => item.id === language)?.label;
 
   return (
-    <main className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
+    <main id="main-content" className="max-w-3xl mx-auto px-4 sm:px-6 py-8">
       <button
         onClick={() => navigate('/')}
         className="flex items-center gap-2 text-slate-400 hover:text-white mb-8 text-sm transition-colors"
@@ -182,9 +180,11 @@ function ReviewSession({
 }) {
   const navigate = useNavigate();
   const rateWord = useAppStore((s) => s.rateWord);
+  const wordPerformance = useAppStore((s) => s.wordPerformance);
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
   const [ratings, setRatings] = useState<Rating[]>([]);
+  const [scheduledDays, setScheduledDays] = useState<number[]>([]);
   const ratingLock = useRef(false);
   const revealButton = useRef<HTMLButtonElement>(null);
   const nextButton = useRef<HTMLButtonElement>(null);
@@ -193,11 +193,14 @@ function ReviewSession({
   const complete = index === words.length;
   const rated = ratings.length > index;
   const card = words[index];
+  const intervals = getRatingIntervals(card ? wordPerformance[wordPerfKey(language, card.rank)] : undefined);
 
   function handleRate(rating: Rating) {
     if (!card || !revealed || rated || ratingLock.current) return;
     ratingLock.current = true;
     rateWord(language, card.rank, card.word, card.translation, rating);
+    const saved = useAppStore.getState().wordPerformance[wordPerfKey(language, card.rank)];
+    setScheduledDays((previous) => [...previous, saved.interval]);
     setRatings((previous) => [...previous, rating]);
   }
 
@@ -325,7 +328,7 @@ function ReviewSession({
                 className={`px-2 py-3 rounded-xl border transition-colors ${rating.color}`}
               >
                 <span className="block font-semibold">{rating.label}</span>
-                <span className="block text-[11px] sm:text-xs mt-1">{rating.hint}</span>
+                <span className="block text-[11px] sm:text-xs mt-1">Review in {intervals[rating.value]} {intervals[rating.value] === 1 ? 'day' : 'days'}</span>
               </button>
             ))}
           </div>
@@ -336,9 +339,8 @@ function ReviewSession({
         <>
           <p role="status" className="text-sm text-slate-400 text-center mb-3">
             Saved as {RATINGS.find((rating) => rating.value === ratings[index])?.label.toLowerCase()}.{' '}
-            {ratings[index] === 'easy'
-              ? 'This word is out of your weak list.'
-              : 'Your next review is scheduled.'}
+            Next review in {scheduledDays[index]} {scheduledDays[index] === 1 ? 'day' : 'days'}.
+            {ratings[index] === 'easy' && ' This word is out of your weak list.'}
           </p>
           <button
             ref={nextButton}

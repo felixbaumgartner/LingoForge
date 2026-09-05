@@ -1,3 +1,4 @@
+import { isLessonContent } from '../../shared/lessonContract.js';
 import { Router } from 'express';
 import fs from 'fs';
 import path from 'path';
@@ -25,11 +26,11 @@ router.post('/generate', async (req, res) => {
     res.status(400).json({ error: `Invalid type. Choose: ${TYPES.join(', ')}` });
     return;
   }
-  if (!level || level < 1 || level > 16) {
+  if (!Number.isInteger(level) || level < 1 || level > 16) {
     res.status(400).json({ error: 'Level must be between 1 and 16' });
     return;
   }
-  if (!lessonNum || lessonNum < 1 || lessonNum > LESSONS_PER_LEVEL) {
+  if (!Number.isInteger(lessonNum) || lessonNum < 1 || lessonNum > LESSONS_PER_LEVEL) {
     res.status(400).json({ error: `Lesson must be between 1 and ${LESSONS_PER_LEVEL}` });
     return;
   }
@@ -72,7 +73,12 @@ router.post('/generate', async (req, res) => {
       return;
     }
 
+    if (!isLessonContent(lessonData, type)) {
+      res.status(502).json({ error: 'The lesson was incomplete. Please try again.' });
+      return;
+    }
     res.json({
+      ...lessonData,
       language,
       type,
       level,
@@ -83,7 +89,6 @@ router.post('/generate', async (req, res) => {
         word: w.word,
         translation: w.translation,
       })),
-      ...lessonData,
     });
   } catch (error) {
     console.error('Lesson generation error:', error);

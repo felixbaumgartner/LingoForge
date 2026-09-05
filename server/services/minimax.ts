@@ -19,6 +19,7 @@ export async function chatCompletion(
 ): Promise<string> {
   const res = await fetch(`${BASE_URL}/chat/completions`, {
     method: 'POST',
+    signal: AbortSignal.timeout(55000),
     headers: {
       Authorization: `Bearer ${API_KEY}`,
       'Content-Type': 'application/json',

@@ -1,3 +1,4 @@
+import { buildLessonPrompt, isLessonContent } from '../shared/lessonContract.js';
 import express from 'express';
 import cors from 'cors';
 import fs from 'fs';
@@ -17,6 +18,7 @@ const BASE_URL = 'https://api.minimax.io/v1';
 async function chatCompletion(messages, options = {}) {
   const res = await fetch(`${BASE_URL}/chat/completions`, {
     method: 'POST',
+    signal: AbortSignal.timeout(55000),
     headers: {
       Authorization: `Bearer ${API_KEY}`,
       'Content-Type': 'application/json',
@@ -60,99 +62,6 @@ async function textToSpeech(text, language, speed = 1.0) {
   throw new Error('No audio data in TTS response');
 }
 
-// --- Prompt builder ---
-let cachedTechniques = null;
-function getTechniques() {
-  if (cachedTechniques) return cachedTechniques;
-  const filePath = path.join(__dirname, '..', 'server', 'data', 'techniques.json');
-  if (fs.existsSync(filePath)) {
-    cachedTechniques = fs.readFileSync(filePath, 'utf-8');
-    return cachedTechniques;
-  }
-  return '[]';
-}
-
-function buildLessonPrompt(words, type, language, level) {
-  const techniques = getTechniques();
-  const wordList = words.map((w) => `${w.word} (${w.translation})`).join(', ');
-  const languageName = language.charAt(0).toUpperCase() + language.slice(1);
-
-  const baseSystem = `You are an expert ${languageName} language teacher. You create engaging, practical lessons.
-
-Use these proven learning techniques from the book "How to Learn a Language in 5 Days":
-${techniques}
-
-Important rules:
-- Use ONLY the vocabulary words provided below in your exercises
-- Target language: ${languageName}
-- Lesson level: ${level} (1=beginner, 16=advanced)
-- All instructions and translations should be in English
-- Return valid JSON only, no markdown or extra text`;
-
-  if (type === 'reading') {
-    return {
-      system: baseSystem,
-      user: `Create a reading lesson using these ${languageName} words: ${wordList}
-
-Return JSON in this exact format:
-{
-  "title": "Lesson title in English",
-  "passage": "A short paragraph (4-6 sentences) in ${languageName} using as many of the words as naturally possible",
-  "passageTranslation": "English translation of the passage",
-  "vocabulary": [
-    { "word": "${languageName} word", "translation": "English meaning", "exampleSentence": "A sentence using the word in ${languageName}", "exampleTranslation": "English translation" }
-  ],
-  "questions": [
-    { "question": "Comprehension question in English about the passage", "options": ["A) option", "B) option", "C) option", "D) option"], "correctIndex": 0 }
-  ]
-}
-
-Include 8-10 vocabulary items and 4 comprehension questions.`,
-    };
-  }
-
-  if (type === 'writing') {
-    return {
-      system: baseSystem,
-      user: `Create a writing lesson using these ${languageName} words: ${wordList}
-
-Return JSON in this exact format:
-{
-  "title": "Lesson title in English",
-  "exercises": [
-    { "type": "fill-in-blank", "instruction": "Fill in the blank with the correct ${languageName} word", "sentence": "Sentence with _____ for the blank", "answer": "correct word", "hint": "English translation of the answer" },
-    { "type": "translation", "instruction": "Translate to ${languageName}", "sentence": "English sentence to translate", "answer": "Correct ${languageName} translation" },
-    { "type": "word-order", "instruction": "Arrange the words to form a correct sentence", "words": ["shuffled", "words", "here"], "answer": "Correct sentence in order" },
-    { "type": "multiple-choice", "instruction": "What does this word mean?", "word": "${languageName} word", "options": ["meaning1", "meaning2", "meaning3", "meaning4"], "correctIndex": 0 }
-  ]
-}
-
-Include 3 fill-in-blank, 2 translation, 2 word-order, and 3 multiple-choice exercises (10 total).`,
-    };
-  }
-
-  return {
-    system: baseSystem,
-    user: `Create a speaking/pronunciation lesson using these ${languageName} words: ${wordList}
-
-Return JSON in this exact format:
-{
-  "title": "Lesson title in English",
-  "pronunciationCards": [
-    { "word": "${languageName} word", "translation": "English meaning", "phoneticHint": "Approximate pronunciation guide" }
-  ],
-  "phrases": [
-    { "phrase": "A useful phrase in ${languageName}", "translation": "English translation", "context": "When to use this phrase" }
-  ],
-  "dialogue": [
-    { "speaker": "A", "line": "${languageName} dialogue line", "translation": "English translation" }
-  ]
-}
-
-Include 10 pronunciation cards, 5 phrases, and a 6-line dialogue.`,
-  };
-}
-
 // --- Routes ---
 const LANGUAGES = ['spanish', 'french', 'dutch'];
 const TYPES = ['reading', 'writing', 'speaking'];
@@ -184,8 +93,8 @@ app.post('/api/lessons/generate', async (req, res) => {
   const { language, type, level, lesson: lessonNum } = req.body;
   if (!LANGUAGES.includes(language)) return res.status(400).json({ error: 'Invalid language' });
   if (!TYPES.includes(type)) return res.status(400).json({ error: 'Invalid type' });
-  if (!level || level < 1 || level > 16) return res.status(400).json({ error: 'Invalid level' });
-  if (!lessonNum || lessonNum < 1 || lessonNum > LESSONS_PER_LEVEL) return res.status(400).json({ error: 'Invalid lesson' });
+  if (!Number.isInteger(level) || level < 1 || level > 16) return res.status(400).json({ error: 'Invalid level' });
+  if (!Number.isInteger(lessonNum) || lessonNum < 1 || lessonNum > LESSONS_PER_LEVEL) return res.status(400).json({ error: 'Invalid lesson' });
 
   try {
     const wordsPath = path.join(__dirname, '..', 'server', 'data', 'words', `${language}.json`);
@@ -212,7 +121,8 @@ app.post('/api/lessons/generate', async (req, res) => {
       return res.status(500).json({ error: 'Failed to parse generated lesson' });
     }
 
-    res.json({ language, type, level, lesson: lessonNum, wordRange: [lessonStart + 1, lessonEnd], ...lessonData });
+    if (!isLessonContent(lessonData, type)) return res.status(502).json({ error: 'The lesson was incomplete. Please try again.' });
+    res.json({ ...lessonData, language, type, level, lesson: lessonNum, wordRange: [lessonStart + 1, lessonEnd], corpusWords: lessonWords.map(({rank, word, translation}) => ({rank, word, translation})) });
   } catch (error) {
     console.error('Lesson generation error:', error);
     res.status(500).json({ error: 'Failed to generate lesson' });

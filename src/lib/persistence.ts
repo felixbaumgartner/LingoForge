@@ -75,7 +75,10 @@ export function isLessonUnlocked(
   level: number,
   lesson: number
 ): boolean {
+  if (!Number.isInteger(level) || level < 1 || level > TOTAL_LEVELS ||
+      !Number.isInteger(lesson) || lesson < 1 || lesson > LESSONS_PER_LEVEL) return false;
   if (!isSectionUnlocked(progress, language, type)) return false;
+  if (progress[language]?.[type]?.[progressKey(level, lesson)]?.completed) return true;
   // First lesson of first level is always open
   if (level === 1 && lesson === 1) return true;
   // First lesson of a level: previous level must be complete
@@ -88,15 +91,12 @@ export function isLessonUnlocked(
 }
 
 export function isSectionUnlocked(
-  progress: ProgressMap,
-  language: Language,
+  _progress: ProgressMap,
+  _language: Language,
   type: LessonType
 ): boolean {
-  if (type === 'reading') return true;
-  if (type === 'writing') {
-    return getCompletedLevelCount(progress, language, 'reading') >= TOTAL_LEVELS;
-  }
-  return getCompletedLevelCount(progress, language, 'writing') >= TOTAL_LEVELS;
+  // Skills develop together. Each track keeps its own sequential progression.
+  return ['reading', 'writing', 'speaking'].includes(type);
 }
 
 export function getCompletedLevelCount(
@@ -243,9 +243,13 @@ export function recordWordResult(
   updated.easeFactor = Math.max(1.3, existing.easeFactor + (0.1 - (5 - quality) * (0.08 + (5 - quality) * 0.02)));
 
   if (correct) {
-    if (existing.interval === 0) updated.interval = 1;
-    else if (existing.interval === 1) updated.interval = 3;
-    else updated.interval = Math.round(existing.interval * updated.easeFactor);
+    const previousInterval = Number.isFinite(existing.interval) ? Math.max(0, existing.interval) : 0;
+    const due = new Date(existing.nextReview).getTime() <= new Date(now).getTime();
+    if (previousInterval === 0) updated.interval = 1;
+    else if (!due) updated.interval = previousInterval;
+    else if (previousInterval === 1) updated.interval = 3;
+    else updated.interval = previousInterval * Math.min(3, updated.easeFactor);
+    updated.interval = Math.min(180, Math.max(1, Math.round(updated.interval)));
   } else {
     updated.interval = 1;
   }
@@ -253,6 +257,23 @@ export function recordWordResult(
   updated.nextReview = new Date(Date.now() + updated.interval * 86400000).toISOString();
 
   return { ...map, [key]: updated };
+}
+
+/** Preview the same adaptive intervals used when a self-rating is saved. */
+export function getRatingIntervals(
+  existing?: WordPerformance,
+  now = Date.now(),
+): Record<'hard' | 'moderate' | 'easy', number> {
+  if (!existing || existing.reviewCount <= 0) return { hard: 1, moderate: 3, easy: 7 };
+  const interval = Number.isFinite(existing.interval) ? Math.max(0, existing.interval) : 0;
+  const ease = Number.isFinite(existing.easeFactor) ? Math.min(3, Math.max(1.3, existing.easeFactor)) : 2.5;
+  const due = new Date(existing.nextReview).getTime() <= now;
+  const bounded = (days: number, minimum: number) => Math.min(180, Math.max(minimum, Math.round(days)));
+  return {
+    hard: 1,
+    moderate: bounded(due ? interval * 1.5 : interval, 3),
+    easy: bounded(due ? interval * ease : interval, 7),
+  };
 }
 
 export function recordWordRating(
@@ -263,15 +284,16 @@ export function recordWordRating(
   translation: string,
   rating: 'hard' | 'moderate' | 'easy'
 ): WordPerformanceMap {
+  const key = wordPerfKey(language, rank);
+  const now = Date.now();
+  const intervals = getRatingIntervals(map[key], now);
   const correct = rating !== 'hard';
   const result = recordWordResult(map, language, rank, word, translation, correct);
-  const key = wordPerfKey(language, rank);
   result[key] = { ...result[key], rating };
 
-  // Override interval based on self-rating
-  const intervals = { hard: 1, moderate: 3, easy: 7 };
+  // Successful scheduled reviews grow; extra early practice does not compound intervals.
   result[key].interval = intervals[rating];
-  result[key].nextReview = new Date(Date.now() + intervals[rating] * 86400000).toISOString();
+  result[key].nextReview = new Date(now + intervals[rating] * 86400000).toISOString();
 
   return result;
 }

@@ -1,39 +1,9 @@
-# LingoForge TODOs
+# Remaining product work
 
-## Phase 2: Adaptive AI Lesson Generation
-**Priority:** High
-**Status:** Blocked on Phase 1 (per-word tracking)
-
-Feed WordPerformance data into AI lesson prompts so lessons adapt to each user's weak spots. The hook point is `buildLessonPrompt()` in `server/services/promptBuilder.ts` — add the user's weak word ranks to the system prompt. The client sends weak word ranks with the lesson request, and the AI emphasizes those words in generated exercises.
-
-**Why:** Phase 1 collects per-word data. Without Phase 2, that data is informational only — the lesson experience doesn't change. This is what delivers the "Duolingo but smarter" promise.
-
-**Depends on:** Phase 1 per-word tracking complete and tested.
-
----
-
-## Loosen Unlock System — Parallel Skill Progression
-**Priority:** Medium
-**Status:** Blocked on Phase 1 + Phase 2
-
-Currently users must complete ALL 16 reading levels (80 lessons, ~10+ hours) before writing unlocks. With per-word tracking, unlock writing once the user demonstrates word mastery through reading — not just level completion.
-
-**Where:** `isSectionUnlocked()` in `src/lib/persistence.ts:89-99`. Currently checks `getCompletedLevelCount() >= TOTAL_LEVELS`. Change to check WordPerformance mastery threshold instead.
-
-**Why:** Faster time-to-value. Users experience all 3 skill types sooner, increasing engagement.
-
-**Depends on:** Phase 1 (word tracking data exists) + Phase 2 (adaptive generation) ideally.
-
----
-
-## Full SM-2 Spaced Repetition Algorithm
-**Priority:** Low
-**Status:** Blocked on Phase 1
-
-Replace the basic fixed-interval SRS (hard=1d, moderate=3d, easy=7d) with the SM-2 algorithm. SM-2 adjusts ease factor based on history — words you consistently get right get exponentially longer intervals, words you keep missing get shorter ones.
-
-**Where:** WordPerformance model already has `easeFactor`, `interval`, and `nextReview` fields (SRS-ready). Just implement the SM-2 update logic (~30 lines) in the `recordWordPerformance()` function.
-
-**Why:** Industry-standard algorithm (Anki uses it). Better review scheduling = better long-term retention. Users won't notice until weeks in, but the data quality improvement compounds.
-
-**Depends on:** Phase 1 (this plan).
+- **Curriculum quality:** Have qualified speakers review corpus translations, generated exercise samples, difficulty progression, and regional alternatives. Resolve the missing French and Dutch entries before advertising exactly 800 words in every language.
+- **Adaptive generated lessons:** Daily practice already uses word performance. A future lesson-generation contract could incorporate weak words and prior lessons while preserving a coherent difficulty progression.
+- **Conversation and listening assessment:** Add contextual listening and open-ended speaking with explicit feedback. Current speaking practice is self-assessed; it does not measure pronunciation accuracy.
+- **Scheduling validation:** Evaluate the adaptive scheduler against real longitudinal recall data before choosing a more sophisticated algorithm or making efficacy claims.
+- **Multi-device attempt history:** Store immutable attempt events if exact merging of simultaneous offline sessions becomes necessary. Current transactional merges avoid overwrites but conservatively merge counters.
+- **Authenticated production verification:** Exercise real Google sign-in, Firestore security rules, offline recovery, and two-device synchronization with a dedicated test account. Browser integration tests deliberately use local fixtures.
+- **Operational safeguards:** Add authenticated generation quotas and provider-cost monitoring before broad public promotion; validate the currently unused server TTS endpoint before adopting it for playback.

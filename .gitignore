@@ -27,3 +27,4 @@ book-text.txt
 *.sw?
 
 .vercel
+output/playwright/

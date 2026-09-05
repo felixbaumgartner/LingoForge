@@ -13,6 +13,7 @@ export interface ReadingLesson {
   wordRange: [number, number];
   corpusWords?: CorpusWord[];
   title: string;
+  objective?: string;
   passage: string;
   passageTranslation: string;
   vocabulary: {
@@ -23,6 +24,7 @@ export interface ReadingLesson {
   }[];
   questions: {
     question: string;
+    explanation?: string;
     options: string[];
     correctIndex: number;
   }[];
@@ -35,6 +37,9 @@ export interface WritingExercise {
   word?: string;
   words?: string[];
   answer: string;
+  acceptedAnswers?: string[];
+  explanation?: string;
+  corpusRank?: number;
   hint?: string;
   options?: string[];
   correctIndex?: number;
@@ -47,6 +52,7 @@ export interface WritingLesson {
   wordRange: [number, number];
   corpusWords?: CorpusWord[];
   title: string;
+  objective?: string;
   exercises: WritingExercise[];
 }
 
@@ -57,6 +63,7 @@ export interface SpeakingLesson {
   wordRange: [number, number];
   corpusWords?: CorpusWord[];
   title: string;
+  objective?: string;
   pronunciationCards: {
     word: string;
     translation: string;

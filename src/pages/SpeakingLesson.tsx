@@ -26,14 +26,12 @@ export function SpeakingLesson() {
   useEffect(() => {
     if (lang && lvl && lessonNum) {
       loadLesson(lang, 'speaking', lvl, lessonNum);
-      setCardIndex(0);
-      setCardRatings({});
     }
   }, [lang, lvl, lessonNum, loadLesson]);
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
+      <main id="main-content" tabIndex={-1} className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center glass rounded-2xl px-12 py-10">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center mx-auto mb-5">
             <Loader2 className="w-7 h-7 text-amber-400 animate-spin" />
@@ -41,16 +39,16 @@ export function SpeakingLesson() {
           <p className="text-white font-medium mb-1">Generating your lesson</p>
           <p className="text-xs text-slate-500">Crafting exercises from your word list...</p>
         </div>
-      </div>
+      </main>
     );
   }
 
   if (error) {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-8 text-center">
+      <main id="main-content" tabIndex={-1} className="max-w-3xl mx-auto px-6 py-8 text-center">
         <p className="text-red-400 mb-4">{error}</p>
         <button onClick={() => loadLesson(lang, 'speaking', lvl, lessonNum)} className="px-4 py-2 bg-slate-700 text-white rounded-lg">Retry</button>
-      </div>
+      </main>
     );
   }
 
@@ -66,13 +64,11 @@ export function SpeakingLesson() {
 
   function handleRate(rating: Rating) {
     setCardRatings((prev) => ({ ...prev, [cardIndex]: rating }));
-    // Auto-advance to next card after rating
-    if (cardIndex < cards.length - 1) {
-      setTimeout(() => setCardIndex(cardIndex + 1), 300);
-    }
+
   }
 
   function handleComplete() {
+    if (!allCardsRated) return;
     // Record per-word performance from self-ratings
     const corpusMap = new Map(corpusWords.map((w) => [w.word.toLowerCase(), w]));
     for (let i = 0; i < cards.length; i++) {
@@ -95,7 +91,7 @@ export function SpeakingLesson() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-8">
+    <main id="main-content" tabIndex={-1} className="max-w-3xl mx-auto px-6 py-8">
       <button onClick={() => navigate('/')} className="flex items-center gap-2 text-slate-500 hover:text-white mb-8 text-sm transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back to Dashboard
       </button>
@@ -103,7 +99,9 @@ export function SpeakingLesson() {
       <div className="mb-1.5 text-xs font-semibold text-amber-400/80 uppercase tracking-[0.15em]">
         Speaking &middot; Level {lvl}, Lesson {lessonNum} &middot; {lang}
       </div>
-      <h2 className="text-2xl font-display font-bold text-white mb-8">{data.title}</h2>
+      <h1 className="text-3xl font-display font-bold text-white mb-3">{data.title}</h1>
+      <p className="text-slate-400 mb-4">{data.objective || 'Listen, repeat aloud, and use the words in a conversation.'}</p>
+      <div className="glass rounded-xl p-4 mb-8 text-sm text-slate-300">Listen once, say it aloud, then listen again and compare. Your ratings are self-assessment; this lesson does not score your pronunciation.</div>
 
       {cards.length > 0 && (
         <div className="mb-8">
@@ -135,7 +133,7 @@ export function SpeakingLesson() {
 
             {/* Self-rating */}
             <div className="mt-6">
-              <p className="text-xs text-slate-500 mb-3">How well can you pronounce this?</p>
+              <p className="text-xs text-slate-500 mb-3">After saying it aloud, how confident do you feel?</p>
               <div className="flex gap-3 justify-center">
                 <button
                   onClick={() => handleRate('hard')}
@@ -240,6 +238,6 @@ export function SpeakingLesson() {
         <CheckCircle2 className="w-5 h-5" />
         {allCardsRated ? 'Complete & Next Lesson' : `Rate all ${cards.length} words to continue`}
       </button>
-    </div>
+    </main>
   );
 }

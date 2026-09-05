@@ -12,6 +12,7 @@ function InteractivePassage({ passage, vocabulary }: {
   passage: string;
   vocabulary: { word: string; translation: string }[];
 }) {
+  const [activeWord, setActiveWord] = useState<number | null>(null);
   const vocabMap = useMemo(() => {
     const map = new Map<string, string>();
     for (const v of vocabulary) {
@@ -25,7 +26,7 @@ function InteractivePassage({ passage, vocabulary }: {
     const escaped = vocabulary.map((v) =>
       v.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     );
-    return new RegExp(`(\\b(?:${escaped.join('|')})\\b)`, 'gi');
+    return new RegExp(`((?<![\\p{L}\\p{N}])(?:${escaped.sort((a, b) => b.length - a.length).join('|')})(?![\\p{L}\\p{N}]))`, 'giu');
   }, [vocabulary]);
 
   if (!pattern) {
@@ -41,10 +42,10 @@ function InteractivePassage({ passage, vocabulary }: {
         if (translation) {
           return (
             <span key={i} className="relative group/word inline-block">
-              <span className="text-emerald-300 underline decoration-emerald-500/30 decoration-dotted underline-offset-4 cursor-help transition-colors group-hover/word:text-emerald-200 group-hover/word:decoration-emerald-400/60">
+              <button type="button" aria-expanded={activeWord === i} aria-label={`${part}: tap for translation`} onClick={() => setActiveWord(activeWord === i ? null : i)} onBlur={() => setActiveWord(null)} className="text-emerald-300 underline decoration-emerald-500/30 decoration-dotted underline-offset-4 cursor-help transition-colors group-hover/word:text-emerald-200 group-hover/word:decoration-emerald-400/60">
                 {part}
-              </span>
-              <span className="pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-sm text-white whitespace-nowrap opacity-0 scale-95 group-hover/word:opacity-100 group-hover/word:scale-100 transition-all duration-200 shadow-xl z-10">
+              </button>
+              <span className={`${activeWord === i ? 'opacity-100 scale-100' : 'opacity-0 scale-95'} pointer-events-none absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 rounded-lg bg-slate-800 border border-slate-700 text-sm text-white whitespace-nowrap group-hover/word:opacity-100 group-hover/word:scale-100 transition-all duration-200 shadow-xl z-10`}>
                 {translation}
                 <span className="absolute top-full left-1/2 -translate-x-1/2 -mt-px border-4 border-transparent border-t-slate-700" />
               </span>
@@ -77,32 +78,27 @@ export function ReadingLesson() {
   useEffect(() => {
     if (lang && lvl && lessonNum) {
       loadLesson(lang, 'reading', lvl, lessonNum);
-      setAnswers({});
-      setSubmitted(false);
-      setShowTranslation(null);
-      setVocabAnswers({});
-      setVocabSubmitted(false);
     }
   }, [lang, lvl, lessonNum, loadLesson]);
 
   // Build vocab quiz — must be before early returns to satisfy React hooks rules
   const data = (lesson?.type === 'reading' ? lesson : null) as ReadingLessonType | null;
-  const corpusWords = data?.corpusWords ?? [];
+  const corpusWords = data?.corpusWords;
   const vocabQuizItems = useMemo(() => {
-    if (corpusWords.length === 0) return [];
+    if (!corpusWords?.length) return [];
     const translations = corpusWords.map((w) => w.translation);
     return corpusWords.map((w, idx) => {
-      const wrong = translations.filter((_, i) => i !== idx).sort(() => Math.random() - 0.5).slice(0, 3);
-      const options = [...wrong, w.translation].sort(() => Math.random() - 0.5);
+      const wrong = [...new Set(translations.filter((translation) => translation !== w.translation))].slice(0, 3);
+      const options = [...wrong];
+      options.splice(idx % (wrong.length + 1), 0, w.translation);
       const correctIdx = options.indexOf(w.translation);
       return { word: w.word, rank: w.rank, translation: w.translation, options, correctIndex: correctIdx };
     });
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(corpusWords)]);
+  }, [corpusWords]);
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[60vh]">
+      <main id="main-content" tabIndex={-1} className="flex items-center justify-center min-h-[60vh]">
         <div className="text-center glass rounded-2xl px-12 py-10">
           <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-cyan-500/20 flex items-center justify-center mx-auto mb-5">
             <Loader2 className="w-7 h-7 text-emerald-400 animate-spin" />
@@ -110,16 +106,16 @@ export function ReadingLesson() {
           <p className="text-white font-medium mb-1">Generating your lesson</p>
           <p className="text-xs text-slate-500">Crafting exercises from your word list...</p>
         </div>
-      </div>
+      </main>
     );
   }
 
   if (error) {
     return (
-      <div className="max-w-3xl mx-auto px-6 py-8 text-center">
+      <main id="main-content" tabIndex={-1} className="max-w-3xl mx-auto px-6 py-8 text-center">
         <p className="text-red-400 mb-4">{error}</p>
         <button onClick={() => loadLesson(lang, 'reading', lvl, lessonNum)} className="px-4 py-2 bg-slate-700 text-white rounded-lg">Retry</button>
-      </div>
+      </main>
     );
   }
 
@@ -137,14 +133,17 @@ export function ReadingLesson() {
     : 0;
 
   function handleSubmit() {
+    if (submitted || totalQuestions === 0 || Object.keys(answers).length < totalQuestions) return;
     setSubmitted(true);
-    if (passed) {
+    if (passed && vocabQuizItems.length === 0) {
       completeLesson(lang, 'reading', lvl, lessonNum, score);
     }
   }
 
   function handleVocabSubmit() {
+    if (vocabSubmitted || Object.keys(vocabAnswers).length < vocabQuizItems.length) return;
     setVocabSubmitted(true);
+    if (passed) completeLesson(lang, 'reading', lvl, lessonNum, score);
     // Record per-word performance
     for (let i = 0; i < vocabQuizItems.length; i++) {
       const item = vocabQuizItems[i];
@@ -164,7 +163,7 @@ export function ReadingLesson() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-8">
+    <main id="main-content" tabIndex={-1} className="max-w-3xl mx-auto px-6 py-8">
       <button onClick={() => navigate('/')} className="flex items-center gap-2 text-slate-500 hover:text-white mb-8 text-sm transition-colors">
         <ArrowLeft className="w-4 h-4" /> Back to Dashboard
       </button>
@@ -172,7 +171,8 @@ export function ReadingLesson() {
       <div className="mb-1.5 text-xs font-semibold text-emerald-400/80 uppercase tracking-[0.15em]">
         Reading &middot; Level {lvl}, Lesson {lessonNum} &middot; {lang}
       </div>
-      <h2 className="text-2xl font-display font-bold text-white mb-8">{data.title}</h2>
+      <h1 className="text-3xl font-display font-bold text-white mb-3">{data.title}</h1>
+      <p className="text-slate-400 mb-8">{data.objective || 'Read for meaning, then recall the words you have learned.'}</p>
 
       {/* Passage */}
       <div className="glass rounded-2xl p-7 mb-8 relative overflow-hidden noise">
@@ -244,6 +244,7 @@ export function ReadingLesson() {
                     );
                   })}
                 </div>
+                {submitted && q.explanation && <p className="mt-3 text-sm text-slate-300">{q.explanation}</p>}
               </div>
             ))}
           </div>
@@ -253,7 +254,7 @@ export function ReadingLesson() {
       {!submitted ? (
         <button
           onClick={handleSubmit}
-          disabled={Object.keys(answers).length < totalQuestions}
+          disabled={totalQuestions === 0 || Object.keys(answers).length < totalQuestions}
           className="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-cyan-500 hover:from-emerald-400 hover:to-cyan-400 disabled:from-slate-700 disabled:to-slate-700 disabled:text-slate-500 text-white font-semibold rounded-2xl transition-all duration-300 shadow-lg shadow-emerald-500/20 disabled:shadow-none"
         >
           Check Answers
@@ -320,6 +321,7 @@ export function ReadingLesson() {
           <p className="text-sm text-slate-400 mb-6">
             {passed ? 'Excellent work! On to the next one.' : 'You need 60% comprehension to pass. Give it another shot!'}
           </p>
+          {vocabSubmitted && vocabQuizItems.some((item, i) => vocabAnswers[i] !== item.correctIndex) && <div className="text-left bg-slate-900/60 rounded-xl p-4 my-5"><h3 className="font-semibold text-amber-300 mb-2">Words to revisit</h3><ul className="space-y-2 text-sm text-slate-300">{vocabQuizItems.filter((item, i) => vocabAnswers[i] !== item.correctIndex).map((item) => <li key={item.rank}><span className="text-white font-medium">{item.word}</span> — {item.translation}</li>)}</ul><p className="text-xs text-slate-400 mt-3">These answers are saved to your word practice.</p></div>}
           <div className="flex gap-3 justify-center">
             {!passed && (
               <button
@@ -338,6 +340,6 @@ export function ReadingLesson() {
           </div>
         </div>
       )}
-    </div>
+    </main>
   );
 }

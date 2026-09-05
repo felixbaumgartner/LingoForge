@@ -2,16 +2,26 @@ import { create } from 'zustand';
 import type { Language } from '../types/language';
 import type { ProgressMap, LessonProgress, WordPerformanceMap } from '../types/progress';
 import type { LessonType } from '../types/lesson';
-import { loadProgress, saveProgress, loadWordPerformance, saveWordPerformance, recordWordResult, recordWordRating } from '../lib/persistence';
-import { saveProgressToFirestore, saveWordPerfToFirestore } from '../lib/progressSync';
+import { recordWordResult, recordWordRating } from '../lib/persistence';
+import { emptyProgress, loadAccount, saveAccountProgress, saveAccountWords } from '../lib/accountStorage';
+import {
+  loadProgressFromFirestore, loadWordPerfFromFirestore,
+  saveProgressToFirestore, saveWordPerfToFirestore, mergeProgress, mergeWordPerformance,
+} from '../lib/progressSync';
 
 interface AppState {
   language: Language;
   progress: ProgressMap;
   wordPerformance: WordPerformanceMap;
   uid: string | null;
+  sessionId: number;
+  hydrated: boolean;
+  syncStatus: 'loading' | 'saved' | 'local' | 'error';
+  syncError: string | null;
   setLanguage: (lang: Language) => void;
   setUid: (uid: string | null) => void;
+  hydrateAccount: (uid: string) => Promise<void>;
+  retrySync: () => Promise<void>;
   setProgress: (progress: ProgressMap) => void;
   setWordPerformance: (wp: WordPerformanceMap) => void;
   completeLesson: (language: Language, type: LessonType, level: number, lesson: number, score?: number) => void;
@@ -19,70 +29,148 @@ interface AppState {
   rateWord: (language: Language, rank: number, word: string, translation: string, rating: 'hard' | 'moderate' | 'easy') => void;
 }
 
-export const useAppStore = create<AppState>((set, get) => ({
-  language: 'spanish',
-  progress: loadProgress(),
-  wordPerformance: loadWordPerformance(),
-  uid: null,
+function withTimeout<T>(promise: Promise<T>): Promise<T> {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => reject(new Error('Sync timed out')), 8000);
+    promise.then(resolve, reject).finally(() => clearTimeout(timer));
+  });
+}
 
-  setLanguage: (lang) => set({ language: lang }),
+export const useAppStore = create<AppState>((set, get) => {
+  let hydrationRequest = 0;
+  let pendingWrites = 0;
+  let failedWrite = false;
 
-  setUid: (uid) => set({ uid }),
-
-  setProgress: (progress) => {
-    saveProgress(progress);
-    set({ progress });
-  },
-
-  setWordPerformance: (wp) => {
-    saveWordPerformance(wp);
-    set({ wordPerformance: wp });
-  },
-
-  completeLesson: (language, type, level, lesson, score) => {
-    const state = get();
-    const newProgress = { ...state.progress };
-    if (!newProgress[language]) {
-      newProgress[language] = { reading: {}, writing: {}, speaking: {} };
+  async function sync(progress?: ProgressMap, words?: WordPerformanceMap) {
+    const { uid, sessionId } = get();
+    if (!uid) return;
+    pendingWrites++;
+    set({ syncStatus: 'loading' });
+    try {
+      await withTimeout(Promise.all([
+        ...(progress ? [saveProgressToFirestore(uid, progress)] : []),
+        ...(words ? [saveWordPerfToFirestore(uid, words)] : []),
+      ]));
+    } catch {
+      if (get().sessionId !== sessionId) return;
+      failedWrite = true;
+      set({ syncError: 'Cloud sync is unavailable. Your progress is kept on this device when browser storage is available.' });
+    } finally {
+      if (get().sessionId === sessionId) {
+        pendingWrites--;
+        if (pendingWrites === 0) set({ syncStatus: failedWrite ? 'error' : 'saved' });
+      }
     }
-    if (!newProgress[language][type]) {
-      newProgress[language][type] = {};
-    }
-    const entry: LessonProgress = {
-      completed: true,
-      score,
-      completedAt: new Date().toISOString(),
-    };
-    const key = `${level}-${lesson}`;
-    newProgress[language][type] = {
-      ...newProgress[language][type],
-      [key]: entry,
-    };
+  }
 
-    saveProgress(newProgress);
-    if (state.uid) {
-      saveProgressToFirestore(state.uid, newProgress).catch(console.error);
-    }
-    set({ progress: newProgress });
-  },
+  function cache(progress?: ProgressMap, words?: WordPerformanceMap) {
+    const { uid } = get();
+    if (!uid) return;
+    const progressSaved = !progress || saveAccountProgress(uid, progress);
+    const wordsSaved = !words || saveAccountWords(uid, words);
+    const saved = progressSaved && wordsSaved;
+    if (!saved) set({ syncError: 'Browser storage is unavailable. Keep this page open until cloud sync completes.' });
+  }
 
-  recordWord: (language, rank, word, translation, correct) => {
-    const state = get();
-    const updated = recordWordResult(state.wordPerformance, language, rank, word, translation, correct);
-    saveWordPerformance(updated);
-    if (state.uid) {
-      saveWordPerfToFirestore(state.uid, updated).catch(console.error);
-    }
-    set({ wordPerformance: updated });
-  },
+  return {
+    language: 'spanish',
+    progress: emptyProgress(),
+    wordPerformance: {},
+    uid: null,
+    sessionId: 0,
+    hydrated: false,
+    syncStatus: 'local',
+    syncError: null,
 
-  rateWord: (language, rank, word, translation, rating) => {
-    const state = get();
-    const updated = recordWordRating(state.wordPerformance, language, rank, word, translation, rating);
-    saveWordPerformance(updated);
-    if (state.uid) {
-      saveWordPerfToFirestore(state.uid, updated).catch(console.error);
-    }
-    set({ wordPerformance: updated });
-  },
-}));
+    setLanguage: (language) => set({ language }),
+
+    setUid: (uid) => {
+      if (get().uid === uid) return;
+      hydrationRequest++;
+      pendingWrites = 0;
+      failedWrite = false;
+      set({
+        uid,
+        sessionId: get().sessionId + 1,
+        ...(uid ? loadAccount(uid) : { progress: emptyProgress(), wordPerformance: {} }),
+        hydrated: false,
+        syncStatus: uid ? 'loading' : 'local',
+        syncError: null,
+      });
+    },
+
+    hydrateAccount: async (uid) => {
+      if (get().uid !== uid) return;
+      const { sessionId } = get();
+      const request = ++hydrationRequest;
+      set({ syncStatus: 'loading', syncError: null });
+      try {
+        const [remoteProgress, remoteWords] = await withTimeout(Promise.all([
+          loadProgressFromFirestore(uid), loadWordPerfFromFirestore(uid),
+        ]));
+        if (get().sessionId !== sessionId || request !== hydrationRequest) return;
+        const progress = mergeProgress(get().progress, remoteProgress ?? emptyProgress());
+        const wordPerformance = mergeWordPerformance(get().wordPerformance, remoteWords ?? {});
+        cache(progress, wordPerformance);
+        set({ progress, wordPerformance, hydrated: true });
+        failedWrite = false;
+        await sync(progress, wordPerformance);
+      } catch {
+        if (get().sessionId !== sessionId || request !== hydrationRequest) return;
+        failedWrite = true;
+        set({ hydrated: true, syncStatus: 'error', syncError: 'Cloud sync is unavailable. You can continue using the progress saved on this device.' });
+      }
+    },
+
+    retrySync: async () => {
+      const { uid } = get();
+      if (uid) await get().hydrateAccount(uid);
+    },
+
+    setProgress: (progress) => {
+      cache(progress);
+      set({ progress });
+    },
+
+    setWordPerformance: (wordPerformance) => {
+      cache(undefined, wordPerformance);
+      set({ wordPerformance });
+    },
+
+    completeLesson: (language, type, level, lesson, score) => {
+      const state = get();
+      const key = `${level}-${lesson}`;
+      const previous = state.progress[language][type][key];
+      const scores = [previous?.score, score].filter((value): value is number => typeof value === 'number' && Number.isFinite(value));
+      const entry: LessonProgress = {
+        completed: true,
+        ...(scores.length ? { score: Math.max(...scores) } : {}),
+        completedAt: new Date().toISOString(),
+      };
+      const progress = {
+        ...state.progress,
+        [language]: {
+          ...state.progress[language],
+          [type]: { ...state.progress[language][type], [key]: entry },
+        },
+      };
+      cache(progress);
+      set({ progress });
+      void sync(progress);
+    },
+
+    recordWord: (language, rank, word, translation, correct) => {
+      const wordPerformance = recordWordResult(get().wordPerformance, language, rank, word, translation, correct);
+      cache(undefined, wordPerformance);
+      set({ wordPerformance });
+      void sync(undefined, wordPerformance);
+    },
+
+    rateWord: (language, rank, word, translation, rating) => {
+      const wordPerformance = recordWordRating(get().wordPerformance, language, rank, word, translation, rating);
+      cache(undefined, wordPerformance);
+      set({ wordPerformance });
+      void sync(undefined, wordPerformance);
+    },
+  };
+});

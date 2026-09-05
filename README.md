@@ -1,148 +1,58 @@
 # LingoForge
 
-An AI-powered language learning app that adapts to how you learn. Master 800 words in Spanish, French, or Dutch through reading, writing, and speaking exercises — with per-word performance tracking that identifies your weak spots.
+Practice Spanish, French, and Dutch through short daily sessions, contextual reading, writing, and pronunciation practice.
 
 **Live:** [lingoforge-orcin.vercel.app](https://lingoforge-orcin.vercel.app)
 
-## Features
+## Learning experience
 
-- **AI-Generated Lessons** — Every lesson is dynamically created using MiniMax AI, so no two sessions are exactly alike
-- **Three Skill Types** — Reading (passages + comprehension), Writing (fill-in-blank, translation, word-order), Speaking (pronunciation cards with audio)
-- **Per-Word Performance Tracking** — Tracks every word you get right or wrong across all lesson types, building a detailed picture of your vocabulary mastery
-- **Word Mastery Dashboard** — See your mastered, learning, and struggling words at a glance with accuracy percentages
-- **Weak Words Practice** — One-tap focused flashcard sessions targeting only the words you struggle with
-- **Focused Review Sessions** — Review all encountered words, weak words, or only scheduled words in stable sessions of up to 30 cards, available after your first lesson
-- **Keyboard-Friendly Practice** — Reveal answers with Space/Enter, rate with 1/2/3, and see a saved-rating summary at the end of each session
-- **Spaced Repetition (SRS)** — Words you get wrong come back sooner; words you master get longer intervals before review
-- **Text-to-Speech** — Listen to native pronunciation for every word, phrase, and passage
-- **Structured Progression** — 16 levels x 5 lessons per skill type, with sequential unlocking
-- **Firebase Auth & Sync** — Sign in with Google, progress syncs across devices via Firestore
+- **Daily practice:** Ten-word sessions combine recognition and typed recall. Due and weak words take priority, while new words and least-recently-practiced words keep sessions moving forward. Ambiguous translation cues use recognition questions.
+- **Useful feedback:** Check answers, see corrections, and retry missed or assisted words. First-attempt results remain separate from correction practice.
+- **Three available skill tracks:** Start reading, writing, or speaking immediately; continue sequentially within each track across 16 levels and five lessons per level.
+- **Contextual lessons:** AI-generated passages and exercises use target vocabulary in natural sentences, with objectives and explanations. Writing supports explicitly accepted alternatives and keeps meaningful accent distinctions.
+- **Personal vocabulary:** Search target words and English meanings, filter due or unpracticed words, hear pronunciation, and inspect review dates.
+- **Review scheduling:** Successful due reviews grow their intervals; difficult words return sooner. Flashcards show the actual next interval before a rating is saved. This is a simple adaptive scheduler, not a validated FSRS implementation.
+- **Honest progress:** Set a daily goal of 5, 10, or 20 distinct words. Speaking ratings and the Strong recall label are study signals, not certified proficiency or automated pronunciation assessments.
+- **Account-scoped progress:** Google sign-in and Firestore synchronization, with per-account local storage, visible sync status, and retry after connection failures.
+- **Accessible controls:** Keyboard practice, visible focus, reduced motion support, and responsive desktop/mobile layouts.
 
-## Tech Stack
+The word lists currently contain 800 Spanish entries and 799 each for French and Dutch. Browser speech synthesis supplies pronunciation; voice availability depends on the device.
 
-- **Frontend:** React 19, TypeScript, Vite, Tailwind CSS v4, Zustand
-- **Backend:** Express 5, Node.js
-- **AI:** MiniMax API (lesson generation + TTS)
-- **Auth & Storage:** Firebase Authentication, Cloud Firestore
-- **Deployment:** Vercel (static + serverless)
-- **Testing:** Vitest (50 unit tests)
+## Development
 
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- A [MiniMax](https://www.minimax.io/) API key
-- A [Firebase](https://firebase.google.com/) project with Authentication and Firestore enabled
-
-### Setup
+Use Node.js 22.12+ (Node.js 24 is used in CI), a MiniMax API key, and a Firebase project with Google Authentication and Firestore enabled.
 
 ```bash
-# Clone the repo
 git clone https://github.com/felixbaumgartner/LingoForge.git
 cd LingoForge
-
-# Install dependencies
 npm install
-
-# Create .env file
 cp .env.example .env
-# Add your MINIMAX_API_KEY and Firebase config to .env
-
-# Start development server (client + API server)
+# Configure MiniMax and Firebase using .env.example.
 npm run dev
 ```
 
-The app runs at `http://localhost:5173` (Vite) with the API server at `http://localhost:3001`.
+Vite runs at `http://localhost:5173`; Express runs at `http://localhost:3001`.
 
-### Scripts
+| Command | Purpose |
+|---|---|
+| `npm run dev` | Frontend and local API |
+| `npm run build` | TypeScript check and production build |
+| `npm run lint` | ESLint |
+| `npm test` | Unit and regression tests |
+| `npm run test:e2e` | Browser integration tests |
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start client + server concurrently |
-| `npm run dev:client` | Start Vite dev server only |
-| `npm run dev:server` | Start Express API server only |
-| `npm run build` | TypeScript check + Vite production build |
-| `npm run lint` | Run ESLint |
-| `npx vitest run` | Run unit tests |
+Browser tests use installed Chrome on Windows and Playwright Chromium elsewhere (`npx playwright install --with-deps chromium`). The development-only harness renders real pages with deterministic lesson fixtures and local-only progress. It does not sign into Google, call the AI provider, or verify production Firestore permissions. Its fixtures are not bundled into the production application.
 
-## Project Structure
+## Architecture
 
-```
-LingoForge/
-├── server/                  # Express API server
-│   ├── routes/
-│   │   ├── lessons.ts       # AI lesson generation endpoint
-│   │   ├── words.ts         # Word corpus endpoint
-│   │   └── tts.ts           # Text-to-speech endpoint
-│   ├── services/
-│   │   ├── minimax.ts       # MiniMax API client
-│   │   └── promptBuilder.ts # Lesson prompt templates
-│   └── data/words/          # Word corpora (800 words per language)
-├── src/
-│   ├── api/client.ts        # Frontend API client
-│   ├── components/
-│   │   ├── WeakWords.tsx     # Word mastery dashboard card
-│   │   ├── AudioPlayer.tsx   # TTS audio player
-│   │   ├── LanguageSelector.tsx
-│   │   └── ProgressBar.tsx
-│   ├── hooks/
-│   │   ├── useLesson.ts     # Lesson loading with cache
-│   │   ├── useAuth.ts       # Firebase auth hook
-│   │   └── useAudio.ts      # Audio playback hook
-│   ├── lib/
-│   │   ├── persistence.ts   # WordPerformance CRUD, SRS, localStorage
-│   │   ├── progressSync.ts  # Firestore sync + merge logic
-│   │   ├── firebase.ts      # Firebase config
-│   │   └── __tests__/       # Unit tests
-│   ├── pages/
-│   │   ├── Dashboard.tsx     # Main dashboard with progress + word mastery
-│   │   ├── ReadingLesson.tsx # Reading passage + comprehension + vocab quiz
-│   │   ├── WritingLesson.tsx # Fill-in-blank, translation, word-order exercises
-│   │   ├── SpeakingLesson.tsx# Pronunciation cards with self-rating
-│   │   ├── FlashcardReview.tsx # Flashcard review (all words or weak-only)
-│   │   └── Login.tsx
-│   ├── store/appStore.ts    # Zustand state (progress + word performance)
-│   └── types/               # TypeScript interfaces
-└── TODOS.md                 # Roadmap (Phase 2: adaptive AI, SRS, unlock system)
-```
+React 19, TypeScript, Vite, Tailwind CSS, Zustand, Express, Firebase, and MiniMax. Pages load on demand. `shared/lessonContract.js` supplies generation prompts and runtime lesson validation to both the local API and Vercel function. Clients validate cached and fetched lessons and cancel stale requests.
 
-## How It Works
+Account storage and synchronization live in `src/lib/accountStorage.ts`, `src/lib/progressSync.ts`, and `src/store/appStore.ts`. Firestore transactions merge progress rather than replacing a stale remote snapshot. Concurrent counters for the same word use conservative maxima, not an event log, so simultaneous offline practice on multiple devices can undercount attempts.
 
-### Lesson Generation
+Vercel serves `dist` and `api/index.js`; pushes to the connected main branch trigger production deployment. GitHub Actions runs lint, unit tests, the production build, and browser tests.
 
-Each lesson is generated on-the-fly by the MiniMax AI. The server slices 10 words from the 800-word corpus based on the level and lesson number, then prompts the AI to create exercises using those words.
+## Learning design
 
-### Per-Word Tracking
+The design draws on retrieval practice with feedback and a balance of meaning-focused input, output, and language-focused study. See [Nation's Four Strands](https://openaccess.wgtn.ac.nz/articles/journal_contribution/The_four_strands/12552167) and [Retrieval Practice: feedback](https://www.retrievalpractice.org/feedback/). These principles guide the product; they do not establish measured learning gains for this app.
 
-Every interaction records performance at the word level:
-- **Reading:** Vocab quiz after comprehension (word-to-translation matching)
-- **Writing:** Each exercise maps to a specific corpus word (correct/incorrect)
-- **Speaking:** Self-rating per pronunciation card (hard/okay/easy)
-- **Flashcards:** Self-rating feeds the same unified data model
-
-### Flashcard Review
-
-Review includes tracked vocabulary and the exact 10 words from each completed lesson. Due reviews come first (oldest due date first), followed by weak words, then the least recently practiced words. Select **Due now** to practice only scheduled reviews.
-
-Each deck is fixed when you select **Start review**. Rating a word updates its progress immediately without changing the active deck. **Review more words** builds a fresh deck using your latest ratings; words rated Easy leave weak-word practice. Pronunciation and playback-speed controls work independently from the answer reveal.
-
-### Word Mastery Categories
-
-| Category | Criteria |
-|----------|----------|
-| Mastered | 80%+ accuracy with 2+ correct streak |
-| Learning | 50-79% accuracy |
-| Struggling | Below 50% accuracy |
-
-## Roadmap
-
-See [TODOS.md](./TODOS.md) for the full roadmap:
-
-- **Phase 2:** Adaptive AI lesson generation — feed weak words into prompts so lessons target your gaps
-- **Unlock system loosening** — unlock Writing/Speaking based on word mastery, not just level completion
-- **Full SM-2 algorithm** — replace basic SRS intervals with the industry-standard spaced repetition algorithm
-
-## License
-
-MIT
+See [TODOS.md](./TODOS.md) for remaining work.
